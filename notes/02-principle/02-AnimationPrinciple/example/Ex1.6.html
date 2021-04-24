@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multi-object motion</title>
+    <script src="../../js/common.js"></script>
+
+
+    <style>
+
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin-bottom: 20px;
+            border: 1px solid black;
+            opacity: 10;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+
+
+<script>
+
+
+    var timer = null,
+        oDivArray = document.getElementsByTagName('div');
+
+
+    oDivArray[0].onclick = function () {
+
+        startMove(this, 'opacity', 50);
+    };
+
+    oDivArray[1].onclick = function () {
+
+        startMove(this, 'width', 400);
+    };
+
+    oDivArray[2].onclick = function () {
+
+        startMove(this, 'height', 300);
+    };
+
+    oDivArray[3].onclick = function () {
+
+        startMove(this, 'borderWidth', 10);
+    };
+
+
+    function startMove(ele, attr, target) {
+
+        clearInterval(ele.timer);
+
+        let iSpeed = null,
+            iCur = null;
+
+        ele.timer = setInterval(function () {
+
+            if (attr == 'opacity') {
+
+                iCur = parseFloat(getStyle(ele, attr)) * 100;
+
+            } else {
+
+                iCur = parseInt(getStyle(ele, attr));
+            }
+
+            iSpeed = (target - iCur) / 7;
+
+            iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+
+            if (iCur == target) {
+
+                clearInterval(ele.timer);
+
+            }
+
+            if (attr == 'opacity') {
+
+                ele.style.opacity = (iCur + iSpeed) / 100;
+
+            } else {
+
+                ele.style[attr] = iCur + iSpeed + 'px';
+
+            }
+
+        }, 30);
+    }
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    var money = +prompt('请输入理财总金额'),
+        year = +prompt('请输入理财年限');
+
+
+    if (isNaN(money) || isNaN(year) || money <= 0 || year <= 0) {
+
+        console.log('输入有误');
+
+    } else {
+
+        var rate = 0.04;
+
+        if (money >= 500000) {
+
+            rate = 0.045;
+        }
+
+        var earnMoney = money * rate * year;
+
+        if (money <= 2000000) {
+
+            earnMoney *= 1.1;
+        }
+
+        console.log(`总收益为: ${earnMoney}`);
+    }
+
+
+</script>
+
+
+
+</body>
+</html>

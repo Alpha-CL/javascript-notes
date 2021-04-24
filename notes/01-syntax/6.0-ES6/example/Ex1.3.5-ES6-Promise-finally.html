@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    const pro = new Promise((resolve, reject) => {
+
+        resolve(2);
+
+    });
+
+    pro.then(result => console.log('then1', result * 1));
+    pro.then(result => console.log('then2', result * 2));
+
+    pro.catch(result => console.log('catch1', result * 1));
+    pro.catch(result => console.log('catch2', result * 2));
+
+    pro.finally(() => console.log('finally1'));
+    pro.finally(() => console.log('finally2'));
+
+
+</script>
+
+
+</body>
+</html>

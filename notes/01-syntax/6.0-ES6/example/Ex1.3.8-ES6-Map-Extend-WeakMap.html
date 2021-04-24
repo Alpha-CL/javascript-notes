@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<ul>
+    <!-- {name: alpha} -->
+    <li>alpha</li>
+    <!-- {name: beta} -->
+    <li>beta</li>
+    <!-- {name: omega} -->
+    <li>omega</li>
+</ul>
+
+
+<script>
+
+
+    /**
+     * 设置 dom 元素与 对象关联
+     *
+     * 当 dom 被移除后，关联的对象也被 垃圾回收
+     */
+
+    const wmap = new WeakMap();
+
+    let oLis = document.querySelectorAll('li');
+
+    for (const li of oLis) {
+
+        wmap.set(li, {
+
+            name: `${li.innerHTML}`
+        });
+    }
+
+    console.log(wmap);
+
+
+    oLis[0].remove();
+    oLis = null;
+
+    console.log(wmap);
+
+    // WeakMap {li => {…}, li => {…}, li => {…}}
+    // [[Entries]]
+    // 0: {li => Object}
+    // 1: {li => Object}
+    // __proto__: WeakMap
+
+
+</script>
+
+<script>
+
+
+    // let obj1 = {                                // 设置 obj1 存放指定对象的地址
+    //     name: 'alpha',
+    //     age: 18
+    // };
+    //
+    //
+    // const map = new Map();
+    // map.set(obj1, 'id');                        // 将 obj1 的地址添加给 map.key( key 只能设置 对象 )
+    //
+    //
+    // obj1 = null;                                // 将 ibj1 设置为空，但此时 map.key 中仍存储这 obj1 的地址
+    //                                             // 因此 obj1 不会被垃圾回收
+    // console.log(map);
+    //
+    // // Map(1) {{…} => "id"}
+    // // [[Entries]]
+    // // 0: {Object => "id"}
+    // // key: {name: "alpha", age: 18}
+    // // value: "id"
+    // // size: (...)
+    // // __proto__: Map
+
+
+</script>
+
+<script>
+
+
+    let obj2 = {                                // 设置 obj2 存放指定对象的地址
+        name: 'alpha',
+        age: 18
+    };
+
+
+    const weakmap = new WeakMap();
+    weakmap.set(obj2, 'id');                    // 将 obj1 的地址添加给 map.key( key 只能设置 对象 )
+
+    obj2 = null;                                // 将 ibj2 设置为空，因 weakmap.key 不会影响垃圾回收
+                                                // 因此 weakmap 中的 obj2 的地址被清除
+    console.log(weakmap);
+
+    // WeakMap {{…} => "id"}
+    // [[Entries]]
+    // 0: {Object => "id"}
+    // key: {name: "alpha", age: 18}
+    // value: "id"
+    // __proto__: WeakMap
+
+
+</script>
+
+
+</body>
+</html>

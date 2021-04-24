@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<body>
+
+
+<!--  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - -->
+
+<!-- 此时 img 还未加载完毕，故也无法获取 -->
+
+<script>
+
+    let img = document.querySelector('img');
+
+    console.log(img);                       // null
+
+</script>
+
+
+<!--  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - -->
+
+
+
+
+
+<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1587302128947&di=e6ee2ea6efc717ec713b5020383289b9&imgtype=0&src=http%3A%2F%2Fimg2.ali213.net%2Fpicfile%2FNews%2F2015%2F04%2F22%2F2015042254906549.jpg"
+     alt="iii">
+
+
+
+
+<!--  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - -->
+
+<!-- 外部引用的JS,刷新后才执行 -->
+
+<script src="Ex1.1-getImg-loaded-size.js"></script>
+
+<!--  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - -->
+
+
+
+
+<!--  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - -->
+<script>
+
+    /**
+     * window.onload
+     *
+     * 需要等页面中所有资源都加载完毕才会触发              // 所需时间无法预估
+     */
+
+    let tar = document.querySelector('img');
+
+    window.onload = function () {
+
+        console.log(tar.width, tar.height);           // 若此图片之前有很多张图片需要加载，则加载时间无法预估
+    };
+
+
+    /**
+     * domImg.onload | domVideo.onload ...
+     *
+     * 仅获取单个元素加载完成后即触发
+     */
+
+    tar.onload = function () {
+
+        console.log(this.width, this.height);
+    };
+
+
+</script>
+<!--  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - -->
+
+
+
+
+
+
+<!--  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - -->
+
+<!--<script>
+    for (let i = 0; i < 10000; i++) {
+
+        console.log(i);
+    }
+</script>-->
+
+<!-- 若之前有很多的代码需要执行，则获取到图片尺寸时，需要的时间太久 -->
+
+<script>
+
+
+    let imgs = document.querySelector('img');
+
+    console.log(imgs.width, imgs.height);                       // null
+
+
+</script>
+<!--  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - -->
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<script>
+
+
+    /**
+     * get(key: any);
+     *
+     * 根据指定的 key 返回对应的 value
+     */
+
+    const mp = new Map([['name', 'alpha'], ['age', 17], ['gender', 'male']]);
+
+    console.log(mp.get('name'));                // alpha
+    console.log(mp.get('age'));                 // 17
+    console.log(mp.get('gender'));              // male
+
+    console.log(mp.get('is null'));             // undefined
+
+
+
+</script>
+
+
+
+</body>
+</html>

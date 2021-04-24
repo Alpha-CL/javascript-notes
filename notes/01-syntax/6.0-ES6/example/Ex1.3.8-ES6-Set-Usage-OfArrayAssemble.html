@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    // /**
+    //  * 数组 '并集', 并去重
+    //  *
+    //  *
+    //  */
+    //
+    // // const arr1 = [33, 22, 55, 22, 33, 55, 44, 66, 77];
+    // // const arr2 = [22, 88, 99, 66, 33, 22, 33, 22];
+    // //
+    // //
+    // // const result1 = [...new Set(arr1.concat(arr2))];
+    // // const result2 = [...new Set([...arr1, ...arr2])];
+    // //
+    // // console.log(result1);            // (8) [33, 22, 55, 44, 66, 77, 88, 99]
+    // // console.log(result2);            // (8) [33, 22, 55, 44, 66, 77, 88, 99]
+
+
+</script>
+
+<script>
+
+
+    // /**
+    //  * 数组 '交集', 并去重
+    //  *
+    //  *
+    //  */
+    //
+    // const arr1 = [33, 22, 55, 22, 33, 55, 44, 66, 77];
+    // const arr2 = [22, 88, 99, 66, 33, 22, 33, 22];
+    //
+    // const result1 = [...new Set(arr1)].filter(value => {
+    //
+    //     return (new Set(arr2)).has(value);
+    // });
+    //
+    // const result2 = [...new Set(arr1)].filter(value => {
+    //
+    //     return arr2.indexOf(value) >= 0;
+    // });
+    //
+    // console.log(result1);                // [33, 22, 66]
+    // console.log(result2);                // [33, 22, 66]
+
+
+</script>
+
+<script>
+
+
+    // /**
+    //  * 数组 '差集', 并去重
+    //  *
+    //  *
+    //  */
+    //
+    // const arr1 = [33, 22, 55, 22, 33, 55, 44, 66, 77];
+    // const arr2 = [22, 88, 99, 66, 33, 22, 33, 22];
+    //
+    //
+    // const result1 = [...new Set(arr1)].filter(value => {            // arr2 的差集
+    //
+    //     return !(new Set(arr2).has(value));
+    // });
+    //
+    // const result2 = [...new Set(arr2)].filter(value => {            // arr1 的差集
+    //
+    //     return !(new Set(arr1).has(value));
+    // });
+    //
+    //
+    // console.log(result1);                   // [55, 44, 77]
+    // console.log(result2);                   // [88, 99]
+
+
+</script>
+
+
+</body>
+</html>

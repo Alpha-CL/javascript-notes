@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    // const pro1 = new Promise((resolve, reject) => {
+    //
+    //     throw 1;
+    // });
+    //
+    //
+    // const pro2 = pro1.then(result => {
+    //
+    //     return result * 2;
+    //
+    // }, err => {
+    //
+    //     return err * 2;
+    // });
+    //
+    //
+    // pro2.then(result => {
+    //
+    //     console.log(result * 3);
+    //
+    // }, err => {
+    //
+    //     console.log(err * 2);
+    // });
+
+
+</script>
+
+<script>
+
+
+    // const pro1 = new Promise((resolve, reject) => {
+    //
+    //     throw  1;
+    // });
+    //
+    // const pro2 = pro1.then(result => {
+    //
+    //     return result * 2;
+    //
+    // }, err => {
+    //
+    //     return err * 3;
+    //
+    // });
+    //
+    // pro2.then(result => console.log(result * 2), err => console.log(err  * 3));
+
+
+</script>
+
+<script>
+
+
+    // const pro1 = new Promise((resolve, reject) => {
+    //
+    //     throw  1;
+    // });
+    //
+    // const pro2 = pro1.then(result => {
+    //
+    //     return result * 2;
+    //
+    // }, err => {
+    //
+    //     throw err;
+    //
+    // });
+    //
+    // pro2.then(result => console.log(result * 2), err => console.log(err  * 3));
+
+
+</script>
+
+<script>
+
+
+    // const pro1 = new Promise((resolve, reject) => {
+    //
+    //     throw  1;
+    // });
+    //
+    // const pro2 = pro1.then(result => {
+    //
+    //     return result * 2;
+    //
+    // }, err => {
+    //
+    //     throw err * 3;
+    //
+    // });
+    //
+    // pro1.catch(err => {
+    //
+    //     return err * 2;
+    //
+    // });
+    //
+    // pro2.then(result => console.log(result * 2), err => console.log(err * 3));
+
+
+</script>
+
+<script>
+
+
+    const pro1 = new Promise((resolve, reject) => {
+
+        resolve(1);
+    });
+
+    const pro2 = new Promise((resolve, reject) => {
+
+        setTimeout(() => {
+
+            resolve(2);
+
+        }, 3000);
+    });
+
+    const pro3 = pro1.then(result => {
+
+        return pro2;
+
+    });
+
+
+    pro3.then(result => {
+
+        console.log(result);
+    });
+
+
+</script>
+
+
+</body>
+</html>

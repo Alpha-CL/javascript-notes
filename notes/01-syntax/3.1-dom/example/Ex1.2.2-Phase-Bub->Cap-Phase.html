@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>useCapture</title>
+
+    <style>
+
+        .GrandFather {
+            width: 300px;
+            height: 300px;
+            background-color: red;
+        }
+
+        .Father {
+            width: 200px;
+            height: 200px;
+            background-color: green;
+        }
+
+        .Son {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+
+<div class="GrandFather">
+    <div class="Father">
+        <div class="Son"></div>
+    </div>
+</div>
+
+<script>
+
+
+
+    /**
+     * 同时绑定两个事件: Event1: capture + Event2: Bubble
+     *
+     * click Son => 执行结果如下:
+     *
+     * GrandFather-capture                      // 先冒泡
+     * Father-capture
+     * Son-Bubble-Click                         // 此时属于当前对象的事件执行
+     * Son-capture
+     * Father-Bubble                            // 后冒泡
+     * GrandFather-Bubble
+     *
+     */
+
+
+    var GrandFather = document.getElementsByClassName('GrandFather')[0];
+
+    var Father = document.getElementsByClassName('Father')[0];
+
+    var Son = document.getElementsByClassName('Son')[0];
+
+
+    // Event capture
+
+    GrandFather.addEventListener('click', function () {
+
+        console.log('GrandFather-Bubble');
+
+    }, false);
+
+    Father.addEventListener('click', function () {
+        console.log('Father-Bubble');
+
+    }, false);
+
+    Son.addEventListener('click', function () {
+        console.log('Son-Bubble-Click');
+
+    }, false);
+
+
+    // Event Bubble
+
+    GrandFather.addEventListener('click', function () {
+
+        console.log('GrandFather-capture');
+
+    }, true);
+
+    Father.addEventListener('click', function () {
+        console.log('Father-capture');
+
+    }, true);
+
+    Son.addEventListener('click', function () {
+        console.log('Son-capture');
+
+    }, true);
+
+
+
+</script>
+
+
+</body>
+</html>

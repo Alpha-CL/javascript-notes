@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    function* task() {
+
+        const start = yield 'start';
+
+        const resp = yield fetch('http://101.132.72.36:5100/api/local');
+
+        const result = yield resp.json();
+    }
+
+    run(task);
+
+
+    /**
+     * 在 async & await 还未出现时，开发者用于模拟 异步处理函数的原理
+     *
+     *
+     */
+
+
+    function run(generatorFunc) {
+
+        const generator = generatorFunc();
+
+        let result = generator.next();
+
+        if (result.done) {
+
+            return;
+        }
+
+        handleResult();
+
+        function handleResult() {
+
+            if (typeof result.value.then === 'function') {
+
+                result.value.then(data => {
+
+                    result = generator.next(data);
+
+                    console.log(data);
+
+                    handleResult();
+
+                }, err => {
+
+                    result = generator.throw(err);
+
+                    console.log(result);
+
+                    handleResult();
+
+                })
+
+            } else {
+
+                result = generator.next(result.value);
+
+                handleResult();
+            }
+        }
+    }
+
+
+
+</script>
+
+
+</body>
+</html>

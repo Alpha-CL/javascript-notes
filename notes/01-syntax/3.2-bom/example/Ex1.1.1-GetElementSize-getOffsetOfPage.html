@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+
+        .box {
+            margin: 100px 0 0 100px;
+        }
+
+        .box3 {
+            /*position: relative;*/
+            width: 300px;
+            height: 300px;
+            background-color: #999;
+            overflow: hidden;
+        }
+
+        .box2 {
+            /*position: relative;*/
+            width: 200px;
+            height: 200px;
+            background-color: #666;
+            overflow: hidden;
+        }
+
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: #333;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+
+<div class="box box3">
+    <div class="box box2">
+        <div class="box box1"></div>
+    </div>
+</div>
+
+
+<script>
+
+
+    function getOffsetOfPage(dom, finalOffsetLeft = null, finalOffsetTop = null) {
+
+        let curDom = dom,
+            domParent;
+
+        if (curDom && curDom.offsetParent !== document.body) {
+
+            finalOffsetLeft += curDom.offsetLeft;
+            finalOffsetTop += curDom.offsetTop;
+
+            domParent = curDom.offsetParent;
+
+            return getOffsetOfPage(domParent, finalOffsetLeft, finalOffsetTop);
+
+        } else {
+
+            finalOffsetLeft += curDom.offsetLeft;
+            finalOffsetTop += curDom.offsetTop;
+
+            return {
+                x: finalOffsetLeft,
+                y: finalOffsetTop
+            }
+        }
+    }
+
+    const box1 = document.querySelector('.box1');
+
+    const finalOffset = getOffsetOfPage(box1);
+
+    console.log(finalOffset);
+
+
+</script>
+
+
+</body>
+</html>

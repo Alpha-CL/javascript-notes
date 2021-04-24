@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .wrap {
+            padding: 24px;
+            display: flex;
+            flex-flow: column nowrap;
+            width: 30%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .wrap .container {
+            height: 150px;
+        }
+
+        .wrap textarea,
+        .wrap button {
+            width: 100%;
+        }
+
+        .wrap textarea {
+            padding: 6px;
+        }
+
+        .wrap button {
+            padding: 6px 0;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+
+<div class="wrap">
+    <div class="container"></div>
+    <label for="txt">
+        <textarea name="conTxt" id="txt" cols="30" rows="10"></textarea>
+    </label>
+    <button>设置div 内容</button>
+</div>
+
+
+<script>
+
+
+    let btn = document.querySelector('.wrap button'),
+        txt = document.querySelector('#txt'),
+        con = document.querySelector('.container');
+
+    btn.onclick = function () {
+
+        let dv = document.createElement('p');
+        dv.innerHTML = txt.value;
+        con.appendChild(dv);
+
+        // con.innerHTML = safe`<p>${txt.value}</p>`;
+    };
+
+
+    function safe(params) {
+
+        const values = Array.prototype.slice.apply(arguments).slice(1);
+
+        let str = '';
+
+        for (let i = 0; i < values.length; i++) {
+
+            const v = values[i].replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+            str += params + v;
+
+            if (i === values.length - 1) {
+
+                str += params[i + 1];
+            }
+        }
+    }
+
+
+
+</script>
+
+
+</body>
+</html>

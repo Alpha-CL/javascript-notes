@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<button>获取所有省份数据</button>
+
+
+<script>
+
+
+    /**
+     * fetch(url, config): Promise;
+     *
+     *
+     */
+
+    const btn = document.querySelector('button');
+
+    async function getProvinces() {
+
+        const url = 'http://101.132.72.36:5100/api/local',
+            config = {
+                method: 'get',
+                headers: {'Content-Type': 'application/json'}
+            };
+
+        // fetch(url, config).then(resp => {
+        //
+        //     console.log(resp);
+        //
+        // }).catch(err => {
+        //
+        //     console.log(err);
+        // });
+
+        try {
+
+            const resp = await fetch(url, config);
+            console.log(resp);
+
+            const result = await resp.json();
+            console.log(result);
+
+        } catch (err) {
+
+            console.log(err);
+        }
+    }
+
+    btn.onclick = () => {
+
+        const pro = getProvinces();
+    };
+
+
+</script>
+
+
+</body>
+</html>

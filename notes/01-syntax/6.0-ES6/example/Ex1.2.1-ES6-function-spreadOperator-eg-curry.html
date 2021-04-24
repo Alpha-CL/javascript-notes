@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    function calc(a, b, c, d) {
+
+        return a + b * c - d;
+    }
+
+
+    /**
+     * curry: 柯里化
+     *
+     * 固定部分相同参数，不断接受剩余参数，返回全部所需参数
+     */
+
+    function curry(func, ...args) {
+
+        return function (...subArgs) {
+
+            const allArgs = [...args, ...subArgs];
+
+            if (allArgs.length >= func.length) {
+
+                return func(...allArgs);
+
+            } else {
+
+                return curry(func, ...allArgs);
+            }
+        }
+    }
+
+    const newCalc = curry(calc, 1, 2);
+
+
+    console.log(newCalc(3, 4));
+    console.log(newCalc(4, 5));
+    console.log(newCalc(5, 6));
+    console.log(newCalc(6, 6));
+
+
+</script>
+
+
+</body>
+</html>

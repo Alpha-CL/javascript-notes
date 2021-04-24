@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        button {
+            border-radius: 3px;
+        }
+
+        .wrap {
+            margin: 100px 0 0 100px;
+            padding: 24px;
+            border: 1px solid #ccc;
+            width: 200px;
+        }
+
+        .wrap .hd {
+            margin-bottom: 12px;
+        }
+
+        .hd button {
+            padding: 6px 12px;
+            margin-right: 6px;
+        }
+
+        .bd {
+            position: relative;
+        }
+
+        .bd img {
+            /*position: absolute;*/
+            margin-bottom: 12px;
+            width: 200px;
+        }
+
+        .wrap > button {
+            padding: 4px 0;
+            width: 49%;
+            box-sizing: border-box;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .hide {
+            display: none;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+
+<script>
+
+
+    let oImg = [
+        'img/joke-1.jpg',
+        'img/joke-2.jpg',
+        'img/joke-3.jpg'
+    ];
+
+
+    (function () {
+
+        function InfoCard(addr) {
+
+            this.address = addr;
+            this.len = addr.length;
+
+            this.init = function (addr, len) {
+
+                this.createDom(addr, len);
+                this.bindEvent();
+            };
+        }
+
+        let wrap = document.createElement('div'),
+            wrapHd = document.createElement('div'),
+            wrapBd = document.createElement('div'),
+            prevBtn = document.createElement('button'),
+            nextBtn = document.createElement('button'),
+            btnFrag = document.createDocumentFragment(),
+            imgFrag = document.createDocumentFragment();
+
+        InfoCard.prototype.createDom = function () {
+
+            let len = this.len,
+                oBody = document.body;
+
+            wrap.setAttribute('class', 'wrap');
+            wrapHd.setAttribute('class', 'hd');
+            wrapBd.setAttribute('class', 'bd');
+
+            for (let i = 0; i < len; i++) {
+
+                let btn = document.createElement('button');
+
+                btn.innerText = 'No-' + (i + 1);
+                btn.dataset.s = i + 1;
+
+                btnFrag.appendChild(btn);
+            }
+
+            this.address.forEach(function (value, index) {
+
+                let img = document.createElement('img');
+
+                img.setAttribute('src', value);
+                img.dataset.t = index + 1;
+
+                if (index > 0) {
+
+                    img.setAttribute('class', 'hide');
+
+                } else {
+
+                    img.setAttribute('class', 'show');
+                }
+
+                imgFrag.appendChild(img);
+            });
+
+
+            prevBtn.setAttribute('class', 'prev');
+            nextBtn.setAttribute('class', 'next');
+
+            prevBtn.innerText = 'prev';
+            nextBtn.innerText = 'next';
+
+            wrapBd.appendChild(imgFrag);
+            wrapHd.appendChild(btnFrag);
+
+            wrap.appendChild(wrapHd);
+            wrap.appendChild(wrapBd);
+            wrap.appendChild(prevBtn);
+            wrap.appendChild(nextBtn);
+
+            oBody.appendChild(wrap);
+        };
+
+        InfoCard.prototype.bindEvent = function () {
+
+            let oImgs = wrapBd.children;
+
+            wrapHd.addEventListener('click', function (e) {
+
+                let target = e.target;
+
+                if (target.tagName === 'BUTTON') {
+
+                    Array.from(oImgs).forEach(function (value) {
+
+
+                        value.classList.remove('show');
+                        value.classList.add('hide');
+
+                        if (target.dataset.s === value.dataset.t) {
+
+                            value.classList.remove('hide');
+                            value.classList.add('show');
+                        }
+                    });
+                }
+
+            }, false);
+
+            prevBtn.onclick = function () {
+
+                let curIndex = null;
+
+                Array.from(oImgs).forEach(function (value) {
+
+                    if (value.className === 'show') {
+
+                        curIndex = +(value.dataset.t);
+                    }
+
+                    value.classList.remove('show');
+                    value.classList.add('hide');
+                });
+
+                curIndex -= 2;
+
+                if (curIndex >= 0) {
+
+                    oImgs[curIndex].classList.remove('hide');
+                    oImgs[curIndex].classList.add('show');
+
+                } else {
+
+                    curIndex = 1;
+                    oImgs[curIndex].classList.remove('hide');
+                    oImgs[curIndex].classList.add('show');
+                }
+
+            };
+
+            nextBtn.onclick = function () {
+
+                let curIndex = null;
+
+                Array.from(oImgs).forEach(function (value) {
+
+                    if (value.className === 'show') {
+
+                        curIndex = +(value.dataset.t);
+                    }
+
+                    value.classList.remove('show');
+                    value.classList.add('hide');
+                });
+
+                if (curIndex < 3) {
+
+                    oImgs[curIndex].classList.remove('hide');
+                    oImgs[curIndex].classList.add('show');
+
+                } else {
+
+                    curIndex = 0;
+                    oImgs[curIndex].classList.remove('hide');
+                    oImgs[curIndex].classList.add('show');
+                }
+
+            };
+        };
+
+        window.infoCard = function (addr) {
+
+            let obj = new InfoCard(addr);
+
+            obj.init();
+        };
+
+    }());
+
+    infoCard(oImg);
+
+
+</script>
+
+
+<!--<div class="wrapper">
+
+    <div class="hd">
+        <button>No-1</button>
+        <button>No-2</button>
+        <button>No-3</button>
+    </div>
+
+    <div class="bd">
+        <img src="img/joke-1.jpg" alt="">
+    </div>
+
+    <button class="prev">prev</button>
+    <button class="next">next</button>
+
+</div>-->
+
+</body>
+</html>

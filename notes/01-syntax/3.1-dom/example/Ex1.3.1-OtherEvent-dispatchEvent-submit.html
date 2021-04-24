@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+
+
+        .demo{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            color: #fff;
+            text-align: center;
+            line-height: 100px;
+            cursor: pointer;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+
+<form action="http://wwww.baidu.com">
+    <div class="demo">click me</div>
+</form>
+
+
+<script>
+
+
+    let demo = document.querySelector('.demo');
+
+    demo.onclick = function() {
+
+        let form = document.querySelector('form');
+
+        form.submit();
+    };
+
+
+</script>
+
+
+
+</body>
+</html>

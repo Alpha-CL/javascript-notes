@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        input {
+            padding: 6px;
+            text-align: right;
+            border: 1px solid #666666;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+
+<label for="minutes">minutes: </label><input type="text" value="0" id="minutes">
+<label for="seconds">seconds: </label><input type="text" value="0" id="seconds">
+
+
+<script>
+
+
+    var minutesNode = document.getElementsByTagName('input')[0],
+        secondsNode = document.getElementsByTagName('input')[1];
+
+    var minutes = 0,
+        seconds = 0;
+
+    var timer = setInterval(function () {
+
+        seconds++;
+
+        if (seconds == 60) {
+
+            seconds = 0;
+            minutes++;
+        }
+
+        secondsNode.value = seconds;
+        minutesNode.value = minutes;
+
+        if (minutes == 3) {
+
+            clearInterval(timer);
+
+        }
+
+    }, 10);
+
+
+</script>
+
+
+</body>
+</html>

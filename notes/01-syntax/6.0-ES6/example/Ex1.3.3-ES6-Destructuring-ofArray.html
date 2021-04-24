@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    // /**
+    //  * 初级数组解构
+    //  *
+    //  * arr[index] : newName
+    //  */
+    //
+    //
+    // let numbers = ['a', 'b', 'c', 'd'];
+    //
+    // const {
+    //
+    //     3: n1,
+    //     1: n2
+    //
+    // } = numbers;
+    //
+    // console.log(n1, n2);
+
+
+</script>
+
+<script>
+
+
+    // let numbers = ['a', 'b', 'c', 'd'];
+    //
+    // /**
+    //  * 按照顺序解构
+    //  *
+    //  *
+    //  * 可以用逗号隔开空出不需要解构的位置
+    //  */
+    //
+    // let n1, n2;
+    //
+    // ([n1, , n2] = numbers);
+    //
+    // console.log(n1, n2);            // a d
+
+
+</script>
+
+<script>
+
+
+    let numbers = ['a', 'b', 'c', 'd', [11, 22, 33, 44]];
+
+    /**
+     * 解构嵌套数组
+     *
+     *
+     * 可以用逗号隔开空出不需要解构的位置
+     */
+
+    let n2;
+
+    ([, , , , [, , n2]] = numbers);             // 根绝指定位置解构
+
+    console.log(n2);            // a d
+
+
+</script>
+
+<script>
+
+
+    // let numbers = ['a', 'b', 'c', 'd', {name: 'alpha', age: 16, sex: 'male'}];
+    //
+    // /**
+    //  * 解构嵌套对象
+    //  *
+    //  *
+    //  * 可以用逗号隔开空出不需要解构的位置
+    //  */
+    //
+    // const [, , , , {sex: gender}] = numbers;
+    //
+    // console.log(gender);            // male
+
+
+</script>
+
+<script>
+
+
+    // const numbers = [32, 44, 5, 61, 6264];
+    //
+    // /**
+    //  * 解构数组的第三项，和 剩余项目的指定数组
+    //  *
+    //  *
+    //  */
+    //
+    // const [, , n1, ...num] = numbers;
+    //
+    // console.log(n1, num);
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    class MySet {
+
+        _arr = Symbol('arr');
+
+        constructor(iterator = []) {
+
+            if (typeof iterator[Symbol.iterator] !== 'function') {
+
+                throw new TypeError(`${iterator} is nor iterator`);
+            }
+
+            this._arr = [];
+
+            for (const item of iterator) {
+
+                this.add(item);
+            }
+        }
+
+        get size() {
+
+            return this._arr.length;
+        }
+
+        add(data) {
+
+            if (!this.has(data)) {
+
+                this._arr.push(data);
+            }
+        }
+
+        has(data) {
+
+            for (const item of this._arr) {
+
+                if (this.isEqual(data, item)) {
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        isEqual(data1, data2) {
+
+            if (data1 === 0 && data2 === 0) {
+
+                return true;
+            }
+
+            return Object.is(data1, data2);
+        }
+
+        delete(data) {
+
+            for (let i = 0; i < this._arr.length; i++) {
+
+                if (this.isEqual(data, this._arr[i])) {
+
+                    this._arr.splice(i, 1);
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        clear() {
+
+            this._arr.length = 0;
+        }
+
+        forEach(callback) {
+
+            for(const item of this._arr) {
+
+                callback(item, item, this);
+            }
+        }
+
+        *[Symbol.iterator]() {
+
+            for(const item of this._arr) {
+
+                yield item;
+            }
+        }
+    }
+
+
+    const test = new MySet([1, 2, 3, 4]);
+
+    test.add(3);
+    test.add(5);
+
+    console.log(test.has(3));
+
+    test.delete(3);
+    // test.clear();
+
+    console.log(test);
+
+
+    // for(const item of test) {
+    //
+    //     console.log(item);
+    // }
+
+    // test.forEach((value, value1, set) => {
+    //
+    //     console.log(value);
+    //     console.log(set);
+    // });
+
+
+</script>
+
+
+</body>
+</html>

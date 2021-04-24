@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>useCapture</title>
+
+    <style>
+
+        .GrandFather {
+            width: 300px;
+            height: 300px;
+            background-color: red;
+        }
+
+        .Father {
+            width: 200px;
+            height: 200px;
+            background-color: green;
+        }
+
+        .Son {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+
+<div class="GrandFather">
+    <div class="Father">
+        <div class="Son"></div>
+    </div>
+</div>
+
+<script>
+
+
+    /**
+     * element.addEventListener(event, function, useCapture)
+     *
+     * @event: 一个字符串，指定事件的名称; 不要使用“ on”前缀。例如，使用“click”而不是“ onclick”。
+     * @function: 指定事件发生时要运行的函数;
+     * @useCapture: 当事件发生时，事件对象将作为第一个参数传递给函数。事件对象的类型取决于指定的事件。例如，“ click”事件属于MouseEvent对象;
+     *           -> true: 事件处理程序在捕获阶段执行
+     *           -> false-default: 事件处理程序在冒泡阶段执行
+     *
+     * 当事件发生时，事件对象将作为第一个参数传递给函数。事件对象的类型取决于指定的事件。例如，“ click”事件属于MouseEvent对象
+     *
+     * EventExecuteOrder: GrandFather -> Father -> Son
+     *
+     */
+
+    var GrandFather = document.getElementsByClassName('GrandFather')[0];
+
+    var Father = document.getElementsByClassName('Father')[0];
+
+    var Son = document.getElementsByClassName('Son')[0];
+
+
+    GrandFather.addEventListener('click', function () {
+
+        console.log('GrandFather');
+
+    }, true);
+
+    Father.addEventListener('click', function () {
+        console.log('Father');
+
+    }, true);
+
+    Son.addEventListener('click', function () {
+        console.log('Son');
+
+    }, true);
+
+
+</script>
+
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>useCapture</title>
+
+    <style>
+
+        .GrandFather {
+            width: 300px;
+            height: 300px;
+            background-color: red;
+        }
+
+        .Father {
+            width: 200px;
+            height: 200px;
+            background-color: green;
+        }
+
+        .Son {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+
+<div class="GrandFather">
+    <div class="Father">
+        <div class="Son"></div>
+    </div>
+</div>
+
+<script>
+
+
+    /**
+     * element.addEventListener(event, function, useCapture)
+     *
+     * @event: 一个字符串，指定事件的名称; 不要使用“ on”前缀。例如，使用“click”而不是“ onclick”。
+     * @function: 指定事件发生时要运行的函数;
+     * @useCapture: 当事件发生时，事件对象将作为第一个参数传递给函数。事件对象的类型取决于指定的事件。例如，“ click”事件属于MouseEvent对象;
+     *           -> true: 事件处理程序在捕获阶段执行
+     *           -> false-default: 事件处理程序在冒泡阶段执行
+     *
+     * 当事件发生时，事件对象将作为第一个参数传递给函数。事件对象的类型取决于指定的事件。例如，“ click”事件属于MouseEvent对象
+     *
+     * EventExecuteOrder: Son -> Father -> GrandFather
+     *
+     */
+
+    var GrandFather = document.getElementsByClassName('GrandFather')[0];
+
+    var Father = document.getElementsByClassName('Father')[0];
+
+    var Son = document.getElementsByClassName('Son')[0];
+
+
+    GrandFather.addEventListener('click', function () {
+
+        console.log('GrandFather');
+
+    }, false);
+
+    Father.addEventListener('click', function () {
+        console.log('Father');
+
+    }, false);
+
+    Son.addEventListener('click', function () {
+        console.log('Son');
+
+    }, false);
+
+
+</script>
+
+
+</body>
+</html>

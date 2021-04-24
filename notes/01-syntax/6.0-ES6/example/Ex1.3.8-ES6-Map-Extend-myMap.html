@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    class MyMap {
+
+        constructor(iterator = []) {
+
+            if (typeof iterator[Symbol.iterator] !== 'function') {
+
+                throw new TypeError(`${iterator} is not iterator`);
+            }
+
+            this._arr = [];
+
+            for (const item of iterator) {
+
+                if (typeof item[Symbol.iterator] !== 'function') {
+
+                    throw new TypeError(`${iterator} is not iterator`);
+                }
+                const iterator = item[Symbol.iterator](),
+                    key = iterator.next().value,
+                    value = iterator.next().value;
+
+                this.set(key, value);
+            }
+        }
+
+        get size() {
+
+            return this._arr.length;
+        }
+
+        set(key, value) {
+
+            if (this.has(key)) {
+
+                const obj = this._getObj(key);
+
+                if (obj) {
+
+                    obj.value = value;
+                }
+
+            } else {
+
+                this._arr.push({
+
+                    key,
+                    value
+                })
+            }
+        }
+
+        has(key) {
+
+            return this._getObj(key) !== undefined;
+        }
+
+        _getObj(key) {
+
+            for (const item of this._arr) {
+
+                if (this.isEqual(item.key, key)) {
+
+                    return item;
+                }
+            }
+        }
+
+        isEqual(data1, data2) {
+
+            if (data1 === 0 && data2 === 0) {
+
+                return true;
+            }
+
+            return Object.is(data1, data2);
+        }
+
+        delete(key) {
+
+            for (let i = 0; i < this._arr.length; i++) {
+
+                if (this.isEqual(this._arr[i].key, key)) {
+
+                    this._arr.splice(i, 1);
+
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        clear() {
+
+            this._arr.length = 0;
+        }
+
+        forEach(callback) {
+
+            for (const item of this._arr) {
+
+                callback(item, item, this);
+            }
+        }
+
+        * [Symbol.iterator]() {
+
+            for (const item of this._arr) {
+
+                yield  [item.key, item.value];
+            }
+        }
+    }
+
+
+    const mp = new MyMap([['name', 'alpha'], ['age', 17], ['gender', 'male']]);
+
+
+    mp.set('aaa', 'bbb');
+
+
+    console.log(mp.delete('age'));
+
+    console.log(mp.has('name'));                // true
+    console.log(mp.has('hello world'));         // false
+
+    console.log(mp);
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>onInput</title>
+
+    <style>
+
+        input {
+
+            border: 1px solid black;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<label for="ipt">Name</label><input type="text" id="ipt">
+
+<script>
+
+    /**
+     * onchange
+     *
+     * 记录鼠标聚焦前
+     * 判断鼠标失去聚焦后的结果和聚焦前的结果是否一致
+     * 如果不一致则触发
+     */
+
+
+    var input = document.getElementsByTagName('input')[0];
+
+    input.onchange = function () {
+
+        console.log(this.value);
+    }
+
+
+</script>
+
+
+</body>
+</html>

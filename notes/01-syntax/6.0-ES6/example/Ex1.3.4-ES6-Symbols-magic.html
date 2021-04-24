@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    // /**
+    //  * 知名符号
+    //  *
+    //  *
+    //  * 一些具有特殊含义的共享符号，通过 Symbol 的静态属性得到
+    //  *
+    //  * 是 JS 把部分内部操作方法预留给出来使用
+    //  */
+    //
+    //
+    // /**
+    //  * Symbol.hasInstance
+    //  *
+    //  *
+    //  * 定义构造函数的静态成员，影响 instanceof 的判断
+    //  */
+    //
+    //
+    // // (obj instanceof A)                    // Function.prototype[Symbol.hasInstance]
+    //
+    // // (A[Symbol.hasInstance])(obj)          // (obj instanceof A) 等效 (A[Symbol.hasInstance])(obj)
+    //
+    //
+    // function A() {
+    //
+    // }
+    //
+    // const obj = new A();
+    //
+    //
+    // /**
+    //  * 因为原型链上的知名符号 A[Symbol.hasInstance](obj) 为 true
+    //  *
+    //  * 所以 obj instanceof A 为 true
+    //  */
+    //
+    //
+    // if (A[Symbol.hasInstance](obj)) {                   // true
+    //
+    //     console.log(obj instanceof A);                  // true
+    // }
+    //
+    //
+    // /**
+    //  * Object.defineProperty(); 可修改 JS 内部方法  Symbol.hasInstance
+    //  *
+    //  *
+    //  */
+    //
+    //
+    // Object.defineProperty(A, Symbol.hasInstance, {      //
+    //
+    //     value: function (obj) {
+    //
+    //         return false;
+    //     }
+    // });
+    //
+    // console.log(obj instanceof A);                      // false
+
+
+</script>
+
+<script>
+
+
+    // /**
+    //  * Symbol.isConcatSpreadable
+    //  *
+    //  * 影响 array.concat 方法
+    //  */
+    //
+    // const arr = [3];
+    //
+    // arr[Symbol.isConcatSpreadable] = false;
+    //
+    // const result = arr.concat(45, [7, 8, 9]);
+    //
+    // // console.log(result);                             // [3, 45, 7, 8, 9]
+    //
+    // console.log(result);                                //  [Array(1), 45, 7, 8, 9]
+    //
+    //
+    // /**
+    //  * 默认情况下 concat 并不会展开对象进行拼接
+    //  *
+    //  */
+    //
+    // const arr2 = [1, 2, 3];
+    //
+    // const obj2 = {
+    //     0: 'a',
+    //     1: 'b',
+    //     length: '2',
+    //     [Symbol.isConcatSpreadable]: true           // false 为默认设置
+    // };
+    //
+    // const res2 = arr2.concat(obj2);
+    //
+    // console.log(res2);                      // 默认情况:  [1, 2, 3, {…}]
+
+
+</script>
+
+<script>
+
+
+    // /**
+    //  * Symbol.toPrimitive
+    //  *
+    //  * 影响类型行转换的结果
+    //  */
+    //
+    //
+    // const obj = {
+    //     a: 1,
+    //     b: 2,
+    //     c: 3
+    // };
+    //
+    // const step1 = obj.valueOf();                    // 获取原始类型
+    // const step2 = step1.toString();                 //
+    // const result = step2 + 456;
+    //
+    // console.log(result);                // [object Object]456
+    //
+    // console.log(obj + 456);             // [object Object]456
+    //
+    //
+    // const obj2 = {
+    //     a: 1,
+    //     b: 2,
+    //     c: 3
+    // };
+    //
+    // obj2[Symbol.toPrimitive] = function () {        // 参与修改了遇见引用类型隐式类型转换时的步骤
+    //
+    //     return 2;
+    // };
+    //
+    // console.log(obj2 * 2);              // 4
+
+
+</script>
+
+<script>
+
+
+    // class Temperature {
+    //
+    //     constructor(degree) {
+    //
+    //         this.degree = degree;
+    //     }
+    //
+    //     [Symbol.toPrimitive](type) {        // 影响隐式类型转换的结果
+    //
+    //         // console.log(type);
+    //         //
+    //         // default                      // 默认为 undefined
+    //         // undefined
+    //         // number                       // 尝试转换为 number
+    //         // NaN
+    //         // string                       // 若不能转换为数字则转换为 string
+    //         // undefined
+    //
+    //         if (type === 'default') {
+    //
+    //             return this.degree + '摄氏度';
+    //
+    //         } else if (type === 'number') {
+    //
+    //             return this.degree;
+    //
+    //         } else if (type === 'string') {
+    //
+    //             return this.degree + 'C';
+    //         }
+    //     }
+    // }
+    //
+    // const t = new Temperature(30);
+    //
+    // console.log(t + '!');
+    // console.log(t / 2);
+    // console.log(String(t));
+
+
+</script>
+
+<script>
+
+
+    // /**
+    //  * Symbol.toStringTag
+    //  *
+    //  * 影响 Object.prototype.toString 的返回值
+    //  */
+    //
+    // class Personal {
+    //
+    //     [Symbol.toStringTag] = 'Personal';
+    // }
+    //
+    // const arr = [1, 2, 3];
+    //
+    // const p = new Personal();
+    //
+    //
+    // console.log(Object.prototype.toString.apply(p));             // 默认情况: [object Object]
+    //                                                              // 修改后: [object Personal]
+    //
+    // console.log(Object.prototype.toString.apply(arr));           // [object Array]
+
+
+</script>
+
+
+</body>
+</html>

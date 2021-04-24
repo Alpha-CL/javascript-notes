@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+
+        div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+        }
+
+        span {
+            position: absolute;
+            left: 300px;
+            top: 0;
+            background-color: black;
+            width: 1px;
+            height: 100px;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+
+<div></div>
+<span></span>
+
+
+<script>
+
+
+    var oDiv = document.getElementsByTagName('div')[0],
+        timer = null;
+
+    oDiv.onclick = function () {
+
+        startMove(this, 300);
+    };
+
+    function startMove(ele, target) {
+
+        clearInterval(timer);
+
+        var a = 3,
+            iSpeed = 0;
+
+        timer = setInterval(function () {
+
+            a = (target - ele.offsetLeft) / 5;
+
+            iSpeed += a;
+
+            iSpeed *= 0.8;
+
+            if (Math.abs(iSpeed) < 1 && Math.abs(target - ele.offsetLeft) < 1) {
+
+                clearInterval(timer);
+
+                ele.style.left = target + 'px';
+
+            } else {
+
+                ele.style.left = ele.offsetLeft + iSpeed + 'px';
+
+            }
+
+        }, 30)
+    }
+
+
+</script>
+
+
+</body>
+</html>

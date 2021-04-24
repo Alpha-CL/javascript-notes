@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="container"></div>
+
+<script>
+
+
+    /**
+     * default params
+     *
+     * 默认形参
+     */
+
+
+
+    function createElement(name = 'div', container = document.querySelector('.container'), content) {
+
+        const ele = document.createElement(name);
+
+        if (content) {
+
+            ele.innerHTML = content;
+        }
+
+        container.appendChild(ele);
+    }
+
+    createElement(undefined, undefined, 'hello world');
+
+
+    // function createElement(name, container, content) {
+    //
+    //     const ele = document.createElement(name);
+    //
+    //     if (content) {
+    //
+    //         ele.innerHTML = content;
+    //     }
+    //
+    //     container.appendChild(ele);
+    // }
+    //
+    // createElement('div', document.querySelector('.container'), 'hello world');
+
+
+</script>
+
+
+</body>
+</html>

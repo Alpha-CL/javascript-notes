@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * 在面向对象中，将下面对一个对象的所有成员的定义，统称为类
+     *
+     *
+     */
+
+
+    // defined Function
+
+
+    function PersonalC(name, age, sex) {                  // 构造函数
+
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+    }
+
+
+    PersonalC.prototype.print = function () {             // 自定义实例方法( 原型方法 )
+
+        console.log(`Hey, brother, my name is ${this.name}, i am ${this.age} year old, `)
+    };
+
+
+    // invoking Function
+
+    const a = new PersonalC('alpha', 17, 'male');
+
+    a.print();
+
+
+    const c = new a.print();                            // 原型上的方法可以使用 new 调用
+    console.log(c);
+
+
+    for (const prop in a) {                             // 可以枚举原型上的方法
+
+        console.log(prop);
+
+        // name
+        // age
+        // sex
+        // print
+    }
+
+
+
+    // Defined Class
+
+    class PersonalL {                                     // 无声明提升，先定义后使用
+
+        constructor(name, age, sex) {
+
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+
+        print() {
+
+            console.log(`Hey, brother, my name is ${this.name}, i am ${this.age} year old, `)
+        }
+    }
+
+
+    // Invoking Class
+
+    const b = new PersonalL('beta', 16, 'female');        // 无法被当作普通函数调用，只能使用 new 关键字调用
+
+    b.print();
+
+
+    // const d = new b.print();                         // 原型上的方法无法使用 new 调用
+    // b.print is not a constructor
+
+
+    for (const prop in b) {                             // 无法枚举原型上的方法
+
+        console.log(prop);
+
+        // name
+        // age
+        // sex
+    }
+
+
+
+</script>
+
+
+</body>
+</html>

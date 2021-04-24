@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * public symbol
+     *
+     *
+     * const demo = Symbol(description: string);
+     *
+     * 根据 符号描述 获取符号
+     *
+     * Symbol.for(description: string): array;
+     */
+
+    const syb = Symbol('abc');
+
+    const obj1 = {
+        a: 1,
+        b: 2,
+        [syb]: 3
+    };
+
+    const obj2 = {
+        a: 'a',
+        b: 'b',
+        [syb]: 'c'
+    };
+
+
+    /**
+     * Symbol.for(sameDescription: string);
+     *
+     * @sameDescription: 相同的符号描述可以
+     */
+
+    const syb1 = Symbol.for('same description');
+    const syb2 = Symbol.for('same description');
+
+    const obj3 = {
+        a: 1,
+        b: 2,
+        [syb1]: 3
+    };
+
+    const obj4 = {
+        a: 'a',
+        b: 'b',
+        [syb2]: 'c'
+    };
+
+    console.log(syb1 === syb2);             // true
+
+
+    /**
+     * 模拟系统 Symbol.for
+     *
+     *
+     */
+
+
+    const SymbolFor = (() => {
+
+        const global = {};
+
+        return function (sameDescription) {
+
+            console.log(global);
+
+            if (!global[sameDescription]) {
+
+                global[sameDescription] = Symbol(sameDescription);
+            }
+
+            console.log(global);
+
+            return global[sameDescription]
+        };
+
+    })();
+
+    const syb6 = SymbolFor('tt');
+    const syb7 = SymbolFor('tt');
+
+    console.log(syb6 === syb7);
+
+
+</script>
+
+
+</body>
+</html>

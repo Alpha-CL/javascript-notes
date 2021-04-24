@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    // const user = {
+    //     name: 'alpha',
+    //     age: 16,
+    //     sex: 'male',
+    //     address: {
+    //
+    //         province: 'shan xi',
+    //         city: 'xian'
+    //     }
+    // };
+    //
+    //
+    // // 原始方法
+    // //
+    // // let name, age, sex, address;
+    // // name = user.name;
+    // // age = user.age;
+    // // sex = user.sex;
+    // // address = user.address;
+    //
+    //
+    // // 进阶方法
+    // //
+    // // let name, age, sex, address;
+    // // ({name, age, sex, address} = user);
+    //
+    //
+    // /**
+    //  * 解构过程中，先定义变量，再去 user 对象中寻找同名属性的值进行赋值
+    //  *
+    //  *
+    //  * 若没有找到属性，则返回 undefined
+    //  */
+    //
+    // // 最终方法
+    // //
+    // let {name, age, sex, address, other} = user;
+    //
+    // console.log({name, age, sex, address, other});
+
+
+</script>
+
+<script>
+
+    // const user = {
+    //     name: 'alpha',
+    //     age: 16,
+    //     sex: 'male',
+    //     address: {
+    //
+    //         province: 'shan xi',
+    //         city: 'xian'
+    //     }
+    // };
+    //
+    // /**
+    //  *
+    //  * 没有同名的属性值，也可以设置默认的属性值
+    //  */
+    //
+    //
+    // let {name, age, sex, address, other = 1000} = user;
+    //
+    // console.log({name, age, sex, address, other});
+
+
+</script>
+
+<script>
+
+
+    // const user = {
+    //     name: 'alpha',
+    //     age: 16,
+    //     sex: 'male',
+    //     address: {
+    //
+    //         province: 'shan xi',
+    //         city: 'xian'
+    //     }
+    // };
+    //
+    // /**
+    //  * 解构非同名变量的对象属性名
+    //  *
+    //  * 已有名称 : 新变量名称
+    //  */
+    //
+    //
+    // let {name, age, sex : gender, address, other = 1000} = user;
+    //
+    // console.log({name, age, gender, address, other});
+
+
+</script>
+
+<script>
+
+
+    // /**
+    //  * 深层解构
+    //  *
+    //  * 利用打括号嵌套即可实现深层次解构
+    //  */
+    //
+    //
+    // const user = {
+    //     name: 'alpha',
+    //     age: 16,
+    //     sex: 'male',
+    //     address: {
+    //
+    //         province: 'shan xi',
+    //         city: 'xian'
+    //     }
+    // };
+    //
+    //
+    // let {name, age, sex, address: {province : myHome}, address: {city}} = user;
+    //
+    // console.log({name, age, sex, myHome, city});
+
+
+</script>
+
+<script>
+
+
+    // /**
+    //  * 展开运算符可以解构剩余项
+    //  *
+    //  *
+    //  */
+    //
+    // const user = {
+    //     name: 'alpha',
+    //     age: 16,
+    //     sex: 'male',
+    //     address: {
+    //
+    //         province: 'shan xi',
+    //         city: 'xian'
+    //     }
+    // };
+    //
+    // /**
+    //  * 解构出除了 name 属性的剩余项存放在新的对象中
+    //  *
+    //  *
+    //  */
+    //
+    // const {name, ...obj} = user;
+    //
+    // console.log(obj);
+
+
+</script>
+
+
+</body>
+</html>

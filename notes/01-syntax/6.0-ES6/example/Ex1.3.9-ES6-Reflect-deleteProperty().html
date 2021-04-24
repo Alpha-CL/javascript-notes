@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+
+    /**
+     * Reflect.deleteProperty(target, propertyKey);
+     *
+     * 删除对象中指定属性
+     */
+
+    const obj = {
+
+        name: 'alpha',
+        age: 18,
+        gender: 'male'
+    };
+
+    // delete obj.age;
+
+    Reflect.deleteProperty(obj, 'age');
+
+    console.log(obj);           // {name: "alpha", gender: "male"}
+
+
+</script>
+
+
+</body>
+</html>

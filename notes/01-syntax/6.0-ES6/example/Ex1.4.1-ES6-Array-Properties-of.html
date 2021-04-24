@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * Array.of(...args);
+     *
+     *
+     * 为了弥补之前 new Array(); 只有一个参数时，参数代表设置其数组长度
+     */
+
+
+    // 返回 arr.length = 1; 新的空数组
+
+    console.log(new Array(1));                  // [empty]
+
+
+    // 返回 第一项为 1 的新数组
+
+    console.log(Array.of(1));                   // [1]
+
+    console.log(Array.of(1, 2, 3, 4, 5));       // [1, 2, 3, 4, 5]
+
+
+
+</script>
+
+
+</body>
+</html>

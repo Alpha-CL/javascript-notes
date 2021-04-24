@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * Reflect.has(target, propertyKey): boolean;
+     *
+     * 判断对象中是否存在指定属性
+     */
+
+    const obj = {
+
+        name: 'alpha',
+        age: 18
+    };
+
+
+    // console.log('name' in obj);                     // true
+
+    console.log(Reflect.has(obj, 'name'));          // true
+
+
+</script>
+
+
+</body>
+</html>

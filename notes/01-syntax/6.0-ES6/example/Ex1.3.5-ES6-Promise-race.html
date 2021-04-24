@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    function getRandom(min, max) {
+
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    const proms = [];
+
+    for (let i = 0; i < 10; i++) {
+
+        proms.push(new Promise((resolve, reject) => {
+
+            setTimeout(() => {
+
+                if (Math.random() < 0.5) {
+
+                    resolve(i);
+
+                } else {
+
+                    reject(i);
+                }
+
+            }, getRandom(2000, 5000));
+        }));
+    }
+
+    const pro = Promise.race(proms);
+
+    pro.then(data => {
+
+        console.log('first finally', data);                 // 无论 then or catch，执行一次后，即停止
+    });
+
+    pro.catch(err => {
+
+        console.log('first failure', err);                 // 无论 then or catch，执行一次后，即停止
+    });
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+
+    const alpha = {
+        name: 'alpha',
+        age: 18,
+        gender: 'man'
+    };
+
+    const beta = {...alpha};
+
+    // const beta = alpha;                      // true 相同的引用地址
+
+
+    console.log(beta);
+    // {name: "alpha", age: 18, gender: "man"}
+
+    console.log(beta === alpha);                // false 不同的引用地址
+
+
+    /**
+     * 利用对象中，后设置的相同属性名的值会覆盖之前的同属性名的值
+     *
+     * 可以在克隆新对象时，更改需要的属性值
+     *
+     * 浅克隆: 仅展开当前结构层的数据内容
+     */
+
+    const omega = {
+        ...alpha,
+        name: 'omega'
+    };
+
+    console.log(omega);
+    // {name: "omega", age: 18, gender: "man"}
+
+
+    /**
+     * 若要进行深层克隆
+     *
+     * 需要再用展开运算符，展开其属性值中的引用属性值          // 已知引用数据结构时可使用
+     */
+
+    const alpha1 = {
+        name: 'alpha1',
+        age: 18,
+        haveBook: ['c++', 'python', 'php'],
+        like: {
+            food: 'fish',
+            color: 'red'
+        }
+    };
+
+    const beta1 = {
+        ...alpha1,
+        name: 'beta',
+        haveBook: [...alpha1.haveBook],
+        like: {
+            ...alpha1.like
+        }
+    };
+
+    console.log(beta1);
+    // {name: "beta", age: 18, haveBook: Array(3), like: {…}}
+    // age: 18
+    // haveBook: (3) ["c++", "python", "php"]
+    // like: {food: "fish", color: "red"}
+    // name: "beta"
+    // __proto__: Object
+
+
+</script>
+
+
+</body>
+</html>

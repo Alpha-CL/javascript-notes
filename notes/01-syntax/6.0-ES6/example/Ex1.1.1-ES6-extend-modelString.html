@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    let food1 = 'banana',
+        food2 = 'fish';
+
+    let demo = myFn`alpha like ${food1}, beta like ${food2}`;
+
+    function myFn(params) {
+
+        /**
+         * 模版字符串会把按照表达式分割为参数传入指定函数
+         *
+         * params.length = value.length - 1
+         */
+
+        const values = Array.prototype.slice.apply(arguments).slice(1);
+
+        let str = '';
+
+        for (let i = 0; i < values.length; i++) {
+
+            // str += params[i] + ': ' + values[i];
+            str += `${params[i]}: ${values[i]}`;
+
+            if (i === values.length - 1) {
+
+                str += params[i + 1];
+            }
+        }
+        return str;
+    }
+
+    console.log(demo);
+
+
+</script>
+
+
+</body>
+</html>

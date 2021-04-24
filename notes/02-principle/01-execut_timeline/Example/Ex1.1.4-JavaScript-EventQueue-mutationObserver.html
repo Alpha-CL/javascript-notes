@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<ul class="container">
+
+</ul>
+
+<button id="btn">click</button>
+
+<script>
+
+
+    let count = 1;
+
+    const ul = document.getElementsByClassName('container')[0];
+
+    document.getElementById('btn').onclick = function () {
+
+        setTimeout(function(){
+
+            console.log('添加了一个 li')
+
+        }, 0);
+
+        let li = document.createElement('li');
+        li.innerText = count++ + '';
+        ul.appendChild(li);
+    };
+
+
+    // 监听 ul
+    const observer = new MutationObserver(() => {
+
+        // 监听的 dom 元素发生改变时运行的回调函数
+        console.log('ul元素发生了改变');
+    });
+
+    observer.observe(ul, {
+
+        attributes: true,               // 监听属性的变化
+        childList: true,                // 监听子元素的变化
+        subtree: true                   // 监听后代元素的变化
+    });
+
+    // observer.disconnect();              // 取消监听
+
+
+</script>
+
+
+</body>
+</html>

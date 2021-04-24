@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    // function* test() {
+    //
+    // }
+    //
+    // const generator = test();
+    //
+    // console.log(generator);
+    //
+    // // test
+    // // __proto__: Generator
+    // // __proto__: Generator
+    // // constructor: GeneratorFunction {prototype: Generator, Symbol(Symbol.toStringTag): "GeneratorFunction", constructor: ƒ}
+    // //
+    // //
+    // // next: ƒ next()                                           // next();
+    // //
+    // //
+    // // return: ƒ return()
+    // // throw: ƒ throw()
+    // // Symbol(Symbol.toStringTag): "Generator"
+    // // __proto__:
+    // //
+    // //
+    // //     Symbol(Symbol.iterator): ƒ [Symbol.iterator]()       // Symbol.iterator;
+    // //
+    // //
+    // // __proto__: Object
+    // //     [[GeneratorLocation]]: Ex1.3.7-ES6-Generato…k7mdrrdpbjsbuab1:13
+    // //     [[GeneratorStatus]]: "suspended"
+    // //     [[GeneratorFunction]]: ƒ* test()
+    // //     [[GeneratorReceiver]]: Window
+    // //     [[Scopes]]: Scopes[3]
+
+
+
+</script>
+
+<script>
+
+
+    // function* test() {
+    //
+    //     console.log('无迭代，无数据产生，必须使用 yield 关键字');
+    // }
+    //
+    // const generator = test();
+    //
+    // console.log(generator);
+
+
+</script>
+
+<script>
+
+
+    // function* test() {
+    //
+    //     // console.log('无迭代，无数据产生，必须使用 yield 关键字');
+    //
+    //     console.log('第一次迭代，并产生迭代数据');
+    //     yield 1;
+    //
+    //     console.log('第二次迭代，并产生迭代数据');
+    //     yield 2;
+    //
+    //     console.log('最后一次迭代，函数无数据返回，并改变 done 的状态为 true ');
+    // }
+    //
+    // const generator = test();       // 返回生成器
+    //
+    // console.log(generator.next());  // 第一次迭代，并产生迭代数据 {value: 1, done: false}
+    // console.log(generator.next());  // 第二次迭代，并产生迭代数据 {value: 2, done: false}
+    // console.log(generator.next());  // 最后一次迭代，函数无数据返回，并改变 done 的状态为 true {value: undefined, done: true}
+
+
+</script>
+
+<script>
+
+
+    // const arr1 = [1, 2, 3, 4, 5],
+    //     arr2 = [5, 6, 7, 8, 9];
+    //
+    // function* createArrGenerator(arr) {
+    //
+    //     for (const item of arr) {
+    //
+    //         yield item;
+    //     }
+    // }
+    //
+    // const arrGenerator = createArrGenerator(arr1);
+    //
+    // console.log(arrGenerator.next());           // {value: 1, done: false}
+    // console.log(arrGenerator.next());           // {value: 2, done: false}
+    // console.log(arrGenerator.next());           // {value: 3, done: false}
+
+
+</script>
+
+<script>
+
+
+    // function* createFeiboGenerator() {
+    //
+    //     let prev1,
+    //         prev2,
+    //         result,
+    //         i = 1;
+    //
+    //     while (true) {
+    //
+    //         if (i === 1 || 1 === 2) {
+    //
+    //             prev1 = 1;
+    //             prev2 = 1;
+    //         }
+    //
+    //         result = i === 1 || i === 2 ? 1 : prev1 + prev2;
+    //
+    //         yield result;
+    //
+    //         i++;
+    //         prev1 = prev2;
+    //         prev2 = result;
+    //     }
+    // }
+    //
+    // const feiboGenerator = createFeiboGenerator();
+    //
+    // console.log(feiboGenerator.next());             // {value: 1, done: false}
+    // console.log(feiboGenerator.next());             // {value: 1, done: false}
+    // console.log(feiboGenerator.next());             // {value: 2, done: false}
+    // console.log(feiboGenerator.next());             // {value: 3, done: false}
+    // console.log(feiboGenerator.next());             // {value: 5, done: false}
+
+
+</script>
+
+<script>
+
+
+    // function* test() {
+    //
+    //     // console.log('无迭代，无数据产生，必须使用 yield 关键字');
+    //
+    //     console.log('第一次迭代，并产生迭代数据');
+    //     yield 1;
+    //
+    //     console.log('第二次迭代，并产生迭代数据');
+    //     yield 2;
+    //
+    //     console.log('最后一次迭代，函数无数据返回，并改变 done 的状态为 true ');
+    //     return 69;
+    // }
+    //
+    // const generator = test();       // 返回生成器
+    //
+    // console.log(generator.next());  // 第一次迭代，并产生迭代数据 {value: 1, done: false}
+    // console.log(generator.next());  // 第二次迭代，并产生迭代数据 {value: 2, done: false}
+    //
+    // console.log(generator.next());  // 最后一次迭代，函数无数据返回，并改变 done 的状态为 true {value: 69, done: true}
+    //                                 // 最后一次迭代时，可设置生成器的返回值( 若不生成器函数不设置返回值，则返回 undefined )
+    //
+    // console.log(generator.next());  // 若继续调用，则返回 undefined {value: undefined, done: true}
+
+
+</script>
+
+<script>
+
+
+    // function* test() {
+    //
+    //     let info = yield 1;
+    //
+    //     yield 3;
+    //
+    //     info = yield 2 + info;
+    //
+    //     console.log(info);                  // undefined
+    // }
+    //
+    // const generator = test();
+    //
+    // console.log(generator.next());          // {value: 1, done: false}
+    //
+    // console.log(generator.next());          // {value: 3, done: false}
+    //
+    // console.log(generator.next(5));         // {value: 7, done: false}
+    //
+    // console.log(generator.next());          // {value: undefined, done: true}
+
+
+</script>
+
+<script>
+
+
+    // /**
+    //  * Generator.return(param);
+    //  *
+    //  *
+    //  * 调用该方法，会提前结束生成器，并结束迭代过程
+    //  */
+    //
+    // function* test() {
+    //
+    //     yield 1;
+    //     yield 2;
+    //     yield 3;
+    // }
+    //
+    // const generator = test();
+    //
+    // console.log(generator.next());                  // {value: 1, done: false}
+    //
+    // console.log(generator.return(2));               // {value: 2, done: true}
+    //
+    // console.log(generator.next());                  // {value: undefined, done: true}
+    // console.log(generator.next());                  // {value: undefined, done: true}
+
+
+
+</script>
+
+<script>
+
+
+    // function* test() {
+    //
+    //     yield 1;
+    //     yield 2;
+    //     yield 3;
+    // }
+    //
+    // const generator = test();
+    //
+    // console.log(generator.next());                  // {value: 1, done: false}
+    //
+    // generator.throw('is a joke');
+    //
+    // console.log(generator.next());                  // Uncaught is a joke
+    // console.log(generator.next());
+
+
+</script>
+
+<script>
+
+
+    // function* test1() {
+    //
+    //     yield 'a';
+    //     yield 'b';
+    //     yield 'c';
+    // }
+    //
+    // function* test2() {
+    //
+    //     yield* test1();
+    //
+    //     yield 1;
+    //     yield 2;
+    //     yield 3;
+    // }
+    //
+    //
+    // const generator = test2();
+    //
+    // console.log(generator.next());              // {value: "a", done: false}
+    // console.log(generator.next());              // {value: "b", done: false}
+    // console.log(generator.next());              // {value: "c", done: false}
+    //
+    // console.log(generator.next());              // {value: "1", done: false}
+    // console.log(generator.next());              // {value: "2", done: false}
+    // console.log(generator.next());              // {value: "3", done: false}
+    //
+    // console.log(generator.next());              // {value: undefined, done: true}
+
+
+</script>
+
+
+
+
+
+</body>
+</html>

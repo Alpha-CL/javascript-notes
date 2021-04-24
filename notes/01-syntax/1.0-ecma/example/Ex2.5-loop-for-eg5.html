@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * 输出 1 ～ 100 中所有素数的和
+     *
+     *
+     */
+
+
+    var sum = 0;
+
+    for (var i = 2; i < 101; i++) {
+
+
+        var isFind = false;
+
+        for (var j = 2; j < i - 1; j++) {
+
+            if (i % j === 0) {
+
+                isFind = true;
+
+                break;
+            }
+        }
+
+
+        if (!isFind) {
+
+            sum += i;
+        }
+
+    }
+
+    console.log(sum);
+
+
+</script>
+
+
+</body>
+</html>

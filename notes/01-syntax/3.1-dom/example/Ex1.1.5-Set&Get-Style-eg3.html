@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        .wrap {
+            margin: 100px 0 0 100px;
+        }
+
+        .demo {
+            overflow: hidden;
+            margin-bottom: 30px;
+            width: 300px;
+            height: 300px;
+            border: 1px solid;
+            text-align: center;
+            line-height: 300px;
+        }
+
+        .btn {
+            padding: 12px 16px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+<div class="wrap">
+    <div class="demo">阿尔法</div>
+    <button class="btn btn-grow">放大</button>
+    <button class="btn btn-shrink">缩写</button>
+</div>
+
+
+<script>
+
+
+    let target = document.querySelector('.demo'),
+        curSize = parseInt(getComputedStyle(target).fontSize),
+        btnGrow = document.querySelector('.btn-grow'),
+        btnShrink = document.querySelector('.btn-shrink');
+
+    btnGrow.onclick = function () {
+
+        curSize += 10;
+
+        if (curSize > 80) {
+
+            curSize = 80;
+        }
+
+        target.style.fontSize = curSize + 'px';
+    };
+
+
+    btnShrink.onclick = function () {
+
+        curSize -= 10;
+
+        if (curSize < 20) {
+
+            curSize = 20;
+        }
+
+        target.style.fontSize = curSize + 'px';
+    };
+
+</script>
+
+
+</body>
+</html>

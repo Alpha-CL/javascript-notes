@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    class Test {
+
+        /**
+         * @obsolete 为了标记过期方法
+         *
+         * ES7+
+         */
+
+        @Obsolete
+        print() {
+
+            console.log('print method');
+        }
+    }
+
+    function Obsolete(target, methodName, descriptor) {
+
+        console.log(target, methodName, descriptor);
+
+        // target       => function
+        // methodName   => print
+        // descriptor   => value: function print() {}
+
+        const oldFunc = descriptor.value;
+
+        descriptor.value = function (...args) {
+
+            console.warn(`${methodName} is Obsolete`);
+
+            oldFunc.apply(this, args);
+        };
+    }
+
+
+</script>
+
+
+</body>
+</html>

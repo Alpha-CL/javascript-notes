@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * set(key: any, value: any);
+     *
+     *
+     * 对比 key 是否存在: 内部使用 Object.is();( 特殊情况: +0 === -0 )
+     *
+     *
+     * 为 map 设置( 已存在 key ) 或 添加( 未存在 key ) 一对 'key: value'
+     *
+     * 并且  key & value 可以是任意类型
+     */
+
+    const mp = new Map();
+
+
+    const number = 666;
+    const str = 'hello world';
+    const boolean = false;
+    const obj = {};
+    const arr = [];
+
+    mp.set('love', 'beta');
+    mp.set(obj, arr);
+    mp.set(number, str);
+    mp.set(str, boolean);
+
+    console.log(mp);
+
+
+</script>
+
+
+</body>
+</html>

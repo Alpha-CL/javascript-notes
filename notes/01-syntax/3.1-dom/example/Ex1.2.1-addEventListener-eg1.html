@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+
+        .wrapper {
+            margin: 100px 0 0 100px;
+            border: 1px solid #ccc;
+            padding: 16px;
+            width: 200px;
+        }
+
+        .hd input,
+        .hd button {
+            padding: 4px 6px;
+        }
+
+        .hd input {
+            width: 64%;
+        }
+
+        .hd button {
+            padding: 4px 10px;
+            margin-left: 10px;
+        }
+
+        .hd {
+            margin-bottom: 16px;
+        }
+
+        .bd {
+            width: 100%;
+        }
+
+        .list li {
+            padding: 6px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .list button {
+            float: right;
+            padding: 3px 4px;
+        }
+
+        .list li:after {
+            content: '';
+            clear: both;
+            display: block;
+        }
+
+        .bd > button {
+            margin-top: 10px;
+            padding: 4px 0;
+            width: 100%;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+<div class="wrapper">
+    <div class="hd">
+        <label>
+            <input type="text" placeholder="请输入内容" class="txt">
+        </label>
+        <button class="add">add</button>
+    </div>
+    <div class="bd">
+        <ol class="list">
+            <li>item-1
+                <button>delete</button>
+            </li>
+            <li>item-2
+                <button>delete</button>
+            </li>
+            <li>item-3
+                <button>delete</button>
+            </li>
+        </ol>
+        <button class="delete-all">delete all</button>
+    </div>
+</div>
+
+
+<script>
+
+    let inputTxt = document.querySelector('.txt'),
+        btnAdd = document.querySelector('.add'),
+        btnDeleteAll = document.querySelector('.delete-all'),
+        oList = document.querySelector('.list');
+
+    btnAdd.onclick = function () {
+
+        let con = inputTxt.value,
+            oLi = document.createElement('li'),
+            oLis = document.querySelectorAll('.list li'),
+            oBtn = document.createElement('button');
+
+        if (!inputTxt.value) {
+
+            alert('请输入有效内容');
+
+        } else {
+
+            oLi.innerText = con;
+            oBtn.innerText = 'delete';
+
+            oLi.appendChild(oBtn);
+            oList.appendChild(oLi);
+        }
+
+        inputTxt.value = null;
+        inputTxt.style.placeholder = '请输入内容';
+
+        if (oLis.length >= 0) {
+
+            btnDeleteAll.classList.remove('hide');
+            btnDeleteAll.classList.add('show');
+        }
+    };
+
+    oList.addEventListener('click', function (e) {
+
+        let target = e.target,
+            oLis = document.querySelectorAll('.list li');
+
+        if (target.tagName === 'BUTTON') {
+
+            target.parentElement.remove();
+        }
+
+        console.log(oLis.length);
+
+        if (oLis.length <= 1) {
+
+            btnDeleteAll.classList.add('hide');
+        }
+
+    }, false);
+
+
+    btnDeleteAll.onclick = function () {
+
+        let oLis = document.querySelectorAll('.list li');
+
+        oLis.forEach(function (value) {
+
+            value.remove();
+        });i
+    };
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

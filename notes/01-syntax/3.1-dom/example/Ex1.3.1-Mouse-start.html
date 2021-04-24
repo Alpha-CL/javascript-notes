@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            margin: 100px 0 0 100px;
+            padding: 24px;
+            border: 1px solid #ccc;
+            width: 280px;
+            color: #333;
+        }
+
+        .wrap img {
+            vertical-align: middle;
+            transform: scale(.7, .7);
+        }
+
+        .wrap .row:not(:last-of-type) {
+            margin-bottom: 12px;
+        }
+
+        .wrap .row span:first-of-type {
+            margin-right: 12px;
+        }
+
+        .wrap span:last-of-type {
+            margin-left: 12px;
+            color: #999;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+
+<div class="wrap">
+    <div class="row">
+        <span>快递包裹:</span>
+        <img src="img/start-empty.png" alt="">
+        <img src="img/start-empty.png" alt="">
+        <img src="img/start-empty.png" alt="">
+        <img src="img/start-empty.png" alt="">
+        <img src="img/start-empty.png" alt="">
+        <span>0分</span>
+    </div>
+    <div class="row">
+        <span>送货速度:</span>
+        <img src="img/start-empty.png" alt="">
+        <img src="img/start-empty.png" alt="">
+        <img src="img/start-empty.png" alt="">
+        <img src="img/start-empty.png" alt="">
+        <img src="img/start-empty.png" alt="">
+        <span>0分</span>
+    </div>
+    <div class="row">
+        <span>商品评分:</span>
+        <img src="img/start-empty.png" alt="">
+        <img src="img/start-empty.png" alt="">
+        <img src="img/start-empty.png" alt="">
+        <img src="img/start-empty.png" alt="">
+        <img src="img/start-empty.png" alt="">
+        <span>0分</span>
+    </div>
+    <div class="row">
+        <span>配送服务:</span>
+        <img src="img/start-empty.png" alt="">
+        <img src="img/start-empty.png" alt="">
+        <img src="img/start-empty.png" alt="">
+        <img src="img/start-empty.png" alt="">
+        <img src="img/start-empty.png" alt="">
+        <span>0分</span>
+    </div>
+</div>
+
+
+<script>
+
+
+    let oWrap = document.querySelector('.wrap'),
+        oRows = oWrap.children;
+
+    Array.from(oRows).forEach(function (value) {
+
+        Array.from(value.children).filter(function (value, index) {
+
+            if (value.tagName === 'IMG') {
+
+                value.dataset.fraction = index + '';
+            }
+        });
+    });
+
+    Array.from(oRows).forEach(function (value) {
+
+        value.addEventListener('mouseover', showStart, false);
+
+        function showStart(e) {
+
+            let tar = e.target;
+
+            if (tar.dataset.fraction) {
+
+                let len = tar.dataset.fraction,
+                    parent = tar.parentElement,
+                    parentChild = tar.parentElement.children,
+                    score = tar.dataset.fraction;
+
+                parent.lastElementChild.innerHTML = score + '分';
+
+                Array.from(parentChild).filter(function (value) {
+
+                    if (value.tagName === 'IMG' && value.dataset.fraction <= len) {
+
+                        return value.src = 'img/start-shining.png';
+
+                    } else {
+
+                        return value.src = 'img/start-empty.png';
+                    }
+                });
+            }
+        }
+
+        value.addEventListener('click', function (e) {
+
+            let tar = e.target;
+
+            if (tar.tagName === 'IMG') {
+
+                let parent = tar.parentElement;
+
+                parent.removeEventListener('mouseover', showStart, false);
+            }
+
+        }, false);
+
+    })
+
+
+</script>
+
+
+</body>
+</html>

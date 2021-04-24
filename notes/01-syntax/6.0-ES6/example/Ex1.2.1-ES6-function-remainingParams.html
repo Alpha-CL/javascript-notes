@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * rest params              // 剩余参数
+     *
+     *
+     * 同一个函数中，有且只能有一个 剩余参数数组
+     *
+     * 同一个函数中，剩余参数 必需设置为最后一个形参
+     */
+
+    function test1(a, b, ...args) {
+
+        console.log(args);                          // 剩余参数会收集所有参数，并返回一个数组
+    }
+
+    test1(1, 2, 23, 4, 315, 31, 61);
+
+
+
+    // 同一个函数中，有且只能有一个 剩余参数数组
+    //
+    // function test2(...args1, ...arg2) {
+    //
+    //
+    //     /**
+    //      * 无法判断该把哪些参数收集到哪个剩余参数数组中
+    //      *
+    //      */
+    //
+    //     console.log(args1);
+    //     console.log(args2);
+    // }
+    //
+    // test2(1, 2, 23, 4, 315, 31, 61);
+
+
+
+    // 同一个函数中，剩余参数 必需设置为最后一个形参
+    //
+    // function test3(name, ...args, age) {
+    //
+    //
+    //     /**
+    //      * SyntaxError: Rest parameter must be last formal parameter
+    //      *
+    //      * 若剩余参数并未设置为最后一个形参，函数则无法判断参数的是否传递
+    //      */
+    //
+    //     console.log(args);
+    // }
+    //
+    // test3(1, 2, 23, 4, 315, 31, 61);
+
+
+
+</script>
+
+
+</body>
+</html>

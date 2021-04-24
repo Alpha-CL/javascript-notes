@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+<div>5</div>
+<div>6</div>
+<div>7</div>
+<div>8</div>
+<div>9</div>
+<div>10</div>
+
+<script>
+
+
+    // /**
+    //  * 数组满足 可迭代协议
+    //  *
+    //  *
+    //  */
+    //
+    // const arr = [1, 2, 3, 4, 5, 6];
+    //
+    // console.log(arr);                           // 数组本身就带有 Symbol.iterator
+    //
+    // // Array(6)
+    // // 0: 1
+    // // 1: 2
+    // // 2: 3
+    // // 3: 4
+    // // 4: 5
+    // // 5: 6
+    // // length: 6
+    // // __proto__: Array(0)
+    // // concat: ƒ concat()
+    // // constructor: ƒ Array()
+    // // copyWithin: ƒ copyWithin()
+    // // entries: ƒ entries()
+    // // every: ƒ every()
+    // // fill: ƒ fill()
+    // // filter: ƒ filter()
+    // // find: ƒ find()
+    // // findIndex: ƒ findIndex()
+    // // flat: ƒ flat()
+    // // flatMap: ƒ flatMap()
+    // // forEach: ƒ forEach()
+    // // includes: ƒ includes()
+    // // indexOf: ƒ indexOf()
+    // // join: ƒ join()
+    // // keys: ƒ keys()
+    // // lastIndexOf: ƒ lastIndexOf()
+    // // length: 0
+    // // map: ƒ map()
+    // // pop: ƒ pop()
+    // // push: ƒ push()
+    // // reduce: ƒ reduce()
+    // // reduceRight: ƒ reduceRight()
+    // // reverse: ƒ reverse()
+    // // shift: ƒ shift()
+    // // slice: ƒ slice()
+    // // some: ƒ some()
+    // // sort: ƒ sort()
+    // // splice: ƒ splice()
+    // // toLocaleString: ƒ toLocaleString()
+    // // toString: ƒ toString()
+    // // unshift: ƒ unshift()
+    // // values: ƒ values()
+    // //
+    // //
+    // // Symbol(Symbol.iterator): ƒ values()              // Symbol.iterator
+    // //
+    // //
+    // // Symbol(Symbol.unscopables): {copyWithin: true, entries: true, fill: true, find: true, findIndex: true, …}
+    // // __proto__: Object
+    //
+    // const arrIterator = arr[Symbol.iterator]();
+    //
+    // console.log(arrIterator.next());
+    // console.log(arrIterator.next());
+    // console.log(arrIterator.next());
+
+
+</script>
+
+<script>
+
+
+    // /**
+    //  * 部分类数组满足 ES6 可迭代协议
+    //  *
+    //  *
+    //  */
+    //
+    // let dv = document.querySelectorAll('div');
+    //
+    // console.log(dv);
+    //
+    // // NodeList(10) [div, div, div, div, div, div, div, div, div, div]
+    // // 0: div
+    // // 1: div
+    // // 2: div
+    // // 3: div
+    // // 4: div
+    // // 5: div
+    // // 6: div
+    // // 7: div
+    // // 8: div
+    // // 9: div
+    // // length: 10
+    // // __proto__: NodeList
+    // // entries: ƒ entries()
+    // // forEach: ƒ forEach()
+    // // item: ƒ item()
+    // // keys: ƒ keys()
+    // // length: (...)
+    // // values: ƒ values()
+    // // constructor: ƒ NodeList()
+    // //
+    // //
+    // // Symbol(Symbol.iterator): ƒ values()                      // Symbol.iterator
+    // //
+    // //
+    // // Symbol(Symbol.toStringTag): "NodeList"
+    // // get length: ƒ length()
+    // // __proto__: Object
+    //
+    // const dvIterator = dv[Symbol.iterator]();
+    //
+    // console.log(dvIterator.next());
+    // console.log(dvIterator.next());
+    // console.log(dvIterator.next());
+
+
+</script>
+
+<script>
+
+
+    // const arr = [1, 2, 3, 4, 5, 6];
+    //
+    // // const arrIterator = arr[Symbol.iterator]();
+    // //
+    // // let itemNext = arrIterator.next();
+    // //
+    // // while (!itemNext.done) {
+    // //
+    // //     const item = itemNext.value;
+    // //
+    // //     console.log(item);
+    // //
+    // //     itemNext = arrIterator.next();
+    // // }
+    //
+    //
+    // /**
+    //  * for ... of ...                   // 一般用于可迭代对象
+    //  *
+    //  *
+    //  * @item: 每次迭代所返回的数据
+    //  *
+    //  * @arr: 可迭代对象
+    //  */
+    //
+    //
+    // for (const item of arr) {
+    //
+    //     console.log(item);
+    // }
+
+
+</script>
+
+<script>
+
+
+    // const obj1 = {
+    //
+    //     a: 1,
+    //     b: 2
+    // };
+    //
+    // for (const item of obj1) {
+    //
+    //     console.log(item);                      // Uncaught TypeError: obj1 is not iterable
+    // }
+
+
+    const obj2 = {
+
+        a: 1,
+        b: 2,
+
+        [Symbol.iterator]() {
+
+            const keys = Object.keys(this);
+
+            let i = 0;
+
+            return {
+
+                next: () => {
+
+                    const result = {
+
+                        value: {
+
+                            propName: keys[i],
+                            propValue: this[keys[i]]
+                        },
+
+                        done: i >= keys.length
+                    };
+
+                    i++;
+
+                    return result;
+
+                }
+            }
+        }
+    };
+
+
+    for (const item of obj2) {
+
+        console.log(item);
+    }
+
+
+</script>
+
+
+</body>
+</html>

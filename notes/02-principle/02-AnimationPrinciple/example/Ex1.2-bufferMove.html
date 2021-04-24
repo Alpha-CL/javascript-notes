@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            position: absolute;
+            left: 500px;
+            top: 0;
+        }
+
+        button {
+            margin-top: 150px;
+            left: 20px;
+            padding: 3px 6px;
+        }
+
+        span {
+            position: absolute;
+            left: 300px;
+            width: 1px;
+            height: 100px;
+            background-color: black;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+
+<div></div>
+
+<span></span>
+
+<button id="btn">run</button>
+
+
+<script>
+
+
+    var oDiv = document.getElementsByTagName('div')[0],
+        oBtn = document.getElementById('btn');
+
+    oBtn.onclick = function () {
+
+        bufferMove(oDiv, 300);
+    };
+
+
+    var timer = null;
+
+    function bufferMove(element, target) {
+
+        let iSpeed = null;
+
+        clearInterval(timer);
+
+        timer = setInterval(function () {
+
+            iSpeed = (target - element.offsetLeft) / 7;
+
+            iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+
+            if (element.offsetLeft == target) {
+
+                clearInterval(timer);
+
+            } else {
+
+                element.style.left = element.offsetLeft + iSpeed + 'px';
+            }
+
+        }, 30);
+    }
+
+
+</script>
+
+
+</body>
+</html>

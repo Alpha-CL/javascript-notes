@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>click 何时触发</title>
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .demo {
+            margin: 100px 0 0 100px;
+            width: 200px;
+            height: 200px;
+            background-color: #3c8dff;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+
+<div class="wrap">
+    <div class="demo"></div>
+</div>
+
+
+<script>
+
+
+    let demo = document.querySelector('.demo');
+
+    demo.mousedown = function () {
+
+    };
+
+
+    demo.addEventListener('mousemove', function () {
+
+        console.log('鼠标在事件源对象中移动即触发');
+
+    }, false);
+
+
+    demo.addEventListener('mouseover', function () {
+
+        console.log('鼠标进入事件源对象');
+
+    }, false);
+
+
+    demo.addEventListener('mouseout', function () {
+
+        this.classList.add('gaga');
+
+        console.log('鼠标离开事件源对象');
+
+    }, false);
+
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    // let goddess = ['goddess-1', 'goddess-2', 'goddess-3', 'goddess-4'];
+    //
+    // function showLove(arr) {
+    //
+    //     return arr.forEach((value, index) => {
+    //
+    //         return new Promise((resolve, reject) => {
+    //
+    //             setTimeout(() => {
+    //
+    //                 if (Math.random() < 0.5) {
+    //
+    //                     console.log(`goddess-${index} agree`);
+    //
+    //                     resolve(true);
+    //
+    //                 } else {
+    //
+    //                     console.log(`goddess-${index} disagree`);
+    //
+    //                     resolve(false);
+    //                 }
+    //
+    //             }, 3000);
+    //
+    //         });
+    //     });
+    // }
+    //
+    // showLove(goddess);
+
+
+</script>
+
+<script>
+
+
+    // function showLove(goddess) {
+    //
+    //     return new Promise((resolve, reject) => {
+    //
+    //         setTimeout(() => {
+    //
+    //             if (Math.random() < 0.3) {
+    //
+    //                 resolve(true);
+    //
+    //             } else {
+    //
+    //                 resolve(false);
+    //             }
+    //
+    //         }, 3000);
+    //
+    //     });
+    // }
+    //
+    // showLove('goddess-1').then(result => {
+    //
+    //     console.log('send showLove message');
+    //
+    //     if (result) {
+    //
+    //         console.log('goddess-1 agree');
+    //
+    //         return undefined;
+    //
+    //     } else {
+    //
+    //         showLove('goddess-2');
+    //     }
+    //
+    // }).then(result => {
+    //
+    //     if (result) {
+    //
+    //         console.log('goddess-2 agree');
+    //
+    //         return undefined;
+    //
+    //     } else {
+    //
+    //         showLove('goddess-3');
+    //     }
+    //
+    // }).then(result => {
+    //
+    //     if (result) {
+    //
+    //         console.log('goddess-3 agree');
+    //
+    //         return undefined;
+    //
+    //     } else {
+    //
+    //         console.log('all disagree');
+    //     }
+    // });
+
+
+</script>
+
+<script>
+
+
+    // let goddess = ['goddess-1', 'goddess-2', 'goddess-3', 'goddess-4'];
+    //
+    // function showLove(goddess) {
+    //
+    //     return new Promise((resolve, reject) => {
+    //
+    //         setTimeout(() => {
+    //
+    //             if (Math.random() < 0.3) {
+    //
+    //                 resolve(true);
+    //
+    //             } else {
+    //
+    //                 resolve(false);
+    //             }
+    //
+    //         }, 300);
+    //
+    //     });
+    // }
+    //
+    // let pro;
+    //
+    // for (let i = 0; i <= goddess.length; i++) {
+    //
+    //     if (i === 0) {
+    //
+    //         pro = showLove(goddess[i]);
+    //     }
+    //
+    //     pro = pro.then(result => {
+    //
+    //         if (result === undefined) {
+    //
+    //             return undefined;
+    //
+    //         } else if (result) {
+    //
+    //             console.log(`goddess-${i + 1} agree`);
+    //
+    //             return undefined;
+    //
+    //         } else {
+    //
+    //             console.log(`goddess-${i + 1} disagree`);
+    //
+    //             if (i < goddess.length - 1) {
+    //
+    //                 return showLove(goddess[i + 1]);
+    //
+    //             } else {
+    //
+    //                 console.log(`all disagree`);
+    //             }
+    //         }
+    //     });
+    // }
+
+
+</script>
+
+<script>
+
+
+    function getRandom(min, max) {
+
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    function showLove(goddess) {
+
+        return new Promise((resolve, reject) => {
+
+            setTimeout(() => {
+
+                if (Math.random() < 0.5) {
+
+                    console.log(`${goddess} ------------- agree`);
+
+                    resolve(true);
+
+                } else {
+
+                    console.log(`${goddess} ------------- disagree`);
+
+                    resolve(false);
+                }
+
+            }, getRandom(2000, 5000));
+        });
+    }
+
+    const proms = [];
+
+    let hasAgree = false;
+
+    for (let i = 0; i < 20; i++) {
+
+        const pro = showLove(`goddess-${i}`).then(result => {
+
+            if (result) {
+
+                if (hasAgree) {
+
+                    console.log(`goddess${i} i am so sorry`);
+
+                } else {
+
+                    hasAgree = true;
+
+                    console.log(`goddess${i} agree`);
+                }
+            }
+
+            return result;
+        });
+
+        proms.push(pro);
+    }
+
+    Promise.all(proms).then(result => {
+
+        console.log(result);
+    });
+
+
+</script>
+
+
+</body>
+</html>

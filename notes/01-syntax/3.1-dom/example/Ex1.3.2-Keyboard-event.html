@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        input {
+            margin: 100px 0 0 100px;
+            padding: 12px 16px;
+            font-size: 30px;
+
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+
+<label><input type="text"></label>
+
+
+<script>
+
+
+    let ipt = document.getElementsByTagName('input')[0];
+
+    ipt.onkeydown = function () {
+
+        console.log('按下触发: keydown，一直按下一直触发');
+    };
+
+
+    ipt.onkeypress = function () {
+
+        console.log('按下有效按键后抬起触发一次: keypress');
+    };
+
+
+    ipt.onkeyup = function () {
+
+        console.log('抬起触发: keyup');
+    };
+
+
+</script>
+
+
+</body>
+</html>

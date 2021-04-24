@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+    function getRandom(min, max) {
+
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    const MyPromise = (() => {
+
+        const PENDING = 'pending',
+            RESOLVED = 'resolved',
+            REJECTED = 'rejected',
+            PromiseStatus = Symbol('PromiseStatus'),
+            PromiseValue = Symbol('PromiseValue'),
+            changeStatus = Symbol('changeStatus'),
+            thenables = Symbol('thenables'),
+            catchables = Symbol('catchables'),
+            settleHandle = Symbol('settleHandle'),
+            linkPromise = Symbol('linkPromise');
+
+        return class MyPromise {
+
+            [changeStatus](newValue, newStatus, queue) {
+
+                if (this[PromiseStatus] !== PENDING) {
+
+                    return;
+                }
+
+                this.PromiseStatus = newStatus;
+                this.PromiseValue = newValue;
+
+                queue.forEach(handle => handle(newValue));
+            }
+
+            [settleHandle](handle, immediatelyStatus, queue) {
+
+                if (typeof handle !== "function") {
+
+                    return;
+                }
+
+                if (this[PromiseStatus] === immediatelyStatus) {
+
+                    setTimeout(() => {
+
+                        handle(this[PromiseValue]);
+
+                    }, 0);
+
+                } else {
+
+                    queue.push(handle);
+                }
+            }
+
+            [linkPromise](thenable, catchable) {
+
+                function exec(data, handle, resolve, reject) {
+
+                    try {
+
+                        const result = handle(data);
+
+                        if (result instanceof MyPromise) {
+
+                            result.then(d => {
+
+                                resolve(d);
+
+                            }, e => {
+
+                                reject(e);
+                            });
+
+                        } else {
+
+                            resolve(result);
+                        }
+
+                    } catch (err) {
+
+                        reject(err);
+                    }
+
+                }
+
+                return new MyPromise((resolve, reject) => {
+
+                    this[settleHandle]((data => {
+
+                        if (typeof thenable !== 'function') {
+
+                            resolve(data);
+
+                            return;
+                        }
+
+                        exec(data, thenable, resolve, reject);
+
+                    }), RESOLVED, this[thenables]);
+
+                    this[settleHandle]((data => {
+
+                        if (typeof catchable !== 'function') {
+
+                            reject(data);
+
+                            return;
+                        }
+
+                        exec(data, catchable, resolve, reject);
+
+                    }), REJECTED, this[catchable]);
+
+
+                });
+            }
+
+            constructor(executor) {
+
+                this[PromiseStatus] = PENDING;
+                this[PromiseValue] = undefined;
+                this[thenables] = [];
+                this[catchables] = [];
+
+                const resolve = data => {
+
+                    this[changeStatus](data, RESOLVED, this[thenables]);
+                };
+
+                const reject = reason => {
+
+                    this[changeStatus](reason, REJECTED, this[catchables]);
+                };
+
+                try {
+
+                    executor(resolve, reject);
+
+                } catch (err) {
+
+                    reject(err);
+                }
+            }
+
+            then(thenable, catchable) {
+
+                // this[settleHandle](thenable, RESOLVED, this[thenables]);
+
+                this.catch(catchable);
+
+                return this[linkPromise](thenable, catchable);
+            }
+
+            catch(catchable) {
+
+                // this[settleHandle](catchable, REJECTED, this[catchables]);
+
+                return this[linkPromise](undefined, catchable);
+            }
+
+            static resolve(data) {
+
+                if (data instanceof MyPromise) {
+
+                    return data;
+
+                } else {
+
+                    return new MyPromise(resolve => {
+
+                        resolve(data);
+                    });
+                }
+            }
+
+            static reject(reason) {
+
+                return new MyPromise(reject => {
+
+                    reject(reason);
+                });
+            }
+
+            static all(proms) {
+
+                return new MyPromise(((resolve, reject) => {
+
+                    const results = proms.map(p => {
+
+                        const obj = {
+
+                            result: undefined,
+                            isResolve: false
+                        };
+
+                        p.then(data => {
+
+                            obj.result = data;
+                            obj.isResolve = true;
+
+                            const unResolve = results.filter(r => !r.isResolve);
+
+                            if (unResolve.length === 0) {
+
+                                resolve(results.map(r => r.result));
+                            }
+
+                        }, reason => {
+
+                            reject(reason);
+                        });
+
+                        return obj;
+                    });
+
+                    // console.log(results);
+                }));
+            }
+
+            static race(proms) {
+
+                return new MyPromise((resolve, reject) => {
+
+                    proms.forEach(p => {
+
+                        p.then(data => {
+
+                            resolve(data);
+
+                        }, err => {
+
+                            reject(err);
+                        });
+                    });
+                });
+            }
+        }
+
+    })();
+
+
+</script>
+
+<script>
+
+
+    // const pro = new MyPromise((resolve, reject) => {
+    //
+    //     resolve(1);
+    // });
+    //
+    // pro.then(data => {
+    //
+    //     console.log('test');
+    //
+    //     console.log(pro);
+    //
+    //     console.log(data);
+    //
+    // });
+
+    // const pro = new MyPromise((resolve, reject) => {
+    //
+    //     setTimeout(() => {
+    //
+    //         resolve(1);
+    //
+    //     }, 3000);
+    // });
+    //
+    //
+    // pro.then(data => {
+    //
+    //     console.log(1, data);
+    // });
+    //
+    // pro.then(data => {
+    //
+    //     console.log(2, data);
+    // });
+    //
+    // pro.then(data => {
+    //
+    //     console.log(3, data);
+    // });
+    //
+    // pro.catch(err => {
+    //
+    //     console.log(1, err);
+    // });
+    //
+    // pro.then(data => {
+    //
+    //     console.log(4, data);
+    //
+    // }, err => {
+    //
+    //     console.log(2, err);
+    //
+    // });
+    //
+    // console.log(pro);
+
+    // const pro = new MyPromise((resolve, reject) => {
+    //
+    //     setTimeout(() => {
+    //
+    //         resolve(1);
+    //
+    //     }, 3000);
+    // });
+    //
+    // pro.then(data => {
+    //
+    //     console.log(1, data);
+    //
+    //     return 123;
+    //
+    // }).then(data => {
+    //
+    //     console.log(2, data);
+    //
+    //     return 234;
+    //
+    // }).then(data => {
+    //
+    //     console.log(3, data);
+    //
+    // });
+    //
+    // console.log(pro);
+
+    // const proms = [];
+    //
+    // for (let i = 0; i <= 10; i++) {
+    //
+    //     proms.push(new MyPromise((resolve, reject) => {
+    //
+    //         setTimeout(() => {
+    //
+    //             // console.log(i, '完成');
+    //             //
+    //             // resolve(i);
+    //
+    //             if (Math.random() < 0.5) {
+    //
+    //                 console.log(i, '完成');
+    //
+    //                 resolve(i);
+    //
+    //             } else {
+    //
+    //                 console.log(i, '失败');
+    //
+    //                 reject(i);
+    //             }
+    //
+    //         }, getRandom(1000, 5000));
+    //     }));
+    // }
+    //
+    // const pro = MyPromise.all(proms);
+    //
+    // pro.then(data => {
+    //
+    //     console.log('全部完成', data);
+    // });
+    //
+    // pro.catch(err => {
+    //
+    //     console.log('有失败的', err);
+    // });
+
+    // const proms = [];
+    //
+    // for (let i = 0; i <= 10; i++) {
+    //
+    //     proms.push(new MyPromise((resolve, reject) => {
+    //
+    //         setTimeout(() => {
+    //
+    //             // console.log(i, '完成');
+    //             //
+    //             // resolve(i);
+    //
+    //             if (Math.random() < 0.5) {
+    //
+    //                 console.log(i, '完成');
+    //
+    //                 resolve(i);
+    //
+    //             } else {
+    //
+    //                 console.log(i, '失败');
+    //
+    //                 reject(i);
+    //             }
+    //
+    //         }, getRandom(1000, 5000));
+    //     }));
+    // }
+    //
+    // const pro = new MyPromise.race(proms);
+    //
+    // pro.then(data => {
+    //
+    //     console.log('有一个完成', data);
+    // });
+    //
+    // pro.catch(err => {
+    //
+    //     console.log('有一个失败', err);
+    // });
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    // /**
+    //  * Accessor-Property( 存取器属性 )
+    //  *
+    //  *
+    //  */
+    //
+    // const obj = {
+    //
+    //     name: 'alpha',
+    //     age: 18,
+    //     gender: 'male'
+    // };
+    //
+    //
+    // Object.defineProperty(obj, 'wife', {
+    //
+    //     get() {             // 获取属性时运行，默认返回 undefined
+    //
+    //         console.log('运行了 (obj.wife).get(); 方法');
+    //     },
+    //
+    //     set(val) {          // 设置属性时运行，默认返回 value
+    //
+    //         console.log('运行了 (obj.wife).set(); 方法', val);
+    //     }
+    // });
+    //
+    // // console.log(obj.wife);
+    // // console.log(obj.wife = 'beta');
+    //
+    // console.log(obj.wife = obj.wife + 1);               // NaN
+    // console.log(obj.wife);                              // undefined
+
+
+</script>
+
+<script>
+
+
+    // /**
+    //  * Accessor-Property( 存取器属性 )
+    //  *
+    //  * 利用新变量模拟返回正常的属性值
+    //  */
+    //
+    // const obj = {
+    //
+    //     name: 'alpha',
+    //     age: 18,
+    //     gender: 'male'
+    // };
+    //
+    //
+    // Object.defineProperty(obj, 'wife', {
+    //
+    //     get() {             // 获取属性时运行，默认返回 undefined
+    //
+    //         console.log('运行了 (obj.wife).get(); 方法');
+    //
+    //         // return obj._wife;        // 直接返回会产生无限递归
+    //
+    //         return obj._wife;           // 返回 第三个变量存储的 value
+    //     },
+    //
+    //     set(val) {          // 设置属性时运行，默认返回 value
+    //
+    //         console.log('运行了 (obj.wife).set(); 方法', val);
+    //
+    //         // obj.wife = val;          // 直接设置会产生无限递归
+    //
+    //         obj._wife = val;            // 利用 第三个变量存储设置的 value
+    //     }
+    // });
+    //
+    //
+    // console.log(obj.wife = 10);                         // 11
+    // console.log(obj.wife = obj.wife + 1);               // 11
+
+
+</script>
+
+<script>
+
+
+    // const obj = {
+    //
+    //     name: 'alpha'
+    // };
+    //
+    // Object.defineProperty(obj, 'age', {
+    //
+    //     get() {
+    //
+    //         return obj._age;
+    //     },
+    //
+    //     set(val) {
+    //
+    //         if (val < 0) {
+    //
+    //             obj._age = 0;
+    //
+    //         } else {
+    //
+    //             obj._age = val;
+    //         }
+    //
+    //     }
+    // });
+    //
+    // obj.age = 18;
+    // console.log(obj.age);
+
+
+</script>
+
+
+</body>
+</html>

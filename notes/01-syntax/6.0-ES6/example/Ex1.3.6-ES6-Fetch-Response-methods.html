@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * responseData.json();
+     *
+     */
+
+    // (async function getProvinces() {
+    //
+    //     const url = 'http://101.132.72.36:5100/api/local';
+    //
+    //     const resp = await fetch(url);
+    //
+    //     const result = await resp.json();
+    //
+    //     console.log(result);
+    //
+    // }());
+
+
+</script>
+
+<script>
+
+    /**
+     * responseData.text();
+     *
+     * 转换响应数据为字符串
+     */
+
+
+    // (async function getProvinces() {
+    //
+    //     const url = 'http://101.132.72.36:5100/api/local';
+    //
+    //     const resp = await fetch(url);
+    //
+    //     const result = await resp.text();
+    //
+    //     console.log(result);
+    // }());
+
+
+</script>
+
+<script>
+
+
+    /**
+     * responseData.blob();
+     *
+     */
+
+    // (async function getProvinces() {
+    //
+    //     const url = 'http://101.132.72.36:5100/api/local';
+    //
+    //     const resp = await fetch(url);
+    //
+    //     const result = await resp.blob();
+    //
+    //     console.log(result);
+    //
+    // }());
+
+
+</script>
+
+<script>
+
+
+    /**
+     * responseData.redirect();
+     *
+     */
+
+    (async function getProvinces() {
+
+        const url = 'http://101.132.72.36:5100/api/local';
+
+        const resp = await fetch(url);
+
+        const result = await resp.redirect('http://101.132.72.36:5100/api/local');
+
+        console.log(result);
+
+    }());
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        select,
+        input {
+            width: 120px;
+            height: 30px;
+            font-size: 16px;
+            text-indent: 1em;
+        }
+
+        select {
+            margin: 100px 0 0 100px;
+        }
+
+        input {
+            width: 200px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+
+<label for="SRGB">
+    <select name="color" id="SRGB">
+        <option value="red">red</option>
+        <option value="blue">blue</option>
+        <option value="green">green</option>
+        <option value="yellow">yellow</option>
+    </select>
+</label>
+<label id="iptTxt">
+    <input type="text" placeholder="please enter keyword">
+</label>
+
+
+<script>
+
+
+    let SRGB = document.querySelector('#SRGB'),
+        iptTxt = document.querySelector('#iptTxt');
+
+    SRGB.onchange = function () {
+
+        console.log('select-change 触发了');
+    };
+
+    iptTxt.onchange = function () {
+
+        console.log('input-change 触发了');
+    };
+
+
+</script>
+
+
+</body>
+</html>

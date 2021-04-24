@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>click 何时触发</title>
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .demo {
+            margin: 100px 0 0 100px;
+            padding: 12px 24px;
+        }
+
+
+        .wrap .gaga ~ div {
+            display: block;
+        }
+
+
+        .surprise {
+            display: none;
+            margin: 20px 0 0 100px;
+            font-size: 56px;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<div class="wrap">
+
+    <button class="demo">click me</button>
+    <div class="surprise">good boy</div>
+</div>
+
+
+<script>
+
+
+
+    /**
+     * 有且仅当在事件源对象上按下并抬起鼠标，才会触发 click 事件
+     *
+     *
+     * 事件源对象上按下，事件源对象外抬起，不出发 click 事件
+     */
+
+
+    let demo = document.querySelector('.demo');
+
+    demo.mousedown = function () {
+
+    };
+
+
+    demo.addEventListener('mousedown', function () {
+
+        console.log('鼠标按下');
+
+    }, false);
+
+    demo.addEventListener('mouseup', function () {
+
+        console.log('鼠标按下');
+
+    }, false);
+
+
+    demo.addEventListener('click', function () {
+
+        this.classList.add('gaga');
+
+        console.log('click 触发');
+
+    }, false);
+
+
+
+</script>
+
+
+</body>
+</html>

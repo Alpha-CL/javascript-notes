@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+
+
+        div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: orange;
+            width: 100px;
+            height: 100px;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+
+<div id="demo"></div>
+
+
+<script>
+
+    var oDiv = document.getElementsByTagName('div')[0],
+        timer = null;
+
+    oDiv.onclick = function(){
+
+        startMove(this);
+    };
+
+    function startMove(ele) {
+
+        clearInterval(timer);
+
+        var iSpeedX = 6,
+            iSpeedY = 8,
+            g = 3;
+
+        ele.timer = setInterval(function () {
+
+            iSpeedY += g;
+
+            var newTop = ele.offsetTop + iSpeedY,
+                newLeft = ele.offsetLeft + iSpeedX;
+
+            if (newTop >= document.documentElement.clientHeight - ele.clientHeight) {
+
+                iSpeedY *= -1;
+
+                iSpeedY *= 0.8;
+                iSpeedX *= 0.8;
+
+                newTop = document.documentElement.clientHeight - ele.clientHeight;
+            }
+
+            if (newTop <= 0) {
+
+                iSpeedY *= -1;
+
+                iSpeedY *= 0.8;
+                iSpeedX *= 0.8;
+
+                newTop = 0;
+            }
+
+            if (newLeft >= document.documentElement.clientWidth - ele.clientWidth) {
+
+                iSpeedX *= -1;
+
+                iSpeedY *= 0.8;
+                iSpeedX *= 0.8;
+
+                newLeft = document.documentElement.clientWidth - ele.clientWidth;
+            }
+
+            if (newLeft <= 0) {
+
+                iSpeedX *= -1;
+
+                iSpeedY *= 0.8;
+                iSpeedX *= 0.8;
+
+                newLeft = 0;
+            }
+
+            if (iSpeedX == 0 && iSpeedY == 0 && newTop == document.documentElement.clientHeight - ele.clientHeight) {
+
+                clearInterval(ele.timer);
+
+            } else {
+
+                ele.style.top = newTop + 'px';
+                ele.style.left = newLeft + 'px';
+
+            }
+
+        }, 30);
+    }
+
+
+</script>
+
+
+</body>
+</html>

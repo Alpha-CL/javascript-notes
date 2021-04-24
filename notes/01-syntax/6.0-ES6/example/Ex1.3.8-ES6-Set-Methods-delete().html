@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * delete(any)boolean;
+     *
+     * 返回是否删除成功
+     */
+
+    const st1 = new Set();
+
+
+    function test() {}
+    st1.add(1);
+    st1.add('a');
+    st1.add(false);
+    st1.add(1);
+    st1.add('a');
+    st1.add([1, 2, 3]);
+    st1.add({name: 1, age: 18});
+    st1.add(test);
+    st1.add(+0);
+    st1.add(-0);
+
+
+    console.log(st1.delete(1));                  // true
+    console.log(st1.delete('alpha'));            // false
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * 模拟返回数据，用于测试
+     *
+     *
+     */
+
+    async function getJSON(resp) {
+
+        return await resp.json();
+    }
+
+    async function getProvinces() {
+
+        const resp = new Response(`[
+
+            {"id": "1", "name": "北京"},
+            {"id": "2", "name": "天津"}
+
+        ]`,{
+
+            ok: true,
+            status: 200
+        });
+
+        const result = await getJSON(resp);
+
+        console.log(result);
+    }
+
+    const pro = getProvinces();
+
+
+</script>
+
+
+</body>
+</html>

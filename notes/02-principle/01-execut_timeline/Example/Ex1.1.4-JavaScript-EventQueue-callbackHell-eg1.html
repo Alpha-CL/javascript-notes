@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="demo">
+    <button id="btn1">按钮1，给按钮2注册点击事件</button>
+    <button id="btn2">按钮1，给按钮2注册点击事件</button>
+    <button id="btn3">按钮3，点击弹出hello world</button>
+</div>
+
+
+<script>
+
+
+    const btn1 = document.querySelector('#btn1'),
+        btn2 = document.querySelector('#btn2'),
+        btn3 = document.querySelector('#bttn3');
+
+
+    btn1.addEventListener('click', function (e) {
+
+        /**
+         * 其他事件处理代码
+         *
+         */
+
+        btn2.addEventListener('click', function (e) {
+
+            /**
+             * 其他事件处理代码
+             *
+             */
+
+            btn3.addEventListener('click', function (e) {
+
+                // 回调地狱
+
+                alert('hello world');
+
+            }, false);
+
+        }, false);
+
+    }, false);
+
+
+
+</script>
+
+
+</body>
+</html>

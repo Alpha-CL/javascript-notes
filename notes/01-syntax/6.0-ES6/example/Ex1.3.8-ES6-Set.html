@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    // const st = new Set();               // 创建一个空的 set 集合
+    //
+    // console.log(st);
+    //
+    // // Set(0)
+    // //     [[Entries]]
+    // // No properties
+    // // size: (...)
+    // // __proto__: Set
+
+
+</script>
+
+<script>
+
+
+    const st1 = new Set();
+
+    console.log(st1);
+
+    // Set(5) {1, 2, 3, 4, 5}
+    // [[Entries]]
+    // 0: 1
+    // 1: 2
+    // 2: 3
+    // 3: 4
+    // 4: 5
+    // size: (...)
+    // __proto__: Set
+
+
+
+    /**
+     * new set(iterable);
+     *
+     * @iterable: 可迭代对象的返回结果
+     */
+
+    // 创建一个具有初始内容的 set 集合，内容来自可迭代对象每一次的迭代结果
+
+    const st2 = new Set([1, 2, 3, 4, 5]);               // new set(iterable);
+
+    console.log(st2);
+
+    // Set(5) {1, 2, 3, 4, 5}
+    // [[Entries]]
+    // 0: 1
+    // 1: 2
+    // 2: 3
+    // 3: 4
+    // 4: 5
+    // size: (...)
+    // __proto__: Set
+
+
+
+    /**
+     * 利用 Set 的特性，存放不重复的数据集合
+     *
+     * 数组去重
+     */
+
+    const st3 = new Set([1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 4]);
+
+    console.log(st3);           // Set(5) {1, 2, 3, 4, 5}
+
+
+    /**
+     * 利用 Set 的特性，存放不重复的数据集合
+     *
+     * 字符串去重
+     */
+
+    const str = new Set("asdfasdfsasdawsdfa");
+
+    console.log(str);           // Set(5) {"a", "s", "d", "f", "w"}
+
+
+</script>
+
+
+
+</body>
+</html>

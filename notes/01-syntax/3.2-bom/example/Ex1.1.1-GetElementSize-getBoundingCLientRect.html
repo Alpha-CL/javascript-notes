@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+
+        .box {
+            margin: 100px 0 0 100px;
+        }
+
+        .box3 {
+            margin: 3000px 0 0 3000px;
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background-color: #999;
+            overflow: hidden;
+        }
+
+        .box2 {
+            width: 200px;
+            height: 200px;
+            background-color: #666;
+            overflow: hidden;
+        }
+
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: #333;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+
+<div class="box box3">
+    <div class="box box2">
+        <div class="box box1"></div>
+    </div>
+</div>
+
+
+<script>
+
+
+    /**
+     * offsetLeft & offsetTop 相对于body 整个网页
+     *
+     * getBoundingClientRect(); 相对于视口
+     */
+
+    const box1 = document.querySelector('.box1'),
+        box2 = document.querySelector('.box2'),
+        box3 = document.querySelector('.box3');
+
+    console.log(box1.offsetParent);                 // <div class="box box3">..</div>
+    console.log(box1.offsetLeft);                   // 200
+    console.log(box1.offsetTop);                    // 200
+
+
+    const boundClient = box1.getBoundingClientRect();
+
+    console.log(boundClient.left);
+    console.log(boundClient.top);
+
+</script>
+
+
+</body>
+</html>

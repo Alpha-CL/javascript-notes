@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #demo {
+            position: absolute;
+            top: 26%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+        }
+
+        #demo p:first-of-type {
+            font-size: 20px;
+        }
+
+        #demo input {
+            padding: 8px;
+        }
+
+        #demo input[type=text] {
+            width: 200px;
+            text-indent: 1em;
+        }
+
+        #demo p {
+            margin-bottom: 12px;
+            width: 200px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        #demo p:last-of-type {
+            margin-top: 6px;
+            text-align: left;
+            text-indent: 2em;
+        }
+
+        .tips {
+            visibility: hidden;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<form action="https://wwww.baidu.com" id="demo">
+    <p>Hey Baby</p>
+    <label>
+        <input type="text" placeholder="Please enter your real age">
+    </label>
+    <input type="submit">
+    <p class="tips">Baby will always be eighteen</p>
+</form>
+
+
+<script>
+
+    let demo = document.querySelector('#demo'),
+        demoTxt = document.querySelector('#demo input:first-of-type'),
+        tips = document.querySelector('.tips');
+
+    demo.onsubmit = function (e) {
+
+        console.log('表单提交时触发');
+
+        if (isNaN(demoTxt.value) || !demoTxt.value.trim()) {
+
+            tips.style.visibility = 'visible';
+
+            return false;
+
+        } else if (demoTxt.value >= 18 || demoTxt.value < 1) {
+
+            tips.style.visibility = 'visible';
+
+            e.preventDefault();
+        }
+    };
+
+
+</script>
+
+
+</body>
+</html>

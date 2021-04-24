@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+
+    // const obj = {
+    //
+    //     name: 'alpha',
+    //     age: 18,
+    //     gender: 'male'
+    // };
+    //
+    //
+    // /**
+    //  * Object.getOwnPropertyDescriptor(obj, prop)
+    //  *
+    //  *
+    //  * 获取对象指定属性的描述符
+    //  */
+    //
+    // const objNameDes = Object.getOwnPropertyDescriptor(obj, 'name');
+    //
+    // console.log(objNameDes);
+    //
+    // // {value: "alpha", writable: true, enumerable: true, configurable: true}
+    // //
+    // // configurable: true      // 当前 property-descriptor 是否能被修改
+    // // enumerable: true        // 该属性是否能被修改
+    // // value: "alpha"          // 属性值
+    // // writable: true          // 该属性是否能被重新赋值
+    // // __proto__: Object
+    //
+    //
+    // /**
+    //  * Object.getOwnPropertyDescriptors(obj);
+    //  *
+    //  *
+    //  * 获取指定对象所有属性的描述符
+    //  */
+    //
+    // const objAllDes = Object.getOwnPropertyDescriptors(obj);
+    //
+    // console.log(objAllDes);
+    //
+    // // {name: {…}, age: {…}, gender: {…}}
+    // // age: {value: 18, writable: true, enumerable: true, configurable: true}
+    // // gender: {value: "male", writable: true, enumerable: true, configurable: true}
+    // // name: {value: "alpha", writable: true, enumerable: true, configurable: true}
+    // // __proto__: Object
+
+
+</script>
+
+<script>
+
+
+    const obj = {
+
+        name: 'alpha',
+        age: 18,
+        gender: 'male'
+    };
+
+
+    /**
+     * Object.defineProperty(obj, prop, des);
+     *
+     *
+     * 添加或修改指定描述符
+     */
+
+    Object.defineProperty(obj, 'wife', {
+
+        value: 'beta',
+        configurable: false,    // 设置为 false 后，后续无法再修改该属性的描述
+        enumerable: false,      // 设置为 false 后，该属性无法被枚举，并 Object.keys() & Object.values() 无法获取
+        writable: false         // 设置为 false 后，该属性的属性值无法再次被修改( ready only )
+    });
+
+
+    /**
+     * Object.defineProperties(obj, des: object);
+     *
+     *
+     * 一次性添加或修改同一对象的多个描述符
+     */
+
+    Object.defineProperties(obj, {
+
+        wife: {
+            value: 'beta',
+            configurable: false,
+            enumerable: false,
+            writable: false
+        },
+        name: {
+            value: 'omega',
+            configurable: false,
+            enumerable: false,
+            writable: false
+        },
+        age: {
+            value: 20,
+            configurable: false,
+            enumerable: false,
+            writable: false
+        }
+    });
+
+
+    // Object.defineProperty(obj, 'wife', {     // 因已设置 configurable: false, 无法再次修改该属性
+    //
+    //     value: 'omega',                      // Uncaught TypeError: Cannot redefine property: wife
+    //     configurable: true
+    // });
+
+    // for (const prop in obj) {
+    //
+    //     console.log(prop);
+    //
+    //     // name
+    //     // age
+    //     // gender
+    //     //
+    //     // 缺少 wife 属性，因上面设置了该属性的 enumerable: false，则该属性无法被枚举
+    // }
+    //
+    // const props = Object.keys(obj);             // 缺少 wife 属性
+    // console.log(props);
+    //
+    // const values = Object.values(obj);          // 缺少 wife 属性
+    // console.log(values);
+
+
+    const objWifeDes = Object.getOwnPropertyDescriptor(obj, 'wife');
+    console.log(objWifeDes);
+    console.log(obj);
+
+
+
+</script>
+
+
+</body>
+</html>

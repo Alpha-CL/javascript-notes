@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<p>
+    <span>name: </span><span id="name"></span>
+</p>
+<p>
+    <span>age: </span><span id="age"></span>
+</p>
+
+
+<script>
+
+    const spanName = document.querySelector('#name'),
+        spanAge = document.querySelector('#age'),
+        user = {};
+
+
+    Object.defineProperties(user, {
+
+        name: {
+
+            get() {
+
+                return spanName.innerHTML;
+            },
+
+            set(v) {
+
+                spanName.innerHTML = v;
+            }
+        },
+
+        age: {
+
+            get() {
+
+                return spanAge.innerHTML;
+            },
+
+            set(v) {
+
+                spanAge.innerHTML = v;
+            }
+        }
+    });
+
+
+    setTimeout(() => {
+
+        user.name = 'alpha';
+        user.age = 18;
+
+    }, 2000);
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .demo {
+            position: absolute;
+            left: 150px;
+            top: 100px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            color: #fff;
+            background-color: dodgerblue;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+
+<div class="demo"></div>
+
+
+<script>
+
+
+    function dragOfOffset(target) {
+
+        let tar = document.querySelector(target),
+            disX = null,
+            disY = null;
+
+        tar.onmousedown = function (e) {
+
+            if (e.button !== 0) {
+
+                return false;
+            }
+
+            let style = getComputedStyle(tar),
+                curTop = parseInt(style.top),
+                curLeft = parseInt(style.left),
+                curPageX = e.pageX,
+                curPageY = e.pageY;
+
+            window.onmousemove = function (e) {
+
+                disX = e.pageX - curPageX;
+                disY = e.pageY - curPageY;
+
+                console.log(disX);
+
+                // tar.style.left = curTop + disX + 'px';
+                // tar.style.top = curLeft + disY + 'px';
+
+                tar.style.left = e.pageX - curPageX / 2 + 'px';
+                tar.style.top = e.pageY - curPageY / 2 + 'px';
+            };
+
+            window.onmouseup = window.onmouseleave = function (e) {
+
+                if (e.button === 0) {
+
+                    window.onmousemove = null;
+                }
+            };
+        };
+    }
+
+    dragOfOffset('.demo');
+
+
+
+
+    // function dragOfMovement(target) {
+    //
+    //     let tar = document.querySelector(target),
+    //         style = getComputedStyle(tar),
+    //         curTop = parseFloat(style.top),
+    //         curLeft = parseFloat(style.left);
+    //
+    //     tar.onmousedown = function (e) {
+    //
+    //         if (e.button !== 0) {
+    //
+    //             return false;
+    //         }
+    //
+    //         window.onmousemove = function (e) {
+    //
+    //             curTop += e.movementY;
+    //             curLeft += e.movementX;
+    //
+    //             tar.style.top = curTop + 'px';
+    //             tar.style.left = curLeft + 'px';
+    //         };
+    //
+    //         window.onmouseup = window.onmouseleave = function (e) {
+    //
+    //             if (e.button === 0) {
+    //
+    //                 window.onmousemove = null;
+    //             }
+    //         };
+    //     };
+    // }
+    //
+    // dragOfMovement('.demo');
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            margin: 100px auto 0;
+            width: 300px;
+            height: 120px;
+            border: 1px solid #ccc;
+            font-size: 20px;
+            text-align: center;
+            line-height: 120px;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+
+<div class="wrap">
+    <p class="val"></p>
+</div>
+
+
+<script>
+
+
+    const date = {
+        controls: {
+            val: document.querySelector('.val')
+        }
+    };
+
+    function myDate(options) {
+
+        const {controls: {val}} = options;
+
+        val.innerHTML = getNowTime();
+
+        setInterval(() => {
+
+            val.innerHTML = getNowTime();
+
+            console.log(getNowTime());
+
+        }, 1000);
+
+        function getNowTime() {
+
+            let date = new Date(),
+                dateArr = {
+                    year: date.getFullYear(),
+                    month: date.getDate(),
+                    oDate: date.getDate(),
+                    hours: date.getHours(),
+                    minutes: date.getMinutes(),
+                    seconds: date.getSeconds()
+                };
+
+            return getTwoDigDate(dateArr);
+        }
+
+        function getTwoDigDate(dateArr) {
+
+            for (let prop in dateArr) {
+
+                if (dateArr[prop] < 10) {
+
+                    dateArr[prop] = '0' + dateArr[prop];
+                }
+            }
+
+            console.log(dateArr);
+
+            return `${dateArr.year}/${dateArr.month}/${dateArr.oDate} ${dateArr.hours}:${dateArr.minutes}:${dateArr.seconds}`;
+        }
+    }
+
+    myDate(date);
+
+
+</script>
+
+
+</body>
+</html>

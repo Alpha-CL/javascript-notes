@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    //    function sayLove(goddess, callback) {
+    //
+    //        setTimeout(function(){                  // wait goddess
+    //
+    //            if (Math.random() < 0.1) {
+    //
+    //                callback(true);                 // say love success
+    //
+    //            } else {
+    //
+    //                callback(false);                // say love fail
+    //            }
+    //
+    //        }, 1200);
+    //    }
+    //
+    //    sayLove('alpha', function (result) {
+    //
+    //        if (result) {
+    //
+    //            console.log(`alpha: yes, i do`);
+    //
+    //        } else {
+    //
+    //            console.log("alpha: you are good boy, jack: ok i don\' care");
+    //
+    //            sayLove('beta', function (result) {
+    //
+    //                if (result) {
+    //
+    //                    console.log('beta: yes, i do');
+    //
+    //                } else {
+    //
+    //                    console.log('beta: you are good boy, jack: ok i don\' care');
+    //
+    //                    sayLove('omega', function (result) {
+    //
+    //                        if (result) {
+    //
+    //                            console.log('omega: yes, i do');
+    //
+    //                        } else {
+    //
+    //                            console.log('omega: you are good boy, jack: Unbelievable')
+    //                        }
+    //                    })
+    //                }
+    //            })
+    //        }
+    //    })
+
+
+</script>
+
+<script>
+
+
+    // function sayLove(goddess, callback) {
+    //
+    //     setTimeout(function () {                    // wait goddess
+    //
+    //         if (Math.random() < 0.1) {
+    //
+    //             callback(true);                     // say love success
+    //
+    //         } else {
+    //
+    //             callback(false);                    // say love fail
+    //         }
+    //
+    //     }, Math.floor(Math.random() * (3000 - 1000) + 1000));
+    //
+    // }
+    //
+    // let yesIdo = null;
+    //
+    // let finalResult = [];
+    //
+    // for (let i = 0; i <= 20; i++) {
+    //
+    //     sayLove(`Goddess${i}`, result => {
+    //
+    //         finalResult.push(result);
+    //
+    //         if (result) {
+    //
+    //             console.log(`Goddess${i}: yes i do`);
+    //
+    //             if (yesIdo) {
+    //
+    //                 console.log('Sorry, This is a misunderstanding');
+    //
+    //             } else {
+    //
+    //                 yesIdo = `Goddess${i}`;
+    //
+    //                 console.log('Love you forever');
+    //             }
+    //
+    //         } else {
+    //
+    //             console.log(`Goddess${i}: you are good boy`);
+    //         }
+    //
+    //         if (finalResult.length === 20) {
+    //
+    //             console.log('final result over');
+    //             console.log(finalResult);
+    //         }
+    //     });
+    // }
+
+
+</script>
+
+<script>
+
+
+    //    function sayLove(goddess, callback) {
+    //
+    //        return new Promise(resolve => {
+    //
+    //            setTimeout(function () {                    // wait goddess
+    //
+    //                if (Math.random() < 0.3) {
+    //
+    //                    resolve(true);                     // say love success
+    //
+    //                } else {
+    //
+    //                    resolve(false);                    // say love fail
+    //                }
+    //
+    //            }, 1000);
+    //        });
+    //    }
+    //
+    //    sayLove('goddess-1')
+    //        .then(result => {
+    //
+    //            if (result) {
+    //
+    //                console.log(result);
+    //                console.log('goddess-1 agree');
+    //
+    //                return undefined;
+    //
+    //            } else {
+    //
+    //                console.log(result);
+    //                console.log('goddess-1 disagree');
+    //                return sayLove('goddess-2');
+    //            }
+    //
+    //        }).then(result => {
+    //
+    //        if (result === undefined) {
+    //
+    //            return undefined;
+    //
+    //        } else if (result) {
+    //
+    //            console.log(result);
+    //            console.log('goddess-2 agree');
+    //
+    //            return undefined;
+    //
+    //        } else {
+    //
+    //            console.log(result);
+    //            console.log('goddess-2 disagree');
+    //            return sayLove('goddess-3');
+    //        }
+    //
+    //
+    //    }).then(result => {
+    //
+    //        if (result === undefined) {
+    //
+    //            return undefined;
+    //
+    //        } else if (result) {
+    //
+    //            console.log(result);
+    //            console.log('goddess-3 agree');
+    //
+    //            return undefined;
+    //
+    //        } else {
+    //
+    //            console.log(result);
+    //            console.log('goddess-3 disagree');
+    //            return sayLove('goddess-3');
+    //        }
+    //    });
+    //
+
+
+</script>
+
+<script>
+
+
+    //    function getRandom(min, max) {
+    //
+    //        return Math.random() * (max - min) + min;
+    //    }
+    //
+    //    function sayLove(goddess, callback) {
+    //
+    //        return new Promise((resolve, reject) => {
+    //
+    //            setTimeout(() => {
+    //
+    //                if (Math.random() < 0.5) {
+    //
+    //                    resolve(true);
+    //
+    //                } else {
+    //
+    //                    resolve(false);
+    //                }
+    //
+    //            }, getRandom(1000, 5000));
+    //        });
+    //    }
+    //
+    //    const proms = [];
+    //
+    //    for (let i = 0; i < 10; i++) {
+    //
+    //        proms.push(sayLove(`goddess-${i}`).then(result => {
+    //
+    //            if (result) {
+    //
+    //                console.log(`goddess-${i}, 同意`);
+    //
+    //            } else {
+    //
+    //                console.log(`goddess-${i}，拒绝`);
+    //            }
+    //
+    //            return result;
+    //        }));
+    //    }
+    //
+    //    Promise.all(proms).then(result => console.log(result));
+
+
+</script>
+
+<script>
+
+
+    function getRandom(min, max) {
+
+        return Math.random() * (max - min) + min;
+    }
+
+    function sayLove(goddess, callback) {
+
+        return new Promise((resolve, reject) => {
+
+            setTimeout(() => {
+
+                if (Math.random() < 0.2) {
+
+                    resolve(true);
+
+                } else {
+
+                    resolve(false);
+                }
+
+            }, getRandom(1000, 5000));
+        });
+    }
+
+    const proms = [];
+
+    let hasAgree = false;
+
+    for (let i = 0; i < 10; i++) {
+
+        proms.push(sayLove(`goddess-${i}`).then(result => {
+
+            if (result) {
+
+                if (hasAgree) {
+
+                    console.log(`抱歉打扰了，发错信息了`);
+
+                } else {
+
+                    hasAgree = true;
+                    console.log(`goddess-${i}, 同意`);
+
+                }
+
+            } else {
+
+                console.log(`goddess-${i}，拒绝`);
+            }
+
+            return result;
+        }));
+    }
+
+    Promise.all(proms).then(result => console.log(result));
+
+
+</script>
+
+
+</body>
+</html>

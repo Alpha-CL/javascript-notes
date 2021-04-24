@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .wrap {
+            /*margin: 300px 0 0 50px;*/
+            padding: 50px;
+            width: 500px;
+            height: 500px;
+            border: 10px solid;
+            background-color: #3c8dff;
+        }
+
+        .demo {
+            padding: 50px;
+            width: 200px;
+            height: 200px;
+            border: 10px solid;
+            background-color: #ffcccc;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+
+<!--<div class="wrap">-->
+<!--    <div class="demo"></div>-->
+<!--</div>-->
+
+
+<script>
+
+
+    let n = 0;
+
+    document.addEventListener('mousemove', function (e) {
+
+        n++;
+
+        console.log(`movementX: ${e.movementX}, movementY: ${e.movementY}`);
+
+        console.log(`${n}`);
+
+    }, false);
+
+
+</script>
+
+</body>
+</html>

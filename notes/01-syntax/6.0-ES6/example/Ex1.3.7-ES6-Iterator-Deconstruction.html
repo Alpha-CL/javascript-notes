@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * ES6 中 仅可迭代对象 可被解构
+     *
+     * ES7 中增加 '普通对象' 也可以被解构
+     */
+
+    const obj = {
+
+        a: 1,
+        b: 2,
+
+        [Symbol.iterator]() {
+
+            const keys = Object.keys(this);
+
+            let i = 0;
+
+            return {
+
+                next: () => {
+
+                    const result = {
+
+                        value: {
+
+                            propName: keys[i],
+                            propValue: this[keys[i]]
+                        },
+
+                        done: i >= keys.length
+                    };
+
+                    i++;
+
+                    return result;
+
+                }
+            }
+        }
+    };
+
+    const arr = [...obj];
+
+    console.log(arr);
+
+
+</script>
+
+
+</body>
+</html>

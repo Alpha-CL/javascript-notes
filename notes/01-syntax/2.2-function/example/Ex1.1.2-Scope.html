@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>闭包案例</title>
+
+    <style>
+
+
+        *  {
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        li {
+            padding: 10px 20px;
+        }
+
+        li:nth-of-type(2n) {
+
+            background-color: #999999;
+        }
+
+        li:nth-of-type(2n+1) {
+
+            background-color: #666666;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+
+<ul>
+    <li>a</li>
+    <li>a</li>
+    <li>a</li>
+    <li>a</li>
+</ul>
+
+
+<script>
+
+
+    // function test() {
+    //
+    //     var liObj = document.getElementsByTagName('li');
+    //
+    //     for (var i = 0; i < liObj.length; i++) {
+    //
+    //         liObj[i].onclick = function () {
+    //
+    //             console.log(i);
+    //         }
+    //     }
+    //
+    // }
+    //
+    // test();
+
+
+</script>
+
+
+<script>
+
+
+    function test() {
+
+        var liObj = document.getElementsByTagName('li');
+
+        for (var i = 0; i < liObj.length; i++) {
+
+            (function (j) {
+
+                liObj[j].onclick = function () {
+
+                    console.log(j);
+                }
+
+            }(i));
+        }
+
+    }
+
+    test();
+
+
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    // class User {
+    //
+    //     constructor(name, age, gender) {
+    //
+    //         this.name = name;
+    //         this.age = age;
+    //         this.gender = gender;
+    //     }
+    // }
+
+    function ConstructProxy(Class, ...propNames) {
+
+        return new Proxy(Class, {
+
+            construct(target, argArray) {
+
+                const obj = Reflect.construct(target, argArray);
+
+                propNames.forEach((name, i) => {
+
+                    obj[name] = argArray[i];
+                });
+
+                return obj;
+            }
+        });
+    }
+
+    class User {
+
+
+    }
+
+    const UserProxy = ConstructProxy(User, 'name', 'age', 'gender');
+
+    const obj = new UserProxy('alpha', 18, 'male');
+
+    console.log(obj);
+
+    // User {name: "alpha", age: 18, gender: "male"}
+    // age: 18
+    // gender: "male"
+    // name: "alpha"
+    // __proto__: Object
+
+
+</script>
+
+
+</body>
+</html>

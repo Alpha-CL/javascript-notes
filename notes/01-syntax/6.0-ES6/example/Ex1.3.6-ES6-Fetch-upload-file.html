@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<img src="" alt="" id="imgAvatar">
+
+<input type="file" name="fl" id="avatar">
+
+<button>submit</button>
+
+
+<script>
+
+
+    // function upload() {
+    //
+    //     const ipt = document.querySelector('#avatar');
+    //
+    //     /**
+    //      * input[file] 时，input.files => FileList
+    //      *
+    //      * FileList 集合中包含了 所有选中的文件
+    //      */
+    //
+    //     console.log(ipt.files);
+    // }
+
+    // FileList {0: File, length: 1}
+    // 0: File {name: "WechatIMG18.png", lastModified: 1588919963069, lastModifiedDate: Fri May 08 2020 14:39:23 GMT+0800 (China Standard Time), webkitRelativePath: "", size: 20412, …}
+    // length: 1
+    // __proto__: FileList
+
+
+</script>
+
+
+<script>
+
+
+    async function upload() {
+
+        const ipt = document.querySelector('#avatar');
+
+        if (ipt.files.length === 0) {
+
+            alert('请选择要上传的文件');
+
+            return;
+        }
+
+        /**
+         * 利用 HTML5 提供的 FormData 构造函数创建 Request
+         *
+         */
+
+        const formData = new FormData();                // create Request
+
+        /**
+         * ipt.files[0]
+         *
+         * 当前选中的单个文件
+         */
+
+        formData.append("imagefile", ipt.files[0]);
+
+        const url = 'http://101.132.72.36:5100/api/upload';
+
+        const resp = await fetch(url, {
+
+            method: 'POST',
+
+            body: formData
+
+            // headers: {           // 无需手动设置，设置 'body: formData' 后系统自动生成
+            //
+            //     'Content-Type': 'multipart/form-data'
+            // }
+        });
+
+        // console.log(await resp.json());          // 服务器响应结果
+
+        return await resp.json();
+    }
+
+    document.querySelector('button').onclick = async function (){
+
+        const result = await upload();
+
+        const img = document.querySelector('#imgAvatar');
+
+        img.src = result.path;
+        
+    };
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

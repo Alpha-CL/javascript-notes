@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+
+        input {
+            border: 1px solid #333;
+            padding: 4px 6px;
+            color: #999;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<label for="ipt">FirstName: <input type="text" id="ipt" value="Please input your name"></label>
+
+<label for="ipt2">LastName:
+
+    <input type="text" id="ipt2" style="" value="请输入用户名" onfocus="if (this.value === '请输入用户名'){this.value = '';
+    this.style.color = '#424242'}" onblur="if(this.value === '') {this.value = '请输入用户名';
+    this.style.color = '#999999';}">
+
+</label>
+
+
+<script>
+
+
+    var input = document.getElementsByTagName('input')[0];
+
+    input.onfocus = function () {
+
+        if (this.value === "Please input your name") {
+
+            this.value = "";
+            this.style.color = '#424242';
+        }
+    };
+
+    input.onblur = function () {
+
+
+        if (this.value === "") {
+
+            this.value = "Please input your name";
+            this.style.color = '#999999';
+        }
+    };
+
+
+</script>
+
+</body>
+</html>
+
+
+

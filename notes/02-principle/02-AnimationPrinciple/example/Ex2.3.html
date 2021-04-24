@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        ul {
+            position: relative;
+            margin: 100px auto 0;
+            width: 800px;
+            height: 100px;
+            background-color: red;
+        }
+
+        ul .ele {
+            float: left;
+            box-sizing: border-box;
+            border: 1px solid black;
+            width: 200px;
+            height: 100px;
+            line-height: 100px;
+            background-color: orange;
+            text-align: center;
+        }
+
+        .bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 100px;
+            opacity: 0.4;
+            background-color: deeppink;
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+<ul>
+    <li class="ele">cst</li>
+    <li class="ele">cg</li>
+    <li class="ele">dg</li>
+    <li class="ele">dcg</li>
+    <li class="bg"></li>
+</ul>
+
+
+<script>
+
+
+    var oLiArray = document.getElementsByTagName('li'),
+        oLiBg= oLiArray[oLiArray.length -1],
+        timer = null;
+
+
+    for (var i = 0; i < oLiArray.length - 1; i++) {
+
+        oLiArray[i].onmouseenter = function () {
+
+            startMove(oLiBg, this.offsetLeft);
+        };
+    }
+
+
+    function startMove(ele, target) {
+
+        clearInterval(timer);
+
+        var a = 3,
+            iSpeed = 0;
+
+        timer = setInterval(function () {
+
+            a = (target - ele.offsetLeft) / 5;
+
+            iSpeed += a;
+
+            iSpeed *= 0.8;
+
+            if (Math.abs(iSpeed) < 1 && Math.abs(target - ele.offsetLeft) < 1) {
+
+                clearInterval(timer);
+
+                ele.style.left = target + 'px';
+
+            } else {
+
+                ele.style.left = ele.offsetLeft + iSpeed + 'px';
+
+            }
+
+        }, 30)
+    }
+
+
+
+</script>
+
+</body>
+</html>

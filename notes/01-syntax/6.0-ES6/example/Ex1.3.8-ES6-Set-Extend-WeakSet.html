@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+
+    let obj1 = {                                // 设置 obj1 存放指定对象的地址
+        name: 'alpha',
+        age: 18
+    };
+
+    const set = new Set();
+    set.add(obj1);                              // 将 obj1 的地址添加给 set
+
+
+    obj1 = null;                                // 将 ibj1 设置为空，但此时 set 中仍存储这 obj1 的地址
+                                                // 因此 obj1 不会被垃圾回收
+    console.log(set);
+
+    // Set(1) {{…}}
+    // [[Entries]]
+    // 0:
+    // value: {name: "alpha", age: 18}
+    // size: (...)
+    // __proto__: Set
+
+
+</script>
+
+<script>
+
+
+    let obj2 = {                                // 设置 obj1 存放指定对象的地址
+        name: 'alpha',
+        age: 18
+    };
+
+    const weakset = new WeakSet();
+    weakset.add(obj2);                          // 将 obj2 的地址添加给 weakset
+
+
+    obj2 = null;                                // 将 ibj2 设置为空，因 weakset 不会影响垃圾回收，
+                                                // 因此 weakset 中的 obj2 的地址被清除
+    console.log(weakset);
+
+    // WeakSet {{…}}
+    // [[Entries]]
+    // No properties
+    // __proto__: WeakSet
+
+
+</script>
+
+
+</body>
+</html>

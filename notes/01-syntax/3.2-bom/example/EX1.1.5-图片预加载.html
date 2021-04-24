@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+
+        body {
+
+            height: 3000px;
+        }
+
+        div {
+            position: absolute;
+            top: 1500px;
+            border: 2px solid black;
+        }
+
+        img {
+            width: 600px;
+            height: 300px;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+
+
+<div id="wrap"></div>
+
+
+<script>
+
+
+    var oImg = document.createElement('img');
+
+    oImg.onload = function () {
+
+        var oDiv = document.getElementById('wrap');
+
+        oDiv.appendChild(this);
+
+    };
+
+    oImg.src =
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1579415414936&di=9174e1dc0c7909e8d8b024de061346d5&imgtype=0&src=http%3A%2F%2Fwww.fahao.cn%2Fuploadfiles%2F201612%2F08%2F20161208041256857.jpg";
+
+
+    /**
+     *
+     * 优化解决方案如下
+     *
+     * 1. 监控滑轮事件( 懒加载 )
+     *
+     * 2. 不断判断当前 div 的位置
+     *
+     * 3. 采取预加载
+     *
+     * 4. 把图片正式添加到页面之中
+     *
+     */
+
+
+</script>
+
+
+
+
+</body>
+</html>

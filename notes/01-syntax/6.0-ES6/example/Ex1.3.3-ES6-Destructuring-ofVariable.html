@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    //    /**
+    //     * 利用解构交换变量值
+    //     *
+    //     *
+    //     */
+    //
+    //
+    //    let a = 11,
+    //        b = 22;
+    //
+    //    [b, a] = [a, b];
+    //
+    //    console.log(a, b)
+
+
+</script>
+
+
+<script>
+
+
+    // /**
+    //  *  练习
+    //  *
+    //  *
+    //  */
+    //
+    // const article = {
+    //
+    //     title: 'hello world',
+    //     content: '你瞅啥',
+    //     contents: [
+    //         {
+    //             content: 'caption1',
+    //             user: {
+    //                 id: 1,
+    //                 name: 'uer1'
+    //             }
+    //         }, {
+    //             content: 'so cook',
+    //             user: {
+    //                 id: 2,
+    //                 name: 'alpha'
+    //             }
+    //         }
+    //     ]
+    // };
+    //
+    //
+    // // 解构出第二条评论的用户名和评论内容
+    //
+    // // const {contents: [, {content: caption, user: {name: userName}}]} = article;
+    // const {
+    //     contents:
+    //         [
+    //             ,
+    //             {
+    //                 content: caption,
+    //                 user: {
+    //                     name: userName
+    //                 }
+    //             }]
+    //
+    // } = article;
+    //
+    // console.log(caption, userName);
+
+
+</script>
+
+
+<script>
+
+
+    // // function print(user) {
+    // //
+    // //     console.log(`${user.name}`);
+    // //     console.log(`${user.age}`);
+    // //     console.log(`${user.gender}`);
+    // //     console.log(`${user.address.province}`);
+    // //     console.log(`${user.address.city}`);
+    // // }
+    //
+    //
+    // function print({name, age, gender, address: {province, city}}) {
+    //
+    //     console.log(`姓名: ${name}`);
+    //     console.log(`年龄: ${age}`);
+    //     console.log(`性别: ${gender}`);
+    //     console.log(`省份: ${province}`);
+    //     console.log(`城市: ${city}`);
+    // }
+    //
+    // const user = {
+    //
+    //     name: 'alpha',
+    //     age: 16,
+    //     gender: 'male',
+    //     address: {
+    //         province: 'shan xi',
+    //         city: 'xi an'
+    //     }
+    // };
+    //
+    // print(user);
+
+
+</script>
+
+
+<script>
+
+
+    // function ajax(options) {
+    //
+    //     const defaultOptions = {
+    //         method: 'get',
+    //         url: '/'
+    //     };
+    //
+    //     const opt = {
+    //         ...defaultOptions,
+    //         ...options
+    //     };
+    //
+    //     console.log(opt);
+    //
+    // }
+
+    /**
+     * 直接解构参数进行传递
+     *
+     *
+     * 无法从 undefined & null 中解构参数       // 设置整个参数的默认值为 {}
+     */
+
+    function ajax({method = 'get', url = '/'} = {}) {
+
+        console.log(method, url);
+    }
+
+    ajax({
+        method: 'get',
+        url: 'abc'
+    })
+
+
+</script>
+
+
+</body>
+</html>

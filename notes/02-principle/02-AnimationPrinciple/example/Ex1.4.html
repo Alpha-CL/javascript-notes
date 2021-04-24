@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/common.js"></script>
+
+    <style>
+
+        #test {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            opacity: 1;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+
+<div id="test"></div>
+
+
+<script>
+
+
+    var timer = null;
+
+    function startMove(elem, target) {
+
+        clearInterval(timer);
+
+        var iSpeed = null,
+            iCur = null;
+
+        timer = setInterval(function () {
+
+            iCur = parseFloat(getStyle(elem, 'opacity')) * 100;
+
+            iSpeed = (target - iCur) / 7;
+
+            iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+
+            if (iCur == target) {
+
+                clearInterval(timer);
+
+            } else {
+
+                elem.style.opacity = (iCur + iSpeed) / 100;
+            }
+
+        }, 30);
+    }
+
+
+    var oDiv = document.getElementById('test');
+
+    oDiv.onclick = function () {
+
+        startMove(this, 50);
+    };
+
+
+</script>
+
+
+</body>
+</html>

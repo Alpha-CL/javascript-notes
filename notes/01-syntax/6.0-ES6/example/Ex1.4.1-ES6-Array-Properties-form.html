@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+
+
+<script>
+
+
+    /**
+     * from(arg);
+     *
+     *
+     * 通过给定的 类数组 或 可迭代数组 创建一个新数组
+     * ( 类数组: 拥有数组的部分方法，length, push 等; 可迭代对象: 包含[Symbol.iterator]; )
+     */
+
+
+    const dvs = document.querySelectorAll('div');               // 返回的结果为 类数组
+
+    console.log(Array.from(dvs));
+
+
+</script>
+
+
+</body>
+</html>

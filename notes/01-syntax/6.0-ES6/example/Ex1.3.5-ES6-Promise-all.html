@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    function getRandom(min, max) {
+
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    const proms = [];
+
+    for (let i = 0; i < 10; i++) {
+
+        proms.push(new Promise((resolve, reject) => {
+
+            setTimeout(() => {
+
+                console.log(i + 'finally');
+
+                resolve(i);
+
+            }, getRandom(200, 500));
+        }));
+    }
+
+    // console.log(proms);
+
+    const pro = Promise.all(proms);
+
+    pro.then(datas => {
+
+        console.log(datas);                 // 全部完成后执行
+    })
+
+</script>
+
+
+</body>
+</html>

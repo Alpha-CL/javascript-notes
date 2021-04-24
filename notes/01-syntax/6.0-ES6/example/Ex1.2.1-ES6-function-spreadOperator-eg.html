@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root,
+        body {
+            height: 100%;
+        }
+
+        .wrap {
+            margin: 100px 0 0 100px;
+            padding: 12px;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-between;
+            width: 12%;
+            height: 500px;
+            border: 1px solid #ccc;
+        }
+
+        .wrap > p {
+            text-align: center;
+        }
+
+        .wrap label {
+            width: 100%;
+        }
+
+        .wrap label input {
+            padding: 6px;
+            width: 100%;
+        }
+
+        .wrap-control p {
+            margin: 6px 0;
+        }
+
+        .wrap-control button {
+            margin: 12px 0 0 0;
+            padding: 6px 0;
+            width: 100%;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+<div class="wrap">
+    <p>Calculator</p>
+    <label for="item1"><input type="number" name="1" id="item1" value="0"></label>
+    <label for="item2"><input type="number" name="2" id="item2" value="0"></label>
+    <label for="item3"><input type="number" name="3" id="item3" value="0"></label>
+    <label for="item4"><input type="number" name="4" id="item4" value="0"></label>
+    <label for="item5"><input type="number" name="5" id="item5" value="0"></label>
+    <label for="item6"><input type="number" name="6" id="item6" value="0"></label>
+    <label for="item7"><input type="number" name="7" id="item7" value="0"></label>
+    <label for="item8"><input type="number" name="8" id="item8" value="0"></label>
+    <label for="item9"><input type="number" name="9" id="item9" value="0"></label>
+    <label for="item10"><input type="number" name="10" id="item10" value="0"></label>
+    <div class="wrap-control">
+        <p>MaxVal: <span class="max-value"></span></p>
+        <p>MinVal: <span class="min-value"></span></p>
+        <button class="wrap-control-btn">Calc</button>
+    </div>
+</div>
+
+
+<script>
+
+
+    function getAllValue() {
+
+        const arr = [],
+            oInput = document.querySelectorAll('input');
+
+        Array.from(oInput).forEach(function (value) {
+
+            arr.push(value.value);
+        });
+
+        return arr;
+    }
+
+    const calcBtn = document.querySelector('.wrap-control-btn');
+
+    calcBtn.onclick = function () {
+
+        const numbers = getAllValue(),
+            maxVal = document.querySelector('.max-value'),
+            minVal = document.querySelector('.min-value');
+
+        // maxVal.innerHTML = Math.max.apply(null, numbers);
+        // minVal.innerHTML = Math.min.apply(null, numbers);
+
+        maxVal.innerHTML = Math.max(...numbers);
+        minVal.innerHTML = Math.min(...numbers);
+    };
+
+
+    // console.log(getAllValue());
+
+
+</script>
+
+</body>
+</html>

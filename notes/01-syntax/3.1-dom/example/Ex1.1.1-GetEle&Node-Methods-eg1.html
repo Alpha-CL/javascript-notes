@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .wrap {
+            margin: 40px 0 0 100px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            width: 200px;
+        }
+
+        .wrap > button {
+            padding: 8px 0;
+            width: 100%;
+            /*border-bottom: 1px solid;*/
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        #list li {
+            padding: 12px 0 6px;
+            border-bottom: 1px solid #eee;
+        }
+
+        #list li button {
+            display: block;
+            float: right;
+            padding: 4px 6px;
+        }
+
+        #list li:after {
+            content: "";
+            clear: both;
+            display: block;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+
+<div class="wrap">
+    <button>清空</button>
+    <ul id="list" class="clearFix">
+        <li>item - 1<button>删除</button></li>
+        <li>item - 2<button>删除</button></li>
+        <li>item - 3<button>删除</button></li>
+        <li>item - 4<button>删除</button></li>
+        <li>item - 5<button>删除</button></li>
+        <li>item - 6<button>删除</button></li>
+        <li>item - 7<button>删除</button></li>
+        <li>item - 8<button>删除</button></li>
+        <li>item - 9<button>删除</button></li>
+    </ul>
+</div>
+
+
+
+<script>
+
+
+    let Olis = document.querySelectorAll('#list li'),
+        Olist = document.querySelector('#list'),
+        clearAllBtn = document.querySelector('.wrap button');
+
+    clearAllBtn.addEventListener('click', function () {
+
+        for (let i = 0; i < Olis.length; i++) {
+
+            Olis[i].style.display = 'none';
+        }
+
+    }, false);
+
+
+    Olist.addEventListener('click', function (e) {
+
+        let target = e.target;
+
+        if (target.innerHTML === '删除') {
+
+            target.parentNode.remove();
+        }
+
+    }, false);
+
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

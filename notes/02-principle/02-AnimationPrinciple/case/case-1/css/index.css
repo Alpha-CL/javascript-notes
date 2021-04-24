@@ -1,0 +1,85 @@
+body {
+    background-color: #eee;
+}
+
+.wrapper {
+    position: relative;
+    margin: 80px auto 0;
+    width: 520px;
+    height: 280px;
+    overflow: hidden;
+}
+
+.wrapper .sliderPage,
+.wrapper .btn,
+.wrapper .sliderIndex {
+    position: absolute;
+}
+
+.wrapper .btn,
+.wrapper .sliderIndex {
+    cursor: pointer;
+}
+
+.wrapper .sliderPage {
+    left: 0;
+    top: 0;
+    height: 280px;
+    width: 3120px;
+}
+
+.wrapper .sliderPage li {
+    width: 520px;
+    height: 280px;
+    float: left;
+}
+
+.wrapper .sliderPage li image {
+    width: 100%;
+    height: 100%;
+}
+
+.wrapper .btn {
+    top: 50%;
+    margin-top: -20px;
+    width: 26px;
+    height: 40px;
+    opacity: 0.2;
+    color: #fff;
+    background-color: #000;
+    line-height: 40px;
+    text-align: center;
+}
+
+.wrapper .leftBtn {
+    left: 0;
+    border-radius: 0 6px 6px 0;
+}
+
+.wrapper .rightBtn {
+    right: 0;
+    border-radius: 6px 0 0 6px;
+}
+
+.wrapper:hover .btn {
+    opacity: 0.6;
+}
+
+.wrapper .sliderIndex {
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.wrapper .sliderIndex span {
+    display: inline-block;
+    margin-right: 4px;
+    width: 8px;
+    height: 8px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+.wrapper .sliderIndex .active {
+    background-color: #333;
+}

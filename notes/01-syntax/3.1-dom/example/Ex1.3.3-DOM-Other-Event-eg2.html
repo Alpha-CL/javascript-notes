@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        .demo {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+        .btn {
+            margin-top: 200px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+<div class="demo"></div>
+<button class="btn">click</button>
+
+<script>
+
+
+    const demo = document.querySelector('.demo'),
+        btn = document.querySelector('.btn');
+
+    let lock = true;
+
+    btn.onclick = function () {
+
+        const finalLeft = 1000;
+        let speed = 0;
+
+        if (lock) {
+
+            lock = false;
+
+            setInterval(function () {
+
+                let demoStyle = getComputedStyle(demo),
+                    curLeft = parseInt(demoStyle.left);
+
+                speed += 2;
+
+                if (curLeft < finalLeft) {
+
+                    demo.style.left = curLeft + speed + 'px';
+                }
+
+                lock = true;
+
+            }, 20);
+        }
+    };
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #ipt {
+            position: absolute;
+            top: 36%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+            padding: 12px 0;
+            width: 600px;
+            font-size: 20px;
+            text-indent: 1em;
+        }
+
+
+
+        .ipt-default {
+            color: #999;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+
+<label for="ipt"><input id="ipt" class="ipt-default" type="text" value="please enter keyword"></label>
+
+
+<script>
+
+
+    let ipt = document.querySelector('#ipt');
+
+    ipt.addEventListener('focus', function () {
+
+        if (!this.value.trim() || this.value === this.defaultValue) {
+
+            this.value = '';
+            this.classList.remove('ipt-default');
+        }
+
+    }, false);
+
+    ipt.addEventListener('blur', function () {
+
+        if (!this.value.trim() || this.value === this.defaultValue) {
+
+            this.value = ipt.defaultValue;
+            this.classList.add('ipt-default');
+        }
+
+    }, false);
+
+
+</script>
+
+
+</body>
+</html>

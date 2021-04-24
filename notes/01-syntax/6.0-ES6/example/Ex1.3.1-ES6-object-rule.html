@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * 若对象字面量初始化时，成员的名称来自一个变量，并且和变量的名称相同，则可以进行简写
+     *
+     *
+     */
+
+
+    function createUser(loginId, loginPwd, nickName) {
+
+        const sayHello = function () {
+
+            console.log('loginId', this.loginId, 'loginPwd', this.loginPwd);
+        };
+
+        // return {
+        //     loginId: loginId,
+        //     loginPwd: loginPwd,
+        //     nickName: nickName
+        // };
+
+        return {                    // 速写方法: 若对象的 key & value 命名相同，则可以省略 同名value
+            loginId,
+            loginPwd,
+            nickName,
+            sayHello
+        };
+    }
+
+    const u = createUser('alpha', '123', 'aaa');
+    console.log(u);
+    u.sayHello();
+
+
+    /**
+     * 对象子面量初始化时，方法可以省略冒号和 function 关键字
+     *
+     *
+     */
+
+    const user = {
+        name: 'beta',
+        age: 18,
+        sayYes() {
+
+            console.log(this.name, this.age);
+        }
+    };
+
+    user.sayYes();
+
+
+    /**
+     * 有时，初始化对象时，某些属性名可能来自于某个表达式的值
+     * 在 ES6 中，可以使用中括号来表示该属性民是通过计算得到的
+     *
+     */
+
+    const prop1 = 'name',
+        prop2 = 'age',
+        prop3 = 'sayWhat';
+
+    const uers3 = {
+        [prop1]: 'omega',
+        [prop2]: 16,
+        [prop3]() {
+
+            console.log(this[prop1], this[prop2]);
+        }
+    };
+
+    uers3[prop3]();
+
+
+</script>
+
+
+</body>
+</html>

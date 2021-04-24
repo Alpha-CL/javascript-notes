@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+
+    /**
+     * Reflect.set(target, propertyKey, propertyValue);
+     *
+     * 设置或添加对象中指定属性
+     */
+
+
+    const obj = {
+
+        name: 'alpha',
+        age: 18
+    };
+
+    // obj.name = 'beta';
+
+    Reflect.set(obj, 'name', 'beta');
+
+    console.log(obj);
+
+    // {name: "beta", age: 18}
+    // age: 18
+    // name: "beta"
+    // __proto__: Object
+
+
+</script>
+
+</body>
+</html>

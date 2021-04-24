@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * for ... of ....
+     *
+     * 因 set 本身就是 可迭代对象，即可使用 for ... of ...
+     */
+
+    // const st1 = new Set();
+    //
+    //
+    // function test() {}
+    // st1.add(1);
+    // st1.add('a');
+    // st1.add(false);
+    // st1.add(1);
+    // st1.add('a');
+    // st1.add([1, 2, 3]);
+    // st1.add({name: 1, age: 18});
+    // st1.add(test);
+    // st1.add(+0);
+    // st1.add(-0);
+    //
+    //
+    // for(const item of st1) {
+    //
+    //     console.log(item);
+    // }
+
+
+</script>
+
+<script>
+
+
+    /**
+     * set.forEach(value, value2, set);                 // set 集合中不存在 index
+     *
+     *
+     * @value === @value2: set 集合中每一项的值
+     *
+     * @set: set 集合
+     *
+     * 利用set 自带的 forEach(); 实例方法
+     */
+
+    const st1 = new Set();
+
+
+    function test() {}
+    st1.add(1);
+    st1.add('a');
+    st1.add(false);
+    st1.add(1);
+    st1.add('a');
+    st1.add([1, 2, 3]);
+    st1.add({name: 1, age: 18});
+    st1.add(test);
+    st1.add(+0);
+    st1.add(-0);
+
+
+    st1.forEach((value, value2, set) => {
+
+        console.log(value);
+
+        console.log(value === value2);                  // true
+
+        console.log(set);
+    });
+
+
+
+</script>
+
+
+</body>
+</html>

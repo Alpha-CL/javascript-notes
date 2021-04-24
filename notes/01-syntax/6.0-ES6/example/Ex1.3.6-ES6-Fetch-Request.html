@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    function getRequest(url, config) {
+
+        /**
+         * 为避免上传时，请求流中自带上传进度等信息干扰了当前信息传递
+         * 确保每次请求的都为 'new Request'
+         */
+        
+        // const rqe = new Request(url, config);
+        //
+        // return rqe.clone();
+
+        return new Request(url, config);
+    }
+
+
+    async function getProvinces(url, config) {
+
+        /**
+         * fetch(url, config); === fetch(new Request);
+         *
+         */
+
+        const resp = await fetch(getRequest(url, config));
+
+        // console.log(getRequest(url, config));        // Request
+        // console.log(resp);                           // Response
+
+        const result = await resp.json();
+
+        // console.log(resp.headers);                   // Response.header
+
+        console.log(result);                            // result
+    }
+
+
+    const pro = getProvinces('http://101.132.72.36:5100/api/local', {
+
+        header: {
+            a: 1,
+            b: 2
+        }
+    });
+
+
+</script>
+
+
+</body>
+</html>

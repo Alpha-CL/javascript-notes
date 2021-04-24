@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tank {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            width: 40px;
+            height: 40px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+
+    </style>
+
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="tank" style="background-image: url('img/tankR.gif')"></div>
+
+
+<script>
+
+
+    // let demo = document.querySelector('.tank');
+    //
+    // demo.style.left = '20px';
+
+
+    let tank = {
+        direction: 'U',
+        left: 100,
+        top: 100,
+        dom: document.querySelector('.tank'),
+        show: function () {
+
+            this.dom.style.left = this.left + 'px';
+            this.dom.style.top = this.top + 'px';
+            this.dom.style.backgroundImage = 'url("img/tank' + this.direction + '.gif")';
+        }
+    };
+
+
+    window.addEventListener('keydown', function (e) {
+
+        if (e.key === 'ArrowUp') {
+
+            tank.direction = 'U';
+
+            tank.top -= 6;
+
+        } else if (e.key === 'ArrowDown') {
+
+            tank.direction = 'D';
+
+            tank.top += 6;
+
+        } else if (e.key === 'ArrowLeft') {
+
+            tank.direction = 'L';
+
+            tank.left -= 6;
+
+        } else if (e.key === 'ArrowRight') {
+
+            tank.direction = 'R';
+
+            tank.left += 6;
+        }
+
+        tank.show();
+
+    }, false);
+
+
+</script>
+
+
+</body>
+</html>

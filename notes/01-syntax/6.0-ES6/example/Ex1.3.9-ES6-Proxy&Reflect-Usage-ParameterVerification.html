@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+    function sum(a, b) {
+
+        return a + b;
+    }
+
+
+    function validatorFunc(func, ...types) {
+
+        return new Proxy(func, {
+
+            apply(target, thisArg, argArray) {
+
+                types.forEach((val, i) => {
+
+                    if (typeof argArray[i] !== val) {
+
+                        throw new TypeError(`第${i + 1}个参数: ${argArray[i]}, 不满足类型${val}`);
+                    }
+                });
+
+                return Reflect.apply(target, thisArg, argArray);
+            }
+        });
+    }
+
+
+    const sumProxy = validatorFunc(sum, 'number', 'number');
+
+    console.log(sumProxy(1, 2));
+
+
+</script>
+
+
+</body>
+</html>

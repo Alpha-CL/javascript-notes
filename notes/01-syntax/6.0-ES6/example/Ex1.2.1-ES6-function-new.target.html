@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * new.target               // ES6
+     *
+     * 用于在函数内部判断，该函数是否使用 new 的方式调用的
+     *
+     */
+
+    function Person(firstName, lastName) {
+
+
+        // 以前的判断方式
+        // if (this instanceof Person) {
+        //
+        //     throw new Error('该函数没有使用 new 来调用');
+        // }
+
+
+        /**
+         * console.log(new.target);
+         *
+         *
+         * 构造函数中: 返回构造函数本身
+         * 普通函数中: 返回 undefined
+         * 箭头函数中: 返回 继承于包裹作用域
+         */
+
+        if (!new.target) {
+            throw 'Foo() must be called with new'
+        }
+
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fullName = `${firstName} + ${lastName}`;
+    }
+
+
+    const p1 = new Person('alpha', 'L');
+    console.log(p1);                                // Person {firstName: "alpha", lastName: "L", fullName: "alpha + L"}
+
+
+    const p2 = Person('beta', 'L');
+    console.log(p2);                                // undefined
+
+
+    console.log(Person.call(p1, 'beta', 'L'));      // undefined
+
+
+</script>
+
+
+</body>
+</html>

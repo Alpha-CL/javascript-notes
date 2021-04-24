@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            margin: 100px 0 0 100px;
+            padding: 24px;
+            width: 500px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .wrap p {
+            margin-bottom: 20px;
+            padding: 6px 12px;
+            width: 200px;
+            border: 1px solid #eee;
+        }
+
+        .wrap p span {
+            margin-left: 10px;
+        }
+
+        .wrap button {
+            padding: 6px 12px;
+        }
+
+        .wrap button:not(:last-of-type) {
+
+            margin-right: 6px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div class="wrap">
+    <p>库存剩余:<span id="_counter">100</span></p>
+    <button class="btn" data-set="-1000">-1000</button>
+    <button class="btn" data-set="-100">-100</button>
+    <button class="btn" data-set="-10">-10</button>
+    <button class="btn" data-set="-1">-1</button>
+    <button class="btn" data-set="1">+1</button>
+    <button class="btn" data-set="10">+10</button>
+    <button class="btn" data-set="100">+100</button>
+    <button class="btn" data-set="1000">+1000</button>
+</div>
+
+
+<script>
+
+
+    let counter = document.querySelector('#_counter'),
+        wrap = document.querySelector('.wrap');
+
+
+    wrap.addEventListener('click', function (e) {
+
+        let target = e.target,
+            count = parseInt(counter.innerText),
+            result;
+
+        if (target.className === 'btn') {
+
+            result = count + parseInt(target.dataset.set);
+
+            if (result < 0) {
+
+                result = 0;
+            }
+
+            counter.innerHTML = result;
+        }
+
+    }, false);
+
+
+</script>
+
+
+
+</body>
+</html>

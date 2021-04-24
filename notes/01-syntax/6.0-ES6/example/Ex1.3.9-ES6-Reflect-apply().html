@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+
+    /**
+     * Reflect.apply(target, thisArgument, argumentList)
+     *
+     *
+     * 调用指定函数，并绑定  this 和 参数列表          // 等同于函数调用
+     */
+
+
+    function method(para1, para2) {
+
+        console.log('method', para1, para2);
+    }
+
+    // method(1, 2);
+
+    Reflect.apply(method, null, [1, 2]);
+
+
+
+</script>
+
+
+</body>
+</html>

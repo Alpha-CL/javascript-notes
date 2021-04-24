@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * Promise
+     *
+     *
+     * then: 注册一个后续处理函数，当 Promise 状态为 resolved 时运行该函数
+     *
+     * catch: 注册一个后续处理函数，当 Promise 状态为 reject 时运行该函数
+     *
+     * finally: [EES2018]注册一个后续处理函数( 无参 )，当 Promise 状态为 settle 时运行该函数
+     */
+
+    // const pro = new Promise((resolve, reject) => {
+    //
+    //     resolve(1);
+    // });
+    //
+    // pro.then(result => console.log('then1', result * 1));
+    // pro.then(result => console.log('then2', result * 2));
+    //
+    // pro.catch(result => console.log('catch', result * 3));
+    // pro.catch(result => console.log('catch', result * 4));
+    //
+    // pro.finally(() => console.log('finally1'));
+    // pro.finally(() => console.log('finally2'));
+
+
+</script>
+
+<script>
+
+
+    /**
+     * Promise.resolve();
+     *
+     * 返回 Promise {<resolved>} 状态的 Promise，传递的数据作为状态数据
+     * 特殊情况: 若传递的数据是 Promise，则直接返回传递的 Promise 对象            // 各个浏览器不同
+     */
+
+    // const pro = new Promise((resolve, reject) => {
+    //
+    //     resolve(1);                      // 事件直接变成 resolve 状态
+    // });
+
+    // const pros = Promise.resolve(1);         // 此写法等效于上面的写法
+    //
+    // console.log(pros);                       // Promise {<resolved>: 1}
+
+
+    /**
+     * Promise.reject();
+     *
+     * 返回 Promise {<rejected>} 状态的 Promise，传递的数据作为状态数据
+     */
+
+    // const proj = new Promise((resolve, reject) => {
+    //
+    //     reject(2);
+    // });
+
+    // const proj = Promise.reject(2);         // 此写法等效于上面的写法
+    //
+    // console.log(proj);                      // Promise {<rejected>: 2}
+
+
+</script>
+
+<script>
+
+
+    /**
+     * all( iterable: array ): newArrayOfPromise;
+     *
+     *
+     * 返回一个新的 Promise 数组对象
+     *
+     * 等待数组中所有的 Promise 的状态都为 resolve 后，返回一个新的 Promise(<resolve>) 的对象
+     *
+     * 若有一项 Promise 返回为 reject, 则立即返回 Promise(<reject>)
+     */
+
+    // function getRandom(min, max) {
+    //
+    //     return Math.random() * (max - min) + min;
+    // }
+    //
+    // const proms = [];
+    //
+    // for (let i = 0; i < 10; i++) {
+    //
+    //     proms.push(new Promise((resolve, reject) => {
+    //
+    //         setTimeout(function () {
+    //
+    //             if (getRandom() < 0.8) {
+    //
+    //                 console.log(`${i} 完成`);
+    //
+    //                 resolve(`${i} 完成`);
+    //
+    //             } else {
+    //
+    //                 console.log(`${i} 失败`);
+    //
+    //                 reject(`${i} 失败`);
+    //             }
+    //
+    //         }, getRandom(1000, 5000));
+    //
+    //     }));
+    // }
+    //
+    // const prom = Promise.all(proms);
+    //
+    // prom.then(data => console.log(data, '全部完成'));       // 数组中所有 Promise 都为 Promise(<resolve>) 时返回
+    //
+    // prom.catch(err => console.log(err, '失败'));           // 第一个失败后立即返回失败的 Promise(<reject>) 对象
+    //
+    // console.log(proms);
+
+
+</script>
+
+<script>
+
+
+    /**
+     * race(iterable):;
+     *
+     * 只要数组中的 Promise 其中一个进入 settle 状态，即返回
+     *
+     * ( 不论返回的 Promise 是 resolve 还是 reject )
+     */
+
+
+    // function getRandom(min, max) {
+    //
+    //     return Math.random() * (max - min) + min;
+    // }
+    //
+    // const proms = [];
+    //
+    // for (let i = 0; i < 10; i++) {
+    //
+    //     proms.push(new Promise((resolve, reject) => {
+    //
+    //         setTimeout(function () {
+    //
+    //             if (getRandom(0.01, 0.9) < 0.5) {
+    //
+    //                 console.log(`${i} 完成`);
+    //
+    //                 resolve(`${i} 完成`);
+    //
+    //             } else {
+    //
+    //                 console.log(`${i} 失败`);
+    //
+    //                 reject(`${i} 失败`);
+    //             }
+    //
+    //         }, getRandom(1000, 5000));
+    //
+    //     }));
+    // }
+    //
+    // const prom = Promise.race(proms);                   // 只要数组中的 Promise 其中一个进入 settle 状态，即返回
+    //
+    // console.log(prom);
+
+
+</script>
+
+
+</body>
+</html>

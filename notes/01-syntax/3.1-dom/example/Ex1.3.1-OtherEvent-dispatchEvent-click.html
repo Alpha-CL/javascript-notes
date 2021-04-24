@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        .demo{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            color: #fff;
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+<a href="http://www.baidu.com" class="btn">baidu</a>
+
+<div class="demo">move enter me</div>
+
+<script>
+
+
+    /**
+     * 模拟 click 事件触发
+     *
+     *
+     */
+
+
+    const demo = document.querySelector('.demo'),
+        btn = document.querySelector('.btn');
+
+
+    demo.onmouseenter = () => {
+
+        btn.click();
+    };
+
+
+</script>
+
+
+</body>
+</html>

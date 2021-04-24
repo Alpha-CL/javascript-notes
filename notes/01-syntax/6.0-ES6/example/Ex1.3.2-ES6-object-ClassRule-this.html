@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * class 中书写 属性和方法可以省略 this.
+     *
+     *
+     * 为了可阅读性，建议分开书写，仅有固定值的写在 class 中
+     */
+
+    class Sum {
+
+        a = 6;                              // 等效于在 constructor 中 this.a
+        b = 9;                              // 等效于在 constructor 中 this.b
+        c = 8;                              // 等效于在 constructor 中 this.b
+
+        constructor() {
+
+            // this.a = 6;
+            // this.b = 9;
+            // this.c = 8;
+
+            this.d = this.a + this.b + this.c;
+
+            // this.sayHi = () => {
+            //
+            //     console.log(`hello world`);
+            // }
+        }
+
+        sayHi = () => {                     // 等效于在 constructor 中 this.sayHi
+
+            console.log(this.d);
+        }
+    }
+
+    const newP = new Sum();
+    newP.sayHi();
+
+
+</script>
+
+
+<script>
+
+
+    /**
+     * 为了确保 class 中创建的函数的 this 始终指向 当前的 class
+     *
+     * 建议使用 箭头函数
+     */
+
+    class ThisChanged {
+
+        a = 6;                              // 等效于在 constructor 中 this.a
+        b = 9;                              // 等效于在 constructor 中 this.b
+        c = 8;                              // 等效于在 constructor 中 this.b
+
+        constructor() {
+
+            // this.a = 6;
+            // this.b = 9;
+            // this.c = 8;
+
+            this.d = this.a + this.b + this.c;
+
+            // this.sayHi = () => {
+            //
+            //     console.log(`hello world`);
+            // }
+        }
+
+        sayHi() {                     // 等效于在 constructor 中 this.sayHi
+
+            console.log(this.d);
+        }
+    }
+
+    const c = new ThisChanged();
+    const t = c.sayHi;
+
+    t();                               // TypeError: Cannot read property 'd' of undefined
+
+
+</script>
+
+
+
+</body>
+</html>

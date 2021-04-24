@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>altkey & ctrlkey  & shiftkeey & button</title>
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .demo {
+            margin: 100px 0 0 100px;
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            font-size: 20px;
+            color: white;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+
+
+<button class="demo">click me</button>
+
+
+<script>
+
+
+    let demo = document.querySelector('.demo');
+
+    demo.addEventListener('click', function (e) {
+
+        console.log(`e.altKey: ${e.altKey} | e.ctrlKey: ${e.ctrlKey} | e.shiftKey: ${e.shiftKey}`);
+
+        console.log(`${e.button}`)
+
+    }, false);
+
+
+    document.onmousedown = function(e) {                // MouseEvent { button: 1 || 2 || 3;}
+
+        console.log(`e.button: ${e.button} ( 0: 鼠标左键 | 1: 滚轮 | 2: 鼠标右键 )`);
+    };
+
+
+</script>
+
+
+
+</body>
+</html>

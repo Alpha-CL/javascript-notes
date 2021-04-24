@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+
+
+        div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: orange;
+            width: 100px;
+            height: 100px;
+        }
+
+        span {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: black;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+
+<div id="demo"></div>
+
+
+<script>
+
+    var oDiv = document.getElementsByTagName('div')[0],
+        timer = null,
+        lastX = 0,
+        lastY = 0,
+        iSpeedX = 0,
+        iSpeedY = 0;
+
+    oDiv.onmousedown = function (e) {
+
+        var event = e || window.event,
+            disX = event.clientX - this.offsetLeft,
+            disY = event.clientY - this.offsetTop,
+            self = this;
+
+        document.onmousemove = function (e) {
+
+            clearInterval(this.timer);
+
+            var event = e || window.event,
+                newLeft = event.clientX - disX,
+                newTop = event.clientY - disY;
+
+            // var oSpan = document.createElement('span');
+            // document.body.appendChild(oSpan);
+            // oSpan.style.left = newLeft + 'px';
+            // oSpan.style.top = newTop + 'px';
+            // oSpan.className = 'span';
+
+            iSpeedX = newLeft -lastX;
+            iSpeedY = newTop - lastY;
+
+            lastX = newLeft;
+            lastY = newTop;
+
+            self.style.left = newLeft + 'px';
+            self.style.top = newTop + 'px';
+
+        };
+
+        document.onmouseup = function (e) {
+
+            document.onmouseup = null;
+            document.onmousemove = null;
+            startMove(self, iSpeedX, iSpeedY);
+        };
+    };
+
+
+    function startMove(ele, iSpeedX, iSpeedY) {
+
+        clearInterval(timer);
+
+        let g = 3;
+
+        ele.timer = setInterval(function () {
+
+            iSpeedY += g;
+
+            let newTop = ele.offsetTop + iSpeedY,
+                newLeft = ele.offsetLeft + iSpeedX;
+
+            if (newTop >= document.documentElement.clientHeight - ele.clientHeight) {
+
+                iSpeedY *= -1;
+
+                iSpeedY *= 0.8;
+                iSpeedX *= 0.8;
+
+                newTop = document.documentElement.clientHeight - ele.clientHeight;
+            }
+
+            if (newTop <= 0) {
+
+                iSpeedY *= -1;
+
+                iSpeedY *= 0.8;
+                iSpeedX *= 0.8;
+
+                newTop = 0;
+            }
+
+            if (newLeft >= document.documentElement.clientWidth - ele.clientWidth) {
+
+                iSpeedX *= -1;
+
+                iSpeedY *= 0.8;
+                iSpeedX *= 0.8;
+
+                newLeft = document.documentElement.clientWidth - ele.clientWidth;
+            }
+
+            if (newLeft <= 0) {
+
+                iSpeedX *= -1;
+
+                iSpeedY *= 0.8;
+                iSpeedX *= 0.8;
+
+                newLeft = 0;
+            }
+
+            if (iSpeedX === 0 && iSpeedY === 0 && newTop === document.documentElement.clientHeight - ele.clientHeight) {
+
+                clearInterval(ele.timer);
+
+            } else {
+
+                ele.style.top = newTop + 'px';
+                ele.style.left = newLeft + 'px';
+
+            }
+
+        }, 30);
+    }
+
+
+</script>
+
+
+</body>
+</html>

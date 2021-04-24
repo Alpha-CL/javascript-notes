@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * delete(key: any) boolean;
+     *
+     * 判断是否成功删除指定 key, 及对应的 value
+     */
+
+
+    const mp = new Map([['name', 'alpha'], ['age', 17], ['gender', 'male']]);
+
+    console.log(mp.delete('name'));                // true
+    console.log(mp.delete('hello world'));         // false
+
+
+
+</script>
+
+
+</body>
+</html>

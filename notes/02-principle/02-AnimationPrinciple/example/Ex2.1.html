@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div></div>
+
+
+<script>
+
+
+    var oDiv = document.getElementsByTagName('div')[0],
+        timer = null;
+
+    oDiv.onclick = function () {
+
+        startMove(this);
+    };
+
+    function startMove(ele) {
+
+        clearInterval(timer);
+
+        let a = -2,
+            iSpeed = 20;
+
+        timer = setInterval(function () {
+
+            iSpeed = iSpeed + a;
+
+            ele.style.left = ele.offsetLeft + iSpeed + 'px';
+
+        }, 30);
+    }
+
+
+</script>
+
+
+</body>
+</html>

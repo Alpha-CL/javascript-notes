@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-size: 100%;
+            font-weight: normal;
+        }
+
+        :root,
+        body {
+            height: 100%;
+        }
+
+        .wishwall-wrap {
+            width: 100%;
+            height: 100%;
+        }
+
+        .wish-control {
+            position: absolute;
+            display: flex;
+            flex-flow: column nowrap;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 35%;
+            text-align: center;
+        }
+
+        .wish-control span {
+            font-size: 20px;
+        }
+
+        .wish-control #wish-txt {
+            margin: 12px 0;
+            padding: 12px;
+            /*border: 1px solid #ccc;*/
+            color: #cccccc;
+            font-size: 16px;
+        }
+
+        .wish-control button {
+            padding: 8px 0;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+
+        .wish-control button:hover {
+            color: #fff;
+            background-color: #666666;
+        }
+
+        .wish-item-template {
+            position: absolute;
+            /*left: 100px;*/
+            /*top: 100px;*/
+            width: 160px;
+            padding: 12px;
+            background-color: #3c8dff;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .wish-item-heading {
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .6);
+        }
+
+        .wish-item-content {
+            margin: 6px 0 32px;
+        }
+
+        .wish-item-heading,
+        .wish-item-date {
+            font-size: 14px;
+            color: rgba(255, 255, 255, .7);
+        }
+
+
+        .wish-item-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<!--
+<div class="wishwall-wrap">
+
+    <div class="wish-list">
+        <div class="wish-item-template">
+            <h3 class="wish-item-heading">愿望-1</h3>
+            <p class="wish-item-content">暴富</p>
+            <span class="wish-item-date">2019/12/12</span>
+            <span class="wish-item-close">X</span>
+        </div>
+    </div>
+
+    <div class="wish-control">
+        <label for="wish-txt"><span class="wish-heading">Make a wish, in case it happens.</span></label>
+        <input type="text" placeholder="come and make a wish to put" id="wish-txt">
+        <button class="wish-btn">Enter</button>
+    </div>
+
+</div>
+-->
+
+<script>
+
+
+    let wishWall = {};
+
+    (function () {
+
+        let dom = null,
+            oWrap = null,
+            wishList = null,
+            itemIndex = 0,
+            curWindowWidth = document.documentElement.clientWidth,
+            curWindowHeight = document.documentElement.clientHeight;
+
+        function WishingWall(options, target) {
+
+            this.oOptions = options || {};
+            this.oTarget = document.querySelector(target) || document.body;
+
+            this.init = function () {
+
+                this.createDom(this.oOptions, this.oTarget);
+                this.bindEvent(this.oArr);
+
+                this.itemDrag();
+                this.closeItem();
+                this.windowResize();
+            };
+        }
+
+        WishingWall.prototype.createDom = function (oArr, oTarget) {
+
+            dom = document.createDocumentFragment();
+            wishList = document.createElement('div');
+            wishList.className = 'wish-list';
+
+            if (oTarget === document.body) {
+
+                oWrap = document.createElement('div');
+                oWrap.classList.add('wishwall-wrap');
+
+            } else {
+
+                oTarget.classList.add('wishingWall-wrap');
+            }
+
+            let wishControl = this.createWishControl(),
+                wishItem = this.createWishItem();
+
+            // wishList.appendChild(wishItem);
+            oWrap.appendChild(wishList);
+            oWrap.appendChild(wishControl);
+
+            dom.appendChild(oWrap);
+            oTarget.appendChild(dom);
+        };
+
+        WishingWall.prototype.createWishItem = function (inputCon) {
+
+            // <div className="wish-list">
+            //     <div className="wish-item-template">
+            //         <h3 className="wish-item-heading">愿望-1</h3>
+            //         <p className="wish-item-content">暴富</p>
+            //         <span className="wish-item-date">2019/12/12</span>
+            //     </div>
+            // </div>
+
+            let wishItem = document.createElement('div'),
+                itemHeading = document.createElement('div'),
+                itemContent = document.createElement('div'),
+                itemData = document.createElement('span'),
+                itemClose = document.createElement('span');
+
+            wishItem.className = 'wish-item-template';
+            wishItem.dataset.close = itemIndex + '';
+            // wishItem.style.zIndex = itemIndex + '';
+            itemHeading.className = 'wish-item-heading';
+            itemContent.className = 'wish-item-content';
+            itemData.className = 'wish-item-date';
+            itemClose.className = 'wish-item-close';
+
+            itemClose.innerHTML = 'X';
+
+            inputCon && inputCon(itemHeading, itemContent, itemData);
+
+            wishItem.appendChild(itemHeading);
+            wishItem.appendChild(itemContent);
+            wishItem.appendChild(itemData);
+            wishItem.appendChild(itemClose);
+
+            itemIndex++;
+
+            return wishItem;
+        };
+
+        WishingWall.prototype.createWishControl = function () {
+
+            // <div className="wish-control">
+            //     <label htmlFor="wish-txt"><span className="wish-heading">Make a wish, in case it happens.</span></label>
+            //     <textarea rows="4" id="wish-txt">Come and make a wish to put</textarea>
+            //     <button className="wish-btn">Enter</button>
+            // </div>
+
+            let wishCon = document.createElement('div'),
+                conLabel = document.createElement('label'),
+                conHeading = document.createElement('span'),
+                conTextarea = document.createElement('input'),
+                conButton = document.createElement('button');
+
+            wishCon.className = 'wish-control';
+            conLabel.setAttribute('for', '#wish-txt');
+            conHeading.className = 'wish-heading';
+            conHeading.innerText = 'Make a wish, in case it happens.';
+            conTextarea.setAttribute('type', 'text');
+            conTextarea.setAttribute('placeholder', 'come and make a wish to put');
+            conTextarea.innerHTML = 'Come and make a wish to put';
+            conTextarea.setAttribute('id', 'wish-txt');
+            conButton.className = 'wish-btn';
+            conButton.innerText = 'Enter';
+
+            wishCon.appendChild(conLabel);
+            conLabel.appendChild(conHeading);
+            wishCon.appendChild(conTextarea);
+            wishCon.appendChild(conButton);
+
+            return wishCon;
+        };
+
+        WishingWall.prototype.bindEvent = function () {
+
+            // this.conTextareaEvent();
+            this.conButtonEvent();
+        };
+
+        WishingWall.prototype.conButtonEvent = function () {
+
+            let conBtn = oWrap.querySelector('button'),
+                conList = oWrap.querySelector('.wish-list'),
+                wishCon = oWrap.querySelector('#wish-txt'),
+                self = this,
+                newItem,
+                index = 1,
+                date = new Date();
+
+            conBtn.addEventListener('click', function () {
+
+                // if (!wishCon.value) {
+                //
+                //     alert('please enter content text');
+                //
+                //     return false;
+                // }
+
+                newItem = self.createWishItem(function (oHead, oContent, oData) {
+
+                    oHead.innerHTML = 'wish-' + (index < 10 ? '0' + index : index);
+                    oContent.innerHTML = wishCon.value;
+                    oData.innerHTML = `${date.getFullYear()}/${(date.getMonth() + 1) < 10 ? '0' +
+                        (date.getMonth() + 1) : (date.getMonth() + 1)}/${date.getDate()}`;
+                });
+
+                conList.appendChild(newItem);
+
+                self.setRandomPosition(newItem);
+
+                wishCon.value = null;
+
+                index++;
+
+            }, false);
+        };
+
+        WishingWall.prototype.setRandomPosition = function (dom) {
+
+            let oScreenWidth = document.documentElement.clientWidth,
+                oScreenHeight = document.documentElement.clientHeight,
+                oStyle = window.getComputedStyle(dom),
+                curWidth = parseInt(oStyle.width),
+                curHeight = parseInt(oStyle.height),
+                maxLeft = oScreenWidth - curWidth,
+                maxHeight = oScreenHeight * 0.5 - curHeight;
+
+            dom.style.top = this.getRandom(20, maxHeight) + 'px';
+            dom.style.left = this.getRandom(0, maxLeft) + 'px';
+            this.setRandomColor(dom);
+        };
+
+        WishingWall.prototype.setRandomColor = function (dom) {
+
+            let red = Math.floor(this.getRandom(100, 200)),
+                green = Math.floor(this.getRandom(100, 200)),
+                blue = Math.floor(this.getRandom(100, 200));
+
+            dom.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+        };
+
+        WishingWall.prototype.getRandom = function (min, max) {
+
+            return Math.floor(Math.random() * (max - min) + min);
+        };
+
+        WishingWall.prototype.itemDrag = function () {
+
+            wishList.addEventListener('mousedown', (e) => {
+
+                let tar = e.target,
+                    viewportWidth = document.documentElement.clientWidth,
+                    viewportHeight = document.documentElement.clientHeight;
+
+                const moveItem = this.getItem(tar);
+
+                if (moveItem) {
+
+                    let oStyle = getComputedStyle(moveItem),
+                        curWidth = parseInt(oStyle.width),
+                        curHeight = parseInt(oStyle.height),
+                        curTop = parseInt(oStyle.top),
+                        curLeft = parseInt(oStyle.left),
+                        maxTop = viewportHeight - curHeight,
+                        maxLeft = viewportWidth - curWidth;
+
+                    moveItem.style.zIndex = itemIndex;
+
+                    window.onmousemove = function (e) {
+
+                        curTop += e.movementY;
+                        curLeft += e.movementX;
+
+                        curTop <= 20 ? curTop = 20 : curTop;
+                        curTop >= maxTop ? curTop = maxTop - 20 : curTop;
+
+                        curLeft <= 20 ? curLeft = 20 : curLeft;
+                        curLeft >= maxLeft ? curLeft = maxLeft - 20 : curLeft;
+
+                        moveItem.style.left = curLeft + 'px';
+                        moveItem.style.top = curTop + 'px';
+                    };
+
+                    window.onmouseup = window.onmouseleave = function () {
+
+                        window.onmousemove = null;
+                    };
+
+                    itemIndex++;
+                }
+
+            }, false);
+
+        };
+
+        WishingWall.prototype.getItem = function (dom) {
+
+            if (dom.className === 'wish-item-template') {
+
+                return dom;
+
+            } else if (dom.parentElement.className === 'wish-item-template') {
+
+                return dom.parentElement;
+            }
+        };
+
+        WishingWall.prototype.closeItem = function () {
+
+            window.addEventListener('click', (e) => {
+
+                let tar = e.target;
+
+                if (tar.parentElement && tar.parentElement.className === 'wish-item-template' && tar.className === 'wish-item-close') {
+
+                    tar.parentElement.remove();
+                }
+
+            }, false);
+        };
+
+        WishingWall.prototype.windowResize = function () {
+
+            window.onresize = function () {
+
+                let disX = document.documentElement.clientWidth - curWindowWidth,
+                    dixY = document.documentElement.clientHeight - curWindowHeight,
+                    allItems = wishList.children;
+
+                Array.from(allItems).forEach((value) => {
+
+                    let oStyle = getComputedStyle(value),
+                        oWidth = parseInt(oStyle.width),
+                        oHeight = parseInt(oStyle.height),
+
+                        oLeft = parseFloat(oStyle.left),
+                        oTop = parseFloat(oStyle.top),
+
+                        leftScale = oLeft / (curWindowWidth - oWidth),
+                        topScale = oTop / (curWindowHeight - oHeight),
+
+                        finalLeft = oLeft + disX * leftScale,
+                        finalTop = oTop + dixY * topScale;
+
+                    value.style.left = finalLeft + 'px';
+                    value.style.top = finalTop + 'px';
+                });
+
+                curWindowWidth = document.documentElement.clientWidth;
+                curWindowHeight = document.documentElement.clientHeight;
+            };
+        };
+
+        window.wishingWall = function (options, target) {
+
+            let wishingWall = new WishingWall(options, target);
+
+            wishingWall.init();
+        };
+
+    }());
+
+    wishingWall(wishWall);
+
+
+</script>
+
+
+</body>
+</html>

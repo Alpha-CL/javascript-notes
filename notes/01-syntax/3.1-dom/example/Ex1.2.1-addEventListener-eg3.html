@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .side-wrap {
+            margin: 100px 0 0 100px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 200px;
+            cursor: pointer;
+        }
+
+        .side-wrap .con {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .con dl:not(:first-of-type) {
+            margin-top: 12px;
+        }
+
+        .con dt {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .con dt:hover {
+            background-color: #ccc;
+        }
+
+        .con dd {
+            padding: 10px 0 10px 12px;
+        }
+
+        .con dd:hover {
+            background-color: #eee;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+
+<!--<div class="side-wrap">-->
+<!--    <div class="con">-->
+<!--        <dl class="list-1">-->
+<!--            <dt>Headline_1</dt>-->
+<!--            <dd>item-1</dd>-->
+<!--            <dd>item-2</dd>-->
+<!--            <dd>item-3</dd>-->
+<!--        </dl>-->
+<!--        <dl class="list-2">-->
+<!--            <dt>Headline_2</dt>-->
+<!--            <dd>item-1</dd>-->
+<!--            <dd>item-2</dd>-->
+<!--            <dd>item-3</dd>-->
+<!--        </dl>-->
+<!--        <dl class="list-3">-->
+<!--            <dt>Headline_3</dt>-->
+<!--            <dd>item-1</dd>-->
+<!--            <dd>item-2</dd>-->
+<!--            <dd>item-3</dd>-->
+<!--        </dl>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<!--<div id="topSide"></div>-->
+
+
+<div id="bSide">
+
+</div>
+
+
+<script>
+
+
+    let menu = [
+        {
+            name: 'Headline_1',
+            items: ['item-1', 'item-3', 'item-3', 'item-4']
+        }, {
+            name: 'Headline_2',
+            items: ['item-1', 'item-3', 'item-3', 'item-4']
+        }, {
+            name: 'Headline_3',
+            items: ['item-1', 'item-3', 'item-3', 'item-4']
+        },
+    ];
+
+
+    (function () {
+
+        let dom = null,
+            oCon = null,
+            oDl = null,
+            oDt = null;
+
+        function Side(arr, target) {
+
+            this.oArr = arr || [];
+            this.oTarget = document.querySelector(target) || '';
+
+            this.init = function () {
+
+                this.createDom(this.oArr, this.oTarget);
+                this.bindEvent(this.oArr);
+                this.appendToTarget(this.oTarget);
+            };
+        }
+
+        Side.prototype.createDom = function (oArr, oTarget) {
+
+            dom = document.createDocumentFragment();
+            oTarget.classList.add('side-wrap');
+
+            oCon = document.createElement('div');
+            oCon.classList.add('con');
+
+            oArr.forEach(function (value, index) {
+
+                oDl = document.createElement('dl');
+                oDt = document.createElement('dt');
+
+                oDl.classList.add('list-' + (index + 1));
+
+                oDt.innerHTML = value.name;
+
+                oDl.appendChild(oDt);
+
+                value.items.forEach(function (value) {
+
+                    let oDd = document.createElement('dd');
+
+                    oDd.innerText = value;
+
+                    oDl.appendChild(oDd);
+                });
+
+                oCon.appendChild(oDl);
+            });
+
+            dom.appendChild(oCon);
+        };
+
+        Side.prototype.bindEvent = function () {
+
+            oCon.addEventListener('click', function (e) {
+
+                let tar = e.target;
+
+                if (tar.tagName === 'DT') {
+
+                    let oDlChild = tar.parentElement.children,
+                        oDds;
+
+                    oDds = Array.from(oDlChild).filter(function (value) {
+
+                        return value.tagName !== 'DT';
+
+                    });
+
+                    oDds.forEach(function (value) {
+
+                        if (getComputedStyle(value).display === 'block') {
+
+                            value.style.display = 'none';
+
+                        } else {
+
+                            value.style.display = 'block';
+                        }
+                    });
+                }
+
+            }, false);
+        };
+
+        Side.prototype.appendToTarget = function (oTarget, oDom) {
+
+            let child = oDom || dom;
+
+            oTarget.appendChild(child);
+        };
+
+        window.side = function (arr, target) {
+
+            let side = new Side(arr, target);
+
+            side.init();
+        };
+
+    }());
+
+    side(menu, '#bSide');
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    function getRandom(min, max) {
+
+        return Math.floor(Math.random * (max - min) + min);
+    }
+
+    const goddess = [];
+
+    for (let i = 0; i < 20; i++) {
+
+        goddess.push(`goddess-${i}`);
+    }
+
+    // function love() {
+    //
+    //     return new Promise((resolve, reject) => {
+    //
+    //         setTimeout(() => {
+    //
+    //             if (Math.random() < 0.5) {
+    //
+    //                 resolve(true);
+    //
+    //             } else {
+    //
+    //                 resolve(false);
+    //             }
+    //
+    //         }, getRandom(2000, 5000));
+    //     });
+    // }
+    //
+    // async function showLove(arr) {
+    //
+    //     let isAgree = true;
+    //
+    //     for (let i = 0; i < arr.length; i++) {
+    //
+    //         const result = await love();
+    //
+    //         if (result) {
+    //
+    //             if (isAgree) {
+    //
+    //                 isAgree = false;
+    //
+    //                 console.log(`${arr[i]} 终于同意了`);
+    //             }
+    //
+    //             console.log(`${arr[i]} 抱歉，手抖了`);
+    //
+    //         } else {
+    //
+    //             console.log(`${arr[i]} 拒绝了`);
+    //         }
+    //     }
+    // }
+    //
+    // const result = showLove(goddess);
+
+
+</script>
+
+
+<script>
+
+
+    function asynSetTimeout(duration) {
+
+        return new Promise((resolve, reject) => {
+
+            setTimeout(() => {
+
+                resolve();
+
+            }, duration);
+        });
+    }
+
+
+    async function love() {
+
+        await asynSetTimeout(getRandom(1000, 5000));
+
+        return Math.random() < 0.1;
+
+    }
+
+
+    async function showLove(arr) {
+
+        let isAgree = true;
+
+        for (let i = 0; i < arr.length; i++) {
+
+            const result = await love();
+
+            if (result) {
+
+                if (isAgree) {
+
+                    isAgree = false;
+
+                    console.log(`${arr[i]} 终于同意了`);
+                }
+
+                console.log(`${arr[i]} 抱歉，手抖了`);
+
+            } else {
+
+                console.log(`${arr[i]} 拒绝了`);
+            }
+        }
+    }
+
+    const result = showLove(goddess);
+
+
+</script>
+
+
+</body>
+</html>

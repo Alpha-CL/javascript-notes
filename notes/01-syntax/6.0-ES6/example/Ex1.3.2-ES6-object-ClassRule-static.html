@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    class PersonalStatic {
+
+        static like = 'woman';
+        static eat = 'fish';
+
+        constructor(name = 'alpha', age = 18, gender = 'male') {
+
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+        }
+
+        static sayHi = () => {
+
+            console.log(`静态函数仅可以获取 class 中的属性 ${this.like}, ${this.eat}`);
+            console.log(`无法获取 constructor 中的 ${this.gender}, ${this.age}`);
+
+            console.log(`static 设置的方法和属性 中 this 指向 class`);
+            // console.dir(this)
+        }
+    }
+
+    PersonalStatic.sayHi();
+
+
+    console.log('---------------------------------------------------------------------');
+
+
+</script>
+
+<script>
+
+
+    class newPersonal {
+
+        static like = 'woman';
+        static eat = 'fish';
+
+        constructor(name = 'alpha', age = 18, gender = 'male') {
+
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+        }
+
+        sayHi = () => {
+
+            console.log(`实例函数仅可以获取 constructor 中的属性 ${this.gender}, ${this.age}`);
+            console.log(`无法获取 constructor 中的 ${this.like}, ${this.eat}`);
+
+            console.log(`实例函数 的方法和属性 中 this 指向 constructor`);
+            // console.dir(this)
+        }
+    }
+
+    const newP = new newPersonal();
+    newP.sayHi();
+
+
+</script>
+
+
+</body>
+</html>

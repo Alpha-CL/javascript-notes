@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    // defined Function
+    //
+    // const newAttr = 'print';                            // 自定义变量或属性名
+    //
+    // function PersonalC(name, age, sex) {                // 构造函数
+    //
+    //     this.name = name;
+    //     this.age = age;
+    //     this.sex = sex;
+    //
+    //     Object.defineProperty(this, 'age', {
+    //
+    //         set(age) {
+    //
+    //             if (isNaN(age)) {
+    //
+    //                 return new TypeError('age property must be a number');
+    //             }
+    //
+    //             if (age < 0) {
+    //
+    //                 age = 0;
+    //
+    //             } else if (age > 100) {
+    //
+    //                 age = 100;
+    //             }
+    //
+    //             this.age = age;
+    //         },
+    //
+    //         get() {
+    //
+    //             return this.age;
+    //         }
+    //     });
+    // }
+    //
+    // PersonalC.prototype[newAttr] = function () {             // 自定义实例方法( 原型方法 )
+    //
+    //     console.log(`Hey, brother, my name is ${this.name}, i am ${PersonalC.age} year old, `)
+    // };
+    //
+    //
+    // // invoking Function
+    //
+    // const a = new PersonalC('alpha', 17, 'male');
+    //
+    // a.print();
+
+
+    // Defined Class
+
+    const newFn = 'print';                              // 自定义变量或属性名
+    const newProp = 'name';
+
+    class Personal {
+
+        /**
+         * 直接在 Class{} 中创建的成员，类会默认与 constructor(){} 的 this 绑定
+         *
+         *
+         * Class{ demo = 666; } === Class{ constructor(){ this.demo = 666; } }
+         */
+
+        color = 11000;                                  // 等同于 constructor(){ this.money = 10000; }
+
+
+        // 无声明提升，先定义后使用
+
+        constructor(name, age, sex) {
+
+            // this.money = 10000;                      // 等同于直接写在 Class 内部
+
+            this[newProp] = name;                       // 自定义属性名
+
+            this._age = age;                            // 为属性设置 getter 或 setter 后，必须在属性名前添加 '_'
+            this.sex = sex;
+
+        }
+
+
+        /**
+         * 读取该属性时，会自动运行此函数
+         *
+         *
+         * 仅设置此方法时，ReadOnly( 属性只读 )
+         */
+
+        get age() {                                    // 无参数
+
+            return this._age + ' year old';
+        }
+
+
+        /**
+         * 设置该属性时，会自动运行此函数
+         *
+         *
+         * 仅设置此方法时候，仅可设置无法读取此属性
+         */
+
+        set age(age) {                                 // 单参数
+
+            if (isNaN(age)) {
+
+                return new TypeError('age property must be a number');
+            }
+
+            if (age < 0) {
+
+                age = 0;
+
+            } else if (age > 100) {
+
+                age = 100;
+            }
+
+            this._age = age;
+        }
+
+
+        /**
+         * static property: value; | static method() { }
+         *
+         *
+         * 创建静态属性，和静态方法             // 静态属性或方法 仅构造函数可访问，实例函数无法访问
+         *
+         * 静态属性或方法，可直接通过 类名 + 属性或方法名调用
+         *
+         * => ClassName.property; | ClassName.method();
+         */
+
+        print = () => {                                         // 自定义变量函数名
+
+            console.log(`Hey, brother, my name is ${this[newProp]}, i am ${this._age} year old.`)
+        }
+
+        // static [newFn]() {                                     // 自定义变量函数名
+        //
+        //     console.log(`Hey, brother, my name is ${this[newProp]}, i am ${this._age} year old.`)
+        // }
+    }
+
+    // Invoking Class
+
+    var p = new Personal('beta', 16, 'female');       // 无法被当作普通函数调用，只能使用 new 关键字调用
+
+    p.print();
+
+
+    // 自定义变量或属性名
+    //
+    // const newProp = 'name';                          // 自定义变量或属性名
+    // const newFn = 'print'
+    //
+    // class Personal {                                 // 无声明提升，先定义后使用
+    //
+    //     this[name] = name;
+    //
+    //     [newFn]() {                                  // 自定义变量函数名
+    //
+    //         console.log(`Hey, brother, my name is ${this.name}, i am ${this.age} year old, `)
+    //     }
+    // }
+
+
+    // 构造函数中 Object.defineProperty(); 可定义某个对象成员属性的读取和设置
+    //
+    //
+
+
+</script>
+
+
+</body>
+</html>

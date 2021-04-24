@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * 英雄打怪兽小游戏
+     *
+     * 英雄和怪兽都具有攻击力、防御力、生命值、暴击几率( 暴击时伤害翻倍 )
+     *
+     * 攻击伤害 = 攻击力 - 防御力             // 攻击最少为 1
+     *
+     * 创建一个英雄和怪兽，让他们互相攻击，直到一方死亡，输出整个攻击过程
+     */
+
+    /**
+     * @name: 角色名称
+     * @attack: 攻击力
+     * @defence: 防御
+     * @hp: 生命值
+     * @critRate: 暴击率(0~100)
+     */
+
+    function Charactor(name, attack, defence, hp, critRate) {
+
+        this.name = name;
+        this.attack = attack;
+        this.defence = defence;
+        this.hp = hp;
+        this.critRate = critRate;
+
+        this.print = function () {
+
+            console.log(`${this.name}\t生命: ${this.hp}\t 攻击: ${this.attack} \t防御: ${this.defence}\t 暴击率: ${this.critRate}%`);
+        };
+
+        this.hit = function (ctor) {
+
+            var damage = this.attack - ctor.defence,
+                rate = this.critRate / 100,
+                rad = Math.random(),
+                isCrit = false;
+
+            if (rad < rate) {
+
+                isCrit = true;
+
+                damage *= 2;
+            }
+
+            if (damage < 1) {
+
+                damage = 1;
+            }
+
+            ctor.hp -= damage;
+
+            if (ctor.hp < 0) {
+
+                ctor.hp = 0;
+            }
+
+            console.log(`${isCrit ? '暴击' : ''}${this.name}攻击${ctor.name}，造成${damage}伤害，对方当前血量为${ctor.hp}`);
+
+            return ctor.hp === 0;
+        };
+    }
+
+
+    var hero = new Charactor('hero', 100, 20, 500, 30);
+
+    var monster = new Charactor('monster', 120, 40, 300, 5);
+
+    hero.print();
+
+    monster.print();
+
+    while (true) {
+
+        if (hero.hit(monster)) {
+
+            console.log('游戏结束');
+
+            break;
+        }
+
+        if (monster.hit(hero)) {
+
+            console.log('游戏结束');
+
+            break;
+        }
+    }
+
+
+    // console.log(hero);
+    //
+    // console.log(monster);
+
+
+</script>
+
+
+</body>
+</html>

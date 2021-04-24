@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .wrap {
+            margin: 300px 0 0 50px;
+            padding: 50px;
+            width: 500px;
+            height: 500px;
+            border: 10px solid;
+            background-color: #3c8dff;
+        }
+
+        .demo {
+            padding: 50px;
+            width: 200px;
+            height: 200px;
+            border: 10px solid;
+            background-color: #ffcccc;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+
+<div class="wrap">
+    <div class="demo"></div>
+</div>
+
+
+<script>
+
+
+
+    /**
+     * e.pageX & e.pageY
+     *
+     *
+     * 鼠标始终相对于页面文档顶部和左侧的距离
+     */
+
+
+    let wrap = document.getElementsByClassName('demo')[0],
+        demo = document.querySelector('.demo');
+
+
+    demo.addEventListener('mousemove', function (e) {
+
+        console.log(`pageX距离页面左边框${e.pageX}, pageY距离页面顶部边框: ${e.pageY}`);
+
+    }, false);
+
+
+</script>
+
+</body>
+</html>

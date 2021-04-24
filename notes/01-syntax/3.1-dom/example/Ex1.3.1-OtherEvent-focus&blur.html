@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        input {
+            margin: 100px 0 0 100px;
+            padding: 6px 10px;
+            font-size: 16px;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+
+<input type="text">
+
+
+<script>
+
+
+    let ipt = document.querySelector('input');
+
+    ipt.onfocus = function (e) {
+
+        console.log('聚焦了', '是否能冒泡: ' + e.cancelable);
+
+    };
+
+    ipt.onblur = function (e) {
+
+        console.log('失去聚焦了', '是否能冒泡: ' + e.cancelable);
+    };
+
+
+</script>
+
+
+</body>
+</html>

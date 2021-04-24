@@ -1,0 +1,56 @@
+.wrap {
+    margin: 100px auto 0;
+    padding: 15px;
+    width: 400px;
+    border: 1px solid #d8d8d8;
+    border-radius: 4px;
+}
+
+.wrap .hd label .txt {
+    width: 230px;
+    height: 25px;
+    border: 1px solid #d8d8d8;
+    border-radius: 2px;
+    text-indent: 0.5em;
+}
+
+.wrap .hd .btn {
+    padding: 3px 7px;
+    color: #3c8dff;
+}
+
+.wrap .hd .btn,
+.wrap .bd .opts .opt {
+    cursor: pointer;
+}
+
+.wrap .hd .active {
+    color: #fff;
+    background-color: #3c8dff;
+    border-radius: 2px;
+}
+
+.wrap .bd .opts .opt {
+    padding: 12px 0;
+    height: 74px;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.wrap .bd .opts .opt img {
+    float: left;
+    margin-right: 8px;
+    width: 50px;
+}
+
+.wrap .bd .opts .opt .name {
+    margin-top: 4px;
+    font-size: 16px;
+    color: #666;
+}
+
+.wrap .bd .opts .opt .des {
+    font-size: 12px;
+    color: #999;
+}
+
+

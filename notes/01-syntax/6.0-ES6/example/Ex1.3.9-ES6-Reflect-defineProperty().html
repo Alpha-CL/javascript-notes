@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * Reflect.definedProperty(target, propertyKey, description): boolean;
+     *
+     * 类似于 Object.defineProperty(); 不同于 若配置出现问题，返回 false( 并不会报错 )
+     */
+
+    const obj = {};
+
+
+    Object.defineProperty(obj, 'age', {
+
+        get() {
+
+            return obj._age;
+        },
+
+        set(v) {
+
+            obj._age = v;
+        }
+    });
+
+
+    Reflect.defineProperty(obj, 'name', {
+
+        get() {
+
+            return obj._name;
+        },
+
+        set(v) {
+
+            obj._name = v;
+        }
+    });
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

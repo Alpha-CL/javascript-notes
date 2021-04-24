@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>magnifier</title>
+
+    <style>
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #small,
+        #big,
+        #mouse-move-block {
+            position: absolute;
+        }
+
+        #big,
+        #small {
+            border: 1px solid #ccc;
+        }
+
+        #small {
+            background-image: url("img/shoe-small.jpg");
+            background-repeat: no-repeat;
+            background-position: left top;
+            background-size: cover;
+        }
+
+        #big {
+            display: none;
+            left: 368px;
+            background-image: url("img/shoe-big.jpg");
+            background-repeat: no-repeat;
+        }
+
+        #mouse-move-block {
+            background-color: rgba(255, 255, 0, .2);
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<div id="small">
+    <div id="mouse-move-block"></div>
+</div>
+<div id="big"></div>
+
+
+<script>
+
+
+    let imgConfig = {
+
+        imgSmallDomProps: {
+            dom: document.getElementById("small"),
+            width: 350,
+            height: 350
+        },
+        imgBigDomProps: {
+            dom: document.getElementById("big"),
+            width: 540,
+            height: 540,
+        },
+        imgBig: {
+            width: 800,
+            height: 800
+        },
+        init() {
+            this.mouseMoveBlockProps = {
+                dom: document.getElementById("mouse-move-block"),
+                width: parseInt(this.imgBigDomProps.width / this.imgBig.width * this.imgSmallDomProps.width),
+                height: parseInt(this.imgBigDomProps.height / this.imgBig.height * this.imgSmallDomProps.height)
+            };
+            const initDom = [
+                this.imgSmallDomProps,
+                this.imgBigDomProps,
+                this.mouseMoveBlockProps
+            ];
+
+            this.initDonProps(initDom);
+            this.initSmallMouseEvent(this.mouseMoveBlockProps);
+        },
+        initDonProps(domProps) {
+
+            domProps.forEach((val) => {
+
+                const dom = val.dom,
+                    width = val.width,
+                    height = val.height;
+
+                dom.style.width = width + "px";
+                dom.style.height = height + "px";
+            });
+        },
+        initSmallMouseEvent(moveBlockDomProps) {
+
+            const imgSmallDom = this.imgSmallDomProps.dom,
+                imgBigDom = this.imgBigDomProps.dom;
+
+            imgSmallDom.onmouseenter = () => {
+
+                imgBigDom.style.display = "block";
+            };
+
+            imgSmallDom.onmouseleave = () => {
+
+                imgBigDom.style.display = "none";
+            };
+
+            imgSmallDom.onmousemove = (e) => {
+
+                const position = this.getMoveBlockDomOffset(e, moveBlockDomProps);
+
+                this.setMoveBlockDomPosition(position, moveBlockDomProps);
+            };
+        },
+        getMoveBlockDomOffset(e, moveBlockDomProps) {
+
+            const target = e.target;
+
+            if (target === this.imgSmallDomProps.dom) {
+
+                return {
+                    x: e.offsetX,
+                    y: e.offsetY
+                }
+
+            } else {
+
+                const styles = getComputedStyle(moveBlockDomProps.dom);
+
+                return {
+                    x: e.offsetX + parseInt(styles.left),
+                    y: e.offsetY + parseInt(styles.top)
+                }
+            }
+        },
+        setMoveBlockDomPosition(position, moveBlockDomProps) {
+
+            const left = position.x - parseInt(moveBlockDomProps.width / 2),
+                top = position.y - parseInt(moveBlockDomProps.height / 2),
+                minLeft = 0,
+                maxLeft = this.imgSmallDomProps.width - parseInt(moveBlockDomProps.width),
+                minTop = 0,
+                maxTop = this.imgSmallDomProps.height - parseInt(moveBlockDomProps.height);
+
+            let finallyLeft,
+                finallyTop;
+
+
+            if (left < minLeft) {
+
+                finallyLeft = 0;
+
+            } else if (left > maxLeft) {
+
+                finallyLeft = maxLeft;
+
+            } else {
+
+                finallyLeft = left;
+            }
+
+            if (top < minTop) {
+
+                finallyTop = 0;
+
+            } else if (top > maxTop) {
+
+                finallyTop = maxTop;
+
+            } else {
+
+                finallyTop = top;
+            }
+
+            finallyLeft === 0 ? moveBlockDomProps.dom.style.left = finallyLeft : moveBlockDomProps.dom.style.left = finallyLeft + "px";
+            finallyTop === 0 ? moveBlockDomProps.dom.style.top = finallyTop : moveBlockDomProps.dom.style.top = finallyTop + "px";
+
+            this.setImgBigPosition(finallyLeft, finallyTop, moveBlockDomProps);
+        },
+        setImgBigPosition(finallyLeft, finallyTop) {
+
+            const imgBigLeft = parseInt((finallyLeft / this.imgSmallDomProps.width) * this.imgBigDomProps.width),
+                imgBigTop = parseInt((finallyTop / this.imgSmallDomProps.height) * this.imgBigDomProps.height);
+
+            this.imgBigDomProps.dom.style.backgroundPosition = `-${imgBigLeft}px -${imgBigTop}px`;
+        }
+    };
+
+    imgConfig.init();
+
+
+</script>
+
+
+</body>
+</html>

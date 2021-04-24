@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<button>click me</button>
+
+<script>
+
+
+    /**
+     * 当一个元素发生了某个事件时，那该元素的所有祖先元素都发生了该事件
+     *
+     * 事件冒泡: 先触发最里层的元素，然后依次触发外层元素           // 默认情况
+     * 事件捕获: 先触发最外层的元素，然后依次触发里层元素
+     */
+
+    let btn = document.getElementsByTagName('button')[0]
+
+    btn.onclick = function () {
+
+        console.log('button');
+    };
+
+    document.body.onclick = function () {
+
+        console.log('body');
+    };
+
+    document.documentElement.onclick = function () {
+
+        console.log('html');
+    };
+
+    document.onclick = function () {
+
+        console.log('document');
+    };
+
+
+    btn.addEventListener()
+
+
+
+</script>
+
+
+</body>
+</html>

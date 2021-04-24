@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>onInput</title>
+
+    <style>
+
+        input {
+
+            border: 1px solid black;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<label for="ipt">Name</label><input type="text" id="ipt">
+
+<script>
+
+
+    /**
+     * oninput
+     *
+     * 无论输入还是输入，都触发事件
+     *
+     */
+
+    var input = document.getElementsByTagName('input')[0];
+
+    input.oninput = function (e) {
+
+        console.log(this.value);
+    }
+
+
+</script>
+
+
+</body>
+</html>

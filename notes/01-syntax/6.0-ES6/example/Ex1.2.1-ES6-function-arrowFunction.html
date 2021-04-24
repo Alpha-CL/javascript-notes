@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * 由于函数的嵌套，造成作用域闭包，创建时 this 的指向为当前对象
+     *
+     * 调用时，this 的指向为 window
+     */
+
+    // const obj = {
+    //
+    //     count: 0,
+    //
+    //     start: function () {
+    //
+    //         setInterval(function () {
+    //
+    //             this.count++;                       // this => window
+    //             console.log(this.count);
+    //
+    //         }, 1000);
+    //     },
+    //
+    //     regEvent: function () {
+    //
+    //         window.onclick = function () {
+    //
+    //             console.log(this.count);            // this => window
+    //         };
+    //     }
+    // };
+    //
+    // obj.start();
+    // obj.regEvent();
+
+
+</script>
+
+<script>
+
+
+    /**
+     * 以前利用嵌套外层函数中创建变量存储 this
+     *
+     * 在嵌套函数内部调用创建的变量解决 this 指向的问题
+     *
+     * 若嵌套层次过多，则有可能造成混乱
+     */
+
+    // const obj = {
+    //
+    //     count: 0,
+    //
+    //     start: function () {
+    //
+    //         let self = this;
+    //
+    //         setInterval(function () {
+    //
+    //             self.count++;                       // this => self: obj.this
+    //             console.log(self.count);
+    //
+    //         }, 1000);
+    //     },
+    //
+    //     regEvent: function () {
+    //
+    //         let self = this;
+    //
+    //         window.onclick = function () {
+    //
+    //             console.log(self.count);            // this => self: obj.this
+    //         };
+    //     }
+    // };
+    //
+    // obj.start();
+    // obj.regEvent();
+
+
+</script>
+
+<script>
+
+
+    /**
+     * arrow function
+     *
+     *
+     * 箭头函数是一个函数表达式，(理论上: 任何使用函数表达式的场景，都可以使用箭头函数)
+     *
+     * 箭头函数中 this 指向取决于定义时的指向，而与调用时无关
+     *
+     * 箭头函数没有 prototype|__proto__ 无法作为构造函数使用( 没有圆原型链，无继承关系，仅作为临时使用 )
+     *
+     *
+     * 原理: 箭头函数中并没有 this & arguments & new.target，使用的是上一级作用域中的 this & arguments & new.target
+     *
+     */
+
+
+    /**
+     * 多数应用场景
+     *
+     *
+     * 1) 临时性使用的函数，并不用于调用
+     *
+     *      * 事件处理函数
+     *
+     *      * 异步处理函数
+     *
+     *      * 其他临时性函数
+     *
+     *
+     * 2) 为了绑定外层 this 的函数( 解决部分因 闭包产生的 this 指向改变 )
+     *
+     *      * setInterval
+     *
+     * 3) 在不影响其他代码的情况下，提交代码的简洁和可阅读性
+     *
+     *      * 数组中的回调函数
+     *
+     */
+
+    // const obj = {
+    //
+    //     count: 0,
+    //
+    //     start: function () {
+    //
+    //         setInterval(() => {
+    //
+    //             this.count++;                       // this => obj
+    //             console.log(this.count);
+    //
+    //         }, 1000);
+    //     },
+    //
+    //     regEvent: function () {
+    //
+    //         window.onclick = () => {
+    //
+    //             console.log(this.count);            // this => obj
+    //         };
+    //     }
+    // };
+    //
+    // obj.start();
+    // obj.regEvent();
+
+
+</script>
+
+<script>
+
+
+    /**
+     * 箭头函数的 this 取决于 定义时 this 的指向
+     *
+     *
+     */
+
+        // const obj = {
+        //
+        //     count: 0,
+        //
+        //     print: function () {
+        //
+        //         console.log(this);                  // this => window
+        //
+        //         console.log(this.count);            // this => obj
+        //     }
+        // };
+        //
+        // // obj.print();                             // 0
+        //
+        // const newPrint = obj.print;
+        // newPrint();                                 // undefined
+
+
+    const obj = {
+
+            count: 0,
+
+            print: () => {
+
+                console.log(this);                      // this => window
+
+                console.log(this.count);                // this => window
+            }
+        };
+
+    // obj.print();                                 // 0
+
+    const newPrint = obj.print;
+    newPrint();                                     // undefined
+
+
+    /**
+     * 箭头函数表达式中不存在 this, arguments, new.target
+     *
+     * 使用的是上一级作用域中的 this, arguments, new.target
+     */
+
+    const obj1 = {
+        method: function () {
+
+            const func = () => {
+
+                console.log(this);                      // this => obj1;
+
+                console.log(arguments);                 // 上级作用域中的 arguments => [ 234 ]
+            };
+
+            func();
+        }
+    };
+
+    obj1.method(234);
+
+
+
+</script>
+
+<script>
+
+
+    /**
+     * 单个参数可简写为
+     *
+     */
+
+
+    // 单个参数的函数表达式
+
+    let fn1 = function (param) {
+
+            return param;
+    };
+
+
+    // 单个参数的箭头函数表达式
+
+    let fn2 = (param) => {
+
+        return param;
+    };
+
+
+    // 仅有一个参数的箭头函数可以省略包裹参数的括号
+
+    let fn3 = (param) => {
+
+        return param;
+    };
+
+
+    // 仅有一个参数，并仅返回一条语句，可简写为
+
+    let fn4 = param => param % 2 === 0;
+
+
+    // 箭头函数仅返回一个对象时，可简写为
+
+    let sum = (a, b) => ({
+        a: a,
+        b: b,
+        sum: a + b
+    });
+
+
+</script>
+
+
+</body>
+</html>

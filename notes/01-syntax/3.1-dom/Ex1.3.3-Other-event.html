@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .wrap {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1000px;
+            height: 300px;
+            background-color: #ccc;
+        }
+
+        .menu-wrap {
+            position: absolute;
+            display: none;
+            left: 200px;
+            top: 100px;
+            border-radius: 4px;
+            border: 1px solid #eee;
+            width: 200px;
+            background-color: #fff;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, .1);
+        }
+
+        .menu-con {
+            padding: 6px 0;
+        }
+
+        .menu-con li {
+            padding: 12px 20px;
+        }
+
+        .menu-con li:not(:last-of-type) {
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-con li:hover {
+            background-color: rgba(0, 0, 0, .1);
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+
+<div class="wrap">contentmenu: 鼠标右键事件</div>
+
+<div class="menu-wrap">
+    <ol class="menu-con">
+        <li>item1</li>
+        <li>item2</li>
+        <li>item3</li>
+        <li>item4</li>
+        <li>item5</li>
+        <li>item6</li>
+    </ol>
+</div>
+
+
+<script>
+
+
+    let wrap = document.querySelector('.wrap'),
+        menu = document.querySelector('.menu-wrap');
+
+
+    wrap.addEventListener('contextmenu', function (e) {
+
+        e.preventDefault();
+
+        menu.style.left = e.clientX + 'px';
+        menu.style.top = e.clientY + 'px';
+        menu.style.display = 'block';
+
+    }, false);
+
+
+    window.onclick = function () {
+
+        menu.style.display = 'none';
+
+    };
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

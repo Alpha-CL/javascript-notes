@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    let outerFnName = 'name',
+        outerFnAge = 'age',
+        outerFnGender = 'gender';
+
+    function PersonalFn(name, age, gender) {
+
+        this[outerFnName] = name;
+        this[outerFnAge] = age;
+        this[outerFnGender] = gender;
+    }
+
+    const pFn = new PersonalFn('alpha', 18, 'male');
+
+    console.log(pFn);
+
+
+</script>
+
+
+<script>
+
+
+    let outerClName = 'name',
+        outerClAge = 'age',
+        outerClGender = 'gender',
+        outerClSay = 'sayHello';
+
+    class PersonalCl {
+
+        constructor(name, age, gender) {
+
+            this[outerClName] = name;
+            this[outerClAge] = age;
+            this[outerClGender] = gender;
+        }
+
+        [outerClSay] = () => {
+
+            console.log(`my name is ${this[outerClName]}, i am ${this[outerClAge]} years old`);
+        }
+    }
+
+    const pCl = new PersonalCl('omega', 16, 'female');
+    pCl[outerClSay]();
+
+    console.log(pCl);
+
+
+</script>
+
+
+</body>
+</html>

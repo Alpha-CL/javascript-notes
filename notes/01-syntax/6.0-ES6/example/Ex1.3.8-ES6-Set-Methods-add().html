@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+    /**
+     * add(value: any);
+     *
+     *
+     * Set 使用 Object.is 判断两个数据是否相同( 特殊情况: +0 === -0 )
+     */
+
+    const st1 = new Set();
+
+
+    function test() {}
+
+    st1.add(1);                         // number
+    st1.add('a');                       // string
+    st1.add(false);                     // boolean
+
+
+    st1.add(1);                         // 无法重复添加相同的数据
+    st1.add('a');                       // 无法重复添加相同的数据
+
+
+    st1.add([1, 2, 3]);                 // array
+    st1.add({name: 1, age: 18});        // object
+    st1.add(test);                      // function
+
+
+    st1.add(+0);                        // 特殊情况: +0 === -0
+    st1.add(-0);
+
+
+    console.log(st1);
+
+
+</script>
+
+
+</body>
+</html>

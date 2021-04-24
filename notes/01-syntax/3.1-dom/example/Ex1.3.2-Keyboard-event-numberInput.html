@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+
+        .onlyIntNum {
+
+            margin: 100px 0 0 100px;
+            padding: 12px;
+            font-size: 20px;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+<label><input type="text" class="onlyIntNum"></label>
+
+<script>
+
+
+    let onlyIntNum = document.querySelector('.onlyIntNum');
+
+    onlyIntNum.addEventListener('keypress', function (e) {
+
+        let code = e.key[0].charCodeAt(0);
+
+        // unicode: 0 ~ 9 => 48, 49, ... 56, 57
+
+        if (code < 48 || code > 57) {
+
+            // return false;
+
+            e.preventDefault();
+        }
+
+    }, false);
+
+
+</script>
+
+
+</body>
+</html>
