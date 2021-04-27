@@ -15,7 +15,7 @@
 
     document.getElementById('username').onblur = function () {
 
-        var reg = /[\u4e00-\u9fa5]/;
+        let reg = /[\u4e00-\u9fa5]/;
 
         if (reg.test(this.value)) {
 

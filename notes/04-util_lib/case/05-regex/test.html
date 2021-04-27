@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+// const str = 'abc123abc123';
+//
+//
+// str.replace(/a/g, match => match).log
+
+
+// const str = 'aaaaaaabbbbbbbbbcccccccceghllllll';
+//
+// const newStr  = str.replace(/(\w)\1+/g, '$1');
+//
+// console.log(newStr);
+
+
+// const str = 'asd123sda123ad123dwad1231';
+//
+// let reg = /[a-z]{3}(?=\d+)/g;
+//
+// while (res = reg.exec(str)) {
+//
+// 	console.log(res);
+// }
+
+
+// const str = 'dwad21159310dwa785071',
+//     reg = /[a-zA-Z](?!\d+)/g;
+//
+// while (res = reg.exec(str)) {
+//
+// 	console.log(res);
+
+    // ["d", index: 0, input: "dwad21159310dwa785071", groups: undefined]
+    // ["w", index: 1, input: "dwad21159310dwa785071", groups: undefined]
+    // ["a", index: 2, input: "dwad21159310dwa785071", groups: undefined]
+    // ["d", index: 12, input: "dwad21159310dwa785071", groups: undefined]
+    // ["w", index: 13, input: "dwad21159310dwa785071", groups: undefined]
+// }
+
+// const pwd = 'dwa123dwad',
+// 	reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#_,.]).{6,12}$/;
+//
+// console.log(reg.test(pwd));         // false
+
+
+function checkPasswordStrength(pwd) {
+
+	if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#_,.]).{6,12}$/.test(pwd)) {
+
+		return '强';
+
+	} else if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,12}$/.test(pwd)) {
+
+		return '中';
+
+	} else if (/^((?=.*[a-z])(?=.*\d)|(?=.*[A-Z])(?=.*\d)).{6,12}$/.test(pwd)) {
+
+        return '弱'
+
+	} else {
+
+		return '非有效密码';
+	}
+}
+
+console.log(checkPasswordStrength('AAAA11111'));
+
+
+</script>
+
+</body>
+</html>
