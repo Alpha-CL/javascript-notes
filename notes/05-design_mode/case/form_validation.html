@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Title</title>
+
+    <style>
+
+    </style>
+</head>
+<body>
+
+
+<div id="oFrom">
+    <label for="oUnDom">
+        username: <input type="text" id="oUnDom" name="username">
+    </label>
+    <span id="showUn"></span>
+    <label for="oPsDom">
+        password: <input type="password" id="oPsDom" name="password">
+    </label>
+    <span id="showPs"></span>
+    <button id="oSubmit">submit</button>
+</div>
+
+
+<script>
+
+let flag = true;
+oSubmit.onclick = function () {
+
+
+};
+
+function Request() {
+
+}
+
+function Validator() {
+
+}
+
+Validator.prototype.strategies = {
+	isNonEmpty(val, errMsg) {
+		if (val === '') {
+			return errMsg;
+		}
+		return true;
+	},
+	maxLength(val, len, errMsg) {
+		if (val !== '' && val.length > len) {
+			return errMsg
+		}
+        return true
+	},
+	minLength(val, len, errMsg) {
+		if (val !== '' && val.length < len) {
+			return errMsg
+		}
+		return true
+	}
+};
+
+Validator.prototype.add = function (dom, showDom, strategyArr) {
+	const self = this;
+	strategyArr.forEach((val, idx) => {
+		self.cache.push(function () {
+			let arr = val.strategy.split(':'),
+				type = arr.shift();
+			arr.unshift(dom.value);
+			arr.push(val.errorMsg);
+		});
+	});
+};
+
+let validator = new Validator();
+
+let ProxyRequest = (function () {
+	validator.add(oUnDom, showUn, [{strategy: 'isNonEmpty', errorMsg: ''}]);
+	validator.add(oPsDom, showPs, [{strategy: 'isNoEmpty', errorMsg: ''}]);
+	return function () {
+		if (validator.start()) {
+			Request();
+		}
+	};
+})();
+
+
+</script>
+
+</body>
+</html>

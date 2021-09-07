@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Title</title>
+
+    <style>
+
+    #demo {
+        display: inline-block;
+        border: 1px solid;
+    }
+
+    </style>
+</head>
+<body>
+
+<div id="demo"></div>
+<button id="oBtn">add img</button>
+
+<script>
+
+
+let MyImg = function (id) {
+	let oImg = new Image();
+	this.setSrc = function (src) {
+		oImg.src = src;
+	};
+	document.getElementById(id).appendChild(oImg);
+};
+
+// let oMyImg = new MyImg('demo');
+// oMyImg.setSrc('https://img0.baidu.com/it/u=3870964477,3746012709&fm=26&fmt=auto&gp=0.jpg');
+
+let proxyImage = (function () {
+	let oNewImage = new Image(),
+        oMyImg = new MyImg('demo');
+	oNewImage.onload = function () {
+		oMyImg.setSrc(oNewImage.src);
+	};
+	return function (src) {
+		oMyImg.setSrc('https://img1.baidu.com/it/u=3294661488,3239471633&fm=26&fmt=auto&gp=0.jpg');
+		oNewImage.src = src;
+	};
+})();
+
+proxyImage('https://img0.baidu.com/it/u=3870964477,3746012709&fm=26&fmt=auto&gp=0.jpg')
+
+
+</script>
+
+</body>
+</html>

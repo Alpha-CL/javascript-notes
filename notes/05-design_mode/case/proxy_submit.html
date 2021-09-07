@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Title</title>
+
+    <style>
+
+    #show {
+        width: 100px;
+        height: 100px;
+        border: 1px solid;
+        line-height: 100px;
+        text-align: center;
+    }
+
+    </style>
+</head>
+<body>
+
+<div id="show">hello world</div>
+
+<button type="bg">add greenBg</button>
+<button type="cl">add blueColor</button>
+<button type="fs">add fontSize</button>
+<button type="fw">add fontWeight</button>
+<button type="op">add opacity</button>
+
+<script>
+
+
+let oDiv = document.getElementById('show'),
+	oButtonArray = document.getElementsByTagName('button'),
+	ProxyRequest,
+    realChangeStyle;
+
+ProxyRequest = function (func) {
+	let cache = [],
+		timer = null;
+	return function () {
+		cache.push(this.getAttribute('type'));
+		clearTimeout(timer);
+		timer = setTimeout(() => {
+			func(oDiv, cache);
+			cache = [];
+		}, 1000);
+	};
+};
+
+realChangeStyle = ProxyRequest(changeStyle);
+
+function changeStyle(dom, typeArr) {
+	let typeObj = {
+		bg: ['backgroundColor', 'green'],
+		cl: ['color', 'blue'],
+		fs: ['fontSize', '24px'],
+		fw: ['fontWeight', 'bold'],
+		op: ['opacity', '.3'],
+	};
+	if (typeArr.constructor === Array) {
+		typeArr.forEach(val => {
+			dom.style[typeObj[val][0]] = typeObj[val][1];
+		});
+	} else {
+		console.log('else');
+		dom.style[typeObj[typeArr][0]] = typeObj[typeArr][1];
+	}
+}
+
+for (let i = 0; i < oButtonArray.length; i++) {
+	oButtonArray[i].onclick = realChangeStyle;
+}
+
+// for (let i = 0; i < oButtonArray.length; i++) {
+// 	oButtonArray[i].onclick = function () {
+// 		changeStyle(oDiv, this.getAttribute('type'));
+// 	};
+// }
+
+
+</script>
+
+</body>
+</html>

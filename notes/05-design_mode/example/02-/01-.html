@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Title</title>
+</head>
+<body>
+
+<button id="oBtn">create alert</button>
+
+
+<script>
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// let createAlert = function (text) {
+//
+// 	let oDiv = document.createElement('div');
+// 	oDiv.style.display = 'none';
+// 	oDiv.innerText = text;
+// 	document.body.appendChild(oDiv);
+// 	return oDiv;
+// };
+//
+// oBtn.onclick = function () {
+// 	let oDiv = createAlert('hello world');
+// 	oDiv.style.display = 'block';
+// };
+
+
+//-------------------------------------------------------------------------------------------------------------------//
+
+
+// let singleAlert = (function () {
+// 	let oDiv = null;
+// 	return function (text) {
+// 		if (oDiv !== null) {
+// 			return oDiv;
+// 		}
+// 		oDiv = document.createElement('div')
+// 		oDiv.style.display = 'none';
+// 		oDiv.innerText = text;
+// 		document.body.appendChild(oDiv);
+// 		return oDiv;
+// 	};
+// })();
+//
+// oBtn.onclick = function () {
+// 	let oDiv = singleAlert('hello world');
+// 	oDiv.style.display = 'block';
+// };
+
+
+//-------------------------------------------------------------------------------------------------------------------//
+
+
+let getSingle = function (func) {
+	let result;
+	return function () {
+		if (!result) {
+			result = func.apply(this, arguments);
+		}
+		return result;
+	};
+};
+
+
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -//
+
+
+let createAlert = function (text) {
+
+	let oDiv = document.createElement('div');
+	oDiv.style.display = 'none';
+	oDiv.innerText = text;
+	document.body.appendChild(oDiv);
+	return oDiv;
+};
+
+let singleAlert = getSingle(createAlert);
+
+oBtn.onclick = function () {
+	let oDiv = singleAlert('hello world');
+	oDiv.style.display = 'block';
+};
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+</script>
+
+
+</body>
+</html>
+
