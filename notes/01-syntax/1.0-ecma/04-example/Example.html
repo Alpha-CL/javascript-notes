@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    </style>
+
+</head>
+<body>
+
+
+<script>
+
+
+function everyFirstLetterUp(str) {
+
+	return str.replace(/\b(\w)(\w*)\b/g, function ($, $1, $2) {
+
+		return $1.toUpperCase() + $2;
+	});
+}
+
+function otherLetterLower(str) {
+
+	return str.replace(/\b(\w)(\w*)\b/g, function ($, $1, $2) {
+
+		return $1 + $2.toLowerCase();
+	});
+}
+
+function removeEmpty(str) {
+
+	return str.replace(/\s+/g, "");
+}
+
+function firstLetterLower(str) {
+
+	return str.replace(/\w/, function ($) {
+
+		return $.toLowerCase();
+	});
+}
+
+function pipe() {
+
+	let methods = Array.from(arguments);
+
+	return function (val) {
+
+		return methods.reduce((result, func) => {
+
+			return func(result);
+
+		}, val)
+
+		// for (let i = 0; i < methods.length; i++) {
+		//
+		//     val = methods[i](val);
+		// }
+		//
+		// return val;
+	}
+}
+
+const str = "FiRst name   ",
+	smallCamel = pipe(everyFirstLetterUp, otherLetterLower, removeEmpty, firstLetterLower);
+
+
+console.log(everyFirstLetterUp(str));
+console.log(otherLetterLower(str));
+console.log(removeEmpty(str));
+console.log(firstLetterLower(str));
+
+console.log(smallCamel(str));
+
+
+</script>
+
+
+</body>
+</html>
