@@ -1,4 +1,4 @@
-## desigin mode
+## design mode
 
 ### design mode
 
