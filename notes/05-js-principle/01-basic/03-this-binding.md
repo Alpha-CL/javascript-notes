@@ -301,18 +301,81 @@ var obj = {
 foo.call(obj);                  // 2
 
 
-//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -//
+//-------------------------------------------------------------------------------------------------------------------//
 
-
-- 硬绑定: 
-
-
-
+//  硬绑定: 
 
 //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -//
 
 
-- new 绑定
+function foo() {
+    console.log(this.a);
+}
+
+var obj = {
+    a: 2
+};
+
+var bar = function () {
+    foo.call(obj);
+}
+
+bar();
+setTimeout(bar, 100);
+
+bar.call(window);               // 硬绑定 bar 不能再修改其 this
+
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -//
+
+
+function foo() {
+
+    console.log(this.a, something);
+    return this.a + something;
+}
+
+function bind(fn, obj) {
+
+    return function() {
+        return fn.apply(obj, arguments);
+    }
+}
+
+var obj = {
+    a: 2
+};
+
+var bar = bind(foo, obj);
+var b = bar(3);                 // 2 3
+console.log(b);                 //  5
+
+
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -//
+
+
+// Function.prototype.bind();
+
+
+function foo(something) {
+    console.log(this.a, something);
+    return this.a + something;
+}
+
+var obj = {
+    a: 2
+};
+
+var bar = foo.bind(obj);
+
+var b = bar(3);                 // 2 3
+console.log(b);                 // 5
+
+
+//-------------------------------------------------------------------------------------------------------------------//
+
+// new 绑定
+
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -//
 
 
 1) 创建/构造 一个全新的对象
