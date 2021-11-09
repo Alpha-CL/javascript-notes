@@ -198,7 +198,7 @@ localstorage & sessionStorage
     - es6
     
     promise api & 解决什么问题
-    
+
     array 工作用常用的方法
 
 
