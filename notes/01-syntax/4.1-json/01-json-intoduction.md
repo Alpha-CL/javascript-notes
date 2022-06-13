@@ -1,32 +1,43 @@
 # Json
 
-Json 是一种传输数据的格式( 以对象为样版，本质上就是对象，但用途有区别，对象用于本地，json用于数据传输 )
-
-> JSON格式是纯文本，它可以很容易地发送和从服务器，并将其用作任何编程语言的数据格式
-
-#### JSON Type
+#### json template
 
 ``` javascript
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Json 是一种传输数据的格式( 以对象为样版，本质上就是对象，但用途有区别，对象用于本地，json 用于数据传输 )
+
+JSON格式是纯文本，它可以很容易地发送和从服务器，并将其用作任何编程语言的数据格式
+
+
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -//
 
 
 json {"key" : "val", "key" : "val", "key" : "val", "key" : "val"}
 
 json {
 
-    "key" : "val",
-    "key" : "val",
-    "key" : "val",
-    "key" : "val"
+    "key": "val",
+    "key": "val",
+    "key": "val",
+    "key": "val"
 }
 
 
 //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -//
 
 
+// Json 转换时, 会检查 key & val
+
+    - key: 必须被引号包裹
+    
+    - value: 必须为安全值( 不包含: function, undefined , 若为这些值则会返回 null )
+
+
 json.keyType => must string
 
-json.valueType => { string, number, object, array, boolean, null}; 不包含: function, a date, undefined
+json.valueType => { string, number, object, array, boolean, null};
 
 
 

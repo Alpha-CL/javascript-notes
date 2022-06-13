@@ -7,7 +7,6 @@
  *
  */
 
-
 var arr1 = [3, 5, 6, 7];
 
 var arr2 = arr1;
@@ -25,7 +24,6 @@ console.log(arr1[0], arr2[0]);
  *
  *
  */
-
 
 var arr1 = [3, 5, 7, 8, 2],
     arr2 = arr1;
@@ -45,7 +43,6 @@ console.log(arr1 === arr2);                         // true
  *
  *
  */
-
 
 var arr1 = [3, 5, 7, 8, 2];
 
